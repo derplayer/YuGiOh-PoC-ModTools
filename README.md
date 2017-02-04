@@ -1,5 +1,5 @@
-# YiGiOh-PoC-ModTools
-Modding Tools for the game "Yu-Gi-Oh! - Power of Chaos: Joey the Passion"
+# Yu-Gi-Oh! - Power of Chaos: Joey the Passion - Mod Tools Repo
+Modding Tools for the PC game "Yu-Gi-Oh! - Power of Chaos: Joey the Passion"
 
 This Modding Tools Repo include:
 * Game Launcher
