@@ -5,6 +5,6 @@ This Modding Tools Repo include:
 * Game Launcher
 * Modding Tools for Editing the Resolution, Positions of graphic elements and effects
 * Documentation/Notices
-* *.YGA Decompresser/Compresser (Yo-Gi-Oh Graphic Acronym)
+* *.YGA Decompresser/Compresser (Yu-Gi-Oh Graphic Acronym)
 * "LZSS"-Like Compressor/Decompressor
 * ...
