@@ -8,4 +8,3 @@ This Modding Tools Repo include:
 * *.YGA Decompresser/Compresser (Yu-Gi-Oh Graphic Acronym)
 * "LZSS"-Like Compressor/Decompressor
 * ...
-x
