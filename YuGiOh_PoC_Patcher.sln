@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YuGiOh_PoC_Patcher", "YuGiOh_PoC_Patcher\YuGiOh_PoC_Patcher.csproj", "{536721FA-269C-4BEC-96F2-CF9F967D4B20}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileDlgExtenders_v12", "YuGiOh_PoC_Patcher\CustomControls\FileDlgExtenders\FileDlgExtenders_v12.csproj", "{9B4DA48C-6D11-46C9-A63D-D369E9C5FE42}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "jSkin", "YuGiOh_PoC_Patcher\CustomControls\jSkin_ModernBlack\jSkin.csproj", "{BC7CD49C-4A90-4B9D-A559-CA78ED0D1C6A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{536721FA-269C-4BEC-96F2-CF9F967D4B20}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{536721FA-269C-4BEC-96F2-CF9F967D4B20}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{536721FA-269C-4BEC-96F2-CF9F967D4B20}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{536721FA-269C-4BEC-96F2-CF9F967D4B20}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9B4DA48C-6D11-46C9-A63D-D369E9C5FE42}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B4DA48C-6D11-46C9-A63D-D369E9C5FE42}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B4DA48C-6D11-46C9-A63D-D369E9C5FE42}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B4DA48C-6D11-46C9-A63D-D369E9C5FE42}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BC7CD49C-4A90-4B9D-A559-CA78ED0D1C6A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC7CD49C-4A90-4B9D-A559-CA78ED0D1C6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC7CD49C-4A90-4B9D-A559-CA78ED0D1C6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC7CD49C-4A90-4B9D-A559-CA78ED0D1C6A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,213 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{536721FA-269C-4BEC-96F2-CF9F967D4B20}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>YuGiOh_PoC_Patcher</RootNamespace>
+    <AssemblyName>YuGiOh_PoC_Patcher</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>
+    </DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>joey.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BasicSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BasicSettings.Designer.cs">
+      <DependentUpon>BasicSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CustomControls\FolderSelectDialog.cs" />
+    <Compile Include="CustomControls\OpenFileDialogEx\ExtendedFolderBrowser.cs" />
+    <Compile Include="CustomControls\OpenFileDialogEx\MyOpenFileDialogControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CustomControls\OpenFileDialogEx\MyOpenFileDialogControl.Designer.cs" />
+    <Compile Include="CustomControls\Reflector.cs" />
+    <Compile Include="CustomControls\RoundButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="MainMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainMenu.Designer.cs">
+      <DependentUpon>MainMenu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PictureBoxEx.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PointEx.cs" />
+    <Compile Include="UserControls\FieldUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\FieldUserControl.Designer.cs">
+      <DependentUpon>FieldUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ImageWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ImageWindow.Designer.cs">
+      <DependentUpon>ImageWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainWindow.Designer.cs">
+      <DependentUpon>MainWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\PointBundleUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\PointBundleUserControl.Designer.cs">
+      <DependentUpon>PointBundleUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\PointUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\PointUserControl.Designer.cs">
+      <DependentUpon>PointUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserControls\ValueUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\ValueUserControl.Designer.cs">
+      <DependentUpon>ValueUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Version.cs" />
+    <Compile Include="YuGi\Filetypes\YGAFile.cs" />
+    <Compile Include="YuGi\Headers\YGAHeader.cs" />
+    <Compile Include="YuGi\Values\YuGiDeckEditor.cs" />
+    <Compile Include="YuGi\Values\YuGiDuelField.cs" />
+    <Compile Include="YuGi\Values\YuGiRectangle.cs" />
+    <Compile Include="YuGi\Values\YuGiValueList.cs" />
+    <Compile Include="YuGi\YuGiBuffer.cs" />
+    <Compile Include="YuGi\YuGiCompressedWord.cs" />
+    <Compile Include="YuGi\YuGiData.cs" />
+    <Compile Include="YuGi\YuGiDataEntry.cs" />
+    <Compile Include="YuGi\YuGiExtendedMethods.cs" />
+    <Compile Include="YuGi\Values\YuGiField.cs" />
+    <Compile Include="YuGi\YuGiLZSS.cs" />
+    <Compile Include="YuGi\Values\YuGiPointBundle.cs" />
+    <Compile Include="YuGi\Values\YuGiValue.cs" />
+    <Compile Include="YuGi\Values\YuGiStructure.cs" />
+    <Compile Include="YuGi\Values\YuGiPoint.cs" />
+    <EmbeddedResource Include="BasicSettings.resx">
+      <DependentUpon>BasicSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CustomControls\OpenFileDialogEx\MyOpenFileDialogControl.resx" />
+    <EmbeddedResource Include="MainMenu.resx">
+      <DependentUpon>MainMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\FieldUserControl.resx">
+      <DependentUpon>FieldUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ImageWindow.resx">
+      <DependentUpon>ImageWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainWindow.resx">
+      <DependentUpon>MainWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\PointBundleUserControl.resx">
+      <DependentUpon>PointBundleUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\PointUserControl.resx">
+      <DependentUpon>PointUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="UserControls\ValueUserControl.resx">
+      <DependentUpon>ValueUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="joey.ico" />
+    <None Include="YuGi\Resources\hand_deck.png" />
+    <None Include="YuGi\Resources\jyogai_ji2.png" />
+    <None Include="YuGi\Resources\jyogai_ji1.png" />
+    <None Include="YuGi\Resources\jyogai_ai2.png" />
+    <None Include="YuGi\Resources\jyogai_ai1.png" />
+    <None Include="YuGi\Resources\fie_normal.bmp" />
+    <None Include="YuGi\Resources\card_ura.bmp" />
+    <None Include="YuGi\Resources\detail.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="CustomControls\FileDlgExtenders\FileDlgExtenders_v12.csproj">
+      <Project>{9b4da48c-6d11-46c9-a63d-d369e9c5fe42}</Project>
+      <Name>FileDlgExtenders_v12</Name>
+    </ProjectReference>
+    <ProjectReference Include="CustomControls\jSkin_ModernBlack\jSkin.csproj">
+      <Project>{bc7cd49c-4a90-4b9d-a559-ca78ed0d1c6a}</Project>
+      <Name>jSkin</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
