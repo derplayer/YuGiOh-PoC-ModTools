@@ -37,6 +37,12 @@
     <ApplicationIcon>joey.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Fasm.NET, Version=1.0.4939.27955, Culture=neutral, processorArchitecture=x86">
+      <HintPath>..\packages\Fasm.NET.1.70.03\lib\Fasm.NET.dll</HintPath>
+    </Reference>
+    <Reference Include="MemorySharp, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MemorySharp.1.2.0\lib\MemorySharp.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
@@ -67,6 +73,12 @@
     <Compile Include="CustomControls\RoundButton.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="DebugPatchWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DebugPatchWindow.Designer.cs">
+      <DependentUpon>DebugPatchWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainMenu.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -77,12 +89,6 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="PointEx.cs" />
-    <Compile Include="UserControls\FieldUserControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UserControls\FieldUserControl.Designer.cs">
-      <DependentUpon>FieldUserControl.cs</DependentUpon>
-    </Compile>
     <Compile Include="ImageWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -94,6 +100,12 @@
     </Compile>
     <Compile Include="MainWindow.Designer.cs">
       <DependentUpon>MainWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\RectangleUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\RectangleUserControl.Designer.cs">
+      <DependentUpon>RectangleUserControl.cs</DependentUpon>
     </Compile>
     <Compile Include="UserControls\PointBundleUserControl.cs">
       <SubType>UserControl</SubType>
@@ -109,6 +121,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserControls\ValueListUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\ValueListUserControl.Designer.cs">
+      <DependentUpon>ValueListUserControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\ValueUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -118,30 +136,34 @@
     <Compile Include="Version.cs" />
     <Compile Include="YuGi\Filetypes\YGAFile.cs" />
     <Compile Include="YuGi\Headers\YGAHeader.cs" />
+    <Compile Include="YuGi\Values\ChildItemCollection.cs" />
+    <Compile Include="YuGi\Values\IChildItem.cs" />
+    <Compile Include="YuGi\Values\YuGiCalcValue.cs" />
     <Compile Include="YuGi\Values\YuGiDeckEditor.cs" />
     <Compile Include="YuGi\Values\YuGiDuelField.cs" />
+    <Compile Include="YuGi\Values\YuGiValue.cs" />
+    <Compile Include="YuGi\Values\YuGiNode.cs" />
     <Compile Include="YuGi\Values\YuGiRectangle.cs" />
     <Compile Include="YuGi\Values\YuGiValueList.cs" />
     <Compile Include="YuGi\YuGiBuffer.cs" />
     <Compile Include="YuGi\YuGiCompressedWord.cs" />
     <Compile Include="YuGi\YuGiData.cs" />
     <Compile Include="YuGi\YuGiDataEntry.cs" />
+    <Compile Include="YuGi\YuGiDebugger.cs" />
     <Compile Include="YuGi\YuGiExtendedMethods.cs" />
-    <Compile Include="YuGi\Values\YuGiField.cs" />
     <Compile Include="YuGi\YuGiLZSS.cs" />
     <Compile Include="YuGi\Values\YuGiPointBundle.cs" />
-    <Compile Include="YuGi\Values\YuGiValue.cs" />
     <Compile Include="YuGi\Values\YuGiStructure.cs" />
     <Compile Include="YuGi\Values\YuGiPoint.cs" />
     <EmbeddedResource Include="BasicSettings.resx">
       <DependentUpon>BasicSettings.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CustomControls\OpenFileDialogEx\MyOpenFileDialogControl.resx" />
+    <EmbeddedResource Include="DebugPatchWindow.resx">
+      <DependentUpon>DebugPatchWindow.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainMenu.resx">
       <DependentUpon>MainMenu.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UserControls\FieldUserControl.resx">
-      <DependentUpon>FieldUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ImageWindow.resx">
       <DependentUpon>ImageWindow.cs</DependentUpon>
@@ -165,9 +187,13 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="UserControls\ValueListUserControl.resx">
+      <DependentUpon>ValueListUserControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UserControls\ValueUserControl.resx">
       <DependentUpon>ValueUserControl.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -182,6 +208,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Fasm.NET.xml" />
     <Content Include="joey.ico" />
     <None Include="YuGi\Resources\hand_deck.png" />
     <None Include="YuGi\Resources\jyogai_ji2.png" />

@@ -12,18 +12,33 @@ using YuGiOh_PoC_Patcher.YuGi.Filetypes;
 using YuGiOh_PoC_Patcher.YuGi.Values;
 using YuGiOh_PoC_Patcher.CustomControls;
 using FileDialogExtenders;
+using System.Collections.Generic;
+using YuGiOh_PoC_Patcher.UserControls;
 
 namespace YuGiOh_PoC_Patcher
 {
     public partial class MainWindow : Form
     {
+
         private YuGiStructure _structure = new YuGiStructure();
         private bool _loading;
         private Bitmap _background = Resources.fie_normal;
+        private Timer _timer = new Timer();
 
         public MainWindow()
         {
             InitializeComponent();
+            _timer.Interval = 250;
+            _timer.Enabled = false;
+            _timer.Tick += _timer_Tick;
+
+            #if DEBUG
+            debugToolStripMenuItem.Enabled = true;
+            #else
+            debugToolStripMenuItem.Enabled = false;
+            #endif
+
+            
 
             checkBox_Rotate.DataBindings.Add("Checked", _structure, "Rotate", true, DataSourceUpdateMode.OnPropertyChanged);
             numericUpDown_CardSize_Width.DataBindings.Add("Value", _structure.CardSize, "X", true, DataSourceUpdateMode.OnPropertyChanged);
@@ -32,19 +47,47 @@ namespace YuGiOh_PoC_Patcher
             _structure.PropertyChanged += _structure_PropertyChanged;
 
             pointUserControl_WindowSize.Point = _structure.WindowSizeOffset;
-            fieldUserControl_Player.Field = _structure.DuelField.PlayerField;
-            fieldUserControl_Enemy.Field = _structure.DuelField.EnemyField;
+
+            TreeNode rootNode = new TreeNode("DuelField");
+            rootNode.Tag = _structure.DuelField.RootNode;
+            GenerateTree(rootNode, _structure.DuelField.RootNode);
+            treeView_DuelField.Nodes.Add(rootNode);
+
+            TreeNode rootNode2 = new TreeNode("DeckEditor");
+            rootNode2.Tag = _structure.DeckEditor.RootNode;
+            GenerateTree(rootNode2, _structure.DeckEditor.RootNode);
+            treeView_DeckEditor.Nodes.Add(rootNode2);
 
             //naice card moving feature buggy as fuck
             //pictureBox_CardTest.Point = _structure.PlayerField.DeckOffset;
             //pictureBox_CardTest2.Point = _structure.EnemyField.DeckOffset;
         }
 
+        private void _timer_Tick(object sender, EventArgs e)
+        {
+            _timer.Enabled = false;
+            UpdatePreview();
+        }
+
+        private void GenerateTree(TreeNode treeNode, YuGiNode yugiNode)
+        {
+            foreach (YuGiNode node in yugiNode.Children)
+            {
+                TreeNode n = new TreeNode(node.Name);
+                n.Tag = node;
+
+                GenerateTree(n, node);
+                treeNode.Nodes.Add(n);
+            }
+        }
+
         private void _structure_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             //needed cause else memory explosion due to drawing garbage
             if (_loading) return;
-            UpdatePreview();
+
+            _timer.Enabled = false;
+            _timer.Enabled = true;
         }
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
@@ -120,8 +163,8 @@ namespace YuGiOh_PoC_Patcher
 
                 graphic.DrawImage(_background, new Rectangle(230, 0, _structure.WindowSizeOffset.X.ValueInt32 - 230, _structure.WindowSizeOffset.Y.ValueInt32), new Rectangle(0, 0, _background.Width, _background.Height), GraphicsUnit.Pixel);
 
-                DrawField(graphic, _structure.DuelField.PlayerField, _structure.CardSize, false, _structure.Rotate);
-                DrawField(graphic, _structure.DuelField.EnemyField, _structure.CardSize, true, _structure.Rotate);
+                DrawField(graphic, _structure.DuelField.RootNode.GetNode<YuGiNode>("PlayerField"), _structure.CardSize, false, _structure.Rotate);
+                DrawField(graphic, _structure.DuelField.RootNode.GetNode<YuGiNode>("EnemyField"), _structure.CardSize, true, _structure.Rotate);
 
                 graphic.DrawImage(Resources.detail, 0, 0);
             }
@@ -129,7 +172,7 @@ namespace YuGiOh_PoC_Patcher
             pictureBox_Preview.Image = bitmap;
         }
 
-        private void DrawField(Graphics graphic, YuGiField field, PointEx cardSize, bool top, bool rotate)
+        private void DrawField(Graphics graphic, YuGiNode node, PointEx cardSize, bool top, bool rotate)
         {
             //570 field size
             //800 window size
@@ -154,35 +197,42 @@ namespace YuGiOh_PoC_Patcher
 
             //removing the draw method extra pixel
             Point cardSizePoint = new Point(cardSize.X - 1, cardSize.Y - 1);
-            
 
-            DrawDeck(graphic, card, deckShadow, deckDepth, new Rectangle(field.DeckOffset.X.ValueInt32 - centerOffsetX, field.DeckOffset.Y.ValueInt32 - centerOffsetY, cardSizePoint.X, cardSizePoint.Y), top); 
+            YuGiPoint deckOffset = node.GetNode<YuGiPoint>("Deck");
+            DrawDeck(graphic, card, deckShadow, deckDepth, new Rectangle(deckOffset.X.ValueInt32 - centerOffsetX, deckOffset.Y.ValueInt32 - centerOffsetY, cardSizePoint.X, cardSizePoint.Y), top);
 
+            YuGiPoint graveyardOffset = node.GetNode<YuGiPoint>("Graveyard");
+            YuGiPoint fusionOffset = node.GetNode<YuGiPoint>("Fusion");
+            YuGiPoint fieldEffectOffset = node.GetNode<YuGiPoint>("Field Effect Card");
+            YuGiPoint removedFromGameOffset = node.GetNode<YuGiPoint>("Removed From Game");
+            YuGiPoint handOffset = node.GetNode<YuGiPoint>("Hand");
             if (top)
             {
-                DrawCard(graphic, card, new Rectangle(field.GraveyardOffset.X.ValueInt32 - centerOffsetX, field.GraveyardOffset.Y.ValueInt32 - centerOffsetY, cardSizePoint.X, cardSizePoint.Y), 180);
-                DrawCard(graphic, card, new Rectangle(field.FusionOffset.X.ValueInt32 - centerOffsetX, field.FusionOffset.Y.ValueInt32 - centerOffsetY, cardSizePoint.X, cardSizePoint.Y), 180);
-                DrawCard(graphic, card, new Rectangle(field.FieldEffectOffset.X.ValueInt32 - centerOffsetX, field.FieldEffectOffset.Y.ValueInt32 - centerOffsetY, cardSizePoint.X, cardSizePoint.Y), 180);
-                graphic.DrawImage(removedSymbol, new Rectangle(field.RemovedFromGameOffset.X.ValueInt32 - centerRemovedOffsetX, field.RemovedFromGameOffset.Y.ValueInt32 - centerRemovedOffsetY, removedSymbol.Width, removedSymbol.Height), new Rectangle(0, 0, removedSymbol.Width, removedSymbol.Height), GraphicsUnit.Pixel);
-                graphic.DrawImage(deckCardZone, new Rectangle(field.HandOffset.X.ValueInt32 - centerHandOffsetOffsetX, (field.HandOffset.Y.ValueInt32 - centerHandOffsetOffsetY) + 19, deckCardZone.Width, deckCardZone.Height), new Rectangle(0, 0, deckCardZone.Width, deckCardZone.Height), GraphicsUnit.Pixel);
+                DrawCard(graphic, card, new Rectangle(graveyardOffset.X.ValueInt32 - centerOffsetX, graveyardOffset.Y.ValueInt32 - centerOffsetY, cardSizePoint.X, cardSizePoint.Y), 180);
+                DrawCard(graphic, card, new Rectangle(fusionOffset.X.ValueInt32 - centerOffsetX, fusionOffset.Y.ValueInt32 - centerOffsetY, cardSizePoint.X, cardSizePoint.Y), 180);
+                DrawCard(graphic, card, new Rectangle(fieldEffectOffset.X.ValueInt32 - centerOffsetX, fieldEffectOffset.Y.ValueInt32 - centerOffsetY, cardSizePoint.X, cardSizePoint.Y), 180);
+                graphic.DrawImage(removedSymbol, new Rectangle(removedFromGameOffset.X.ValueInt32 - centerRemovedOffsetX, removedFromGameOffset.Y.ValueInt32 - centerRemovedOffsetY, removedSymbol.Width, removedSymbol.Height), new Rectangle(0, 0, removedSymbol.Width, removedSymbol.Height), GraphicsUnit.Pixel);
+                graphic.DrawImage(deckCardZone, new Rectangle(handOffset.X.ValueInt32 - centerHandOffsetOffsetX, (handOffset.Y.ValueInt32 - centerHandOffsetOffsetY) + 19, deckCardZone.Width, deckCardZone.Height), new Rectangle(0, 0, deckCardZone.Width, deckCardZone.Height), GraphicsUnit.Pixel);
             }
             else
             {
-                DrawCard(graphic, card, new Rectangle(field.GraveyardOffset.X.ValueInt32 - centerOffsetX, field.GraveyardOffset.Y.ValueInt32 - centerOffsetY, cardSizePoint.X, cardSizePoint.Y), 0);
-                DrawCard(graphic, card, new Rectangle(field.FusionOffset.X.ValueInt32 - centerOffsetX, field.FusionOffset.Y.ValueInt32 - centerOffsetY, cardSizePoint.X, cardSizePoint.Y), 0);
-                DrawCard(graphic, card, new Rectangle(field.FieldEffectOffset.X.ValueInt32 - centerOffsetX, field.FieldEffectOffset.Y.ValueInt32 - centerOffsetY, cardSizePoint.X, cardSizePoint.Y), 0);
-                graphic.DrawImage(removedSymbolEnemy, new Rectangle(field.RemovedFromGameOffset.X.ValueInt32 - centerRemovedOffsetX, field.RemovedFromGameOffset.Y.ValueInt32 - centerRemovedOffsetY, removedSymbolEnemy.Width, removedSymbolEnemy.Height), new Rectangle(0, 0, removedSymbolEnemy.Width, removedSymbolEnemy.Height), GraphicsUnit.Pixel);
-                graphic.DrawImage(deckCardZone, new Rectangle(field.HandOffset.X.ValueInt32 - centerHandOffsetOffsetX, (field.HandOffset.Y.ValueInt32 - centerHandOffsetOffsetY) - 19, deckCardZone.Width, deckCardZone.Height), new Rectangle(0, 0, deckCardZone.Width, deckCardZone.Height), GraphicsUnit.Pixel);
+                DrawCard(graphic, card, new Rectangle(graveyardOffset.X.ValueInt32 - centerOffsetX, graveyardOffset.Y.ValueInt32 - centerOffsetY, cardSizePoint.X, cardSizePoint.Y), 0);
+                DrawCard(graphic, card, new Rectangle(fusionOffset.X.ValueInt32 - centerOffsetX, fusionOffset.Y.ValueInt32 - centerOffsetY, cardSizePoint.X, cardSizePoint.Y), 0);
+                DrawCard(graphic, card, new Rectangle(fieldEffectOffset.X.ValueInt32 - centerOffsetX, fieldEffectOffset.Y.ValueInt32 - centerOffsetY, cardSizePoint.X, cardSizePoint.Y), 0);
+                graphic.DrawImage(removedSymbolEnemy, new Rectangle(removedFromGameOffset.X.ValueInt32 - centerRemovedOffsetX, removedFromGameOffset.Y.ValueInt32 - centerRemovedOffsetY, removedSymbolEnemy.Width, removedSymbolEnemy.Height), new Rectangle(0, 0, removedSymbolEnemy.Width, removedSymbolEnemy.Height), GraphicsUnit.Pixel);
+                graphic.DrawImage(deckCardZone, new Rectangle(handOffset.X.ValueInt32 - centerHandOffsetOffsetX, (handOffset.Y.ValueInt32 - centerHandOffsetOffsetY) - 19, deckCardZone.Width, deckCardZone.Height), new Rectangle(0, 0, deckCardZone.Width, deckCardZone.Height), GraphicsUnit.Pixel);
             }
 
             for (int i = 0; i < 5; i++)
             {
-                YuGiPoint monsterCardStart = field.MonsterCards.Points[0];
-                YuGiPoint magicCardStart = field.MagicCards.Points[0];
+                YuGiPointBundle monsterCards = node.GetNode<YuGiPointBundle>("Monster Cards");
+                YuGiPointBundle magicCards = node.GetNode<YuGiPointBundle>("Spell/Trap Cards");
+                YuGiPoint monsterCardStart = (YuGiPoint)monsterCards.Children[0];
+                YuGiPoint magicCardStart = (YuGiPoint)magicCards.Children[0];
 
                 if (rotate)
                 {
-                    Rectangle rect = new Rectangle(monsterCardStart.X.ValueInt32 + i * field.MonsterCards.Gap - centerOffsetX, monsterCardStart.Y.ValueInt32 - centerOffsetY, cardSizePoint.X, cardSizePoint.Y);
+                    Rectangle rect = new Rectangle(monsterCardStart.X.ValueInt32 + i * monsterCards.Gap - centerOffsetX, monsterCardStart.Y.ValueInt32 - centerOffsetY, cardSizePoint.X, cardSizePoint.Y);
                     if (top)
                     {
                         DrawCard(graphic, card, rect, 270);
@@ -197,22 +247,22 @@ namespace YuGiOh_PoC_Patcher
                 {
                     if (top)
                     {
-                        DrawCard(graphic, card, new Rectangle(monsterCardStart.X.ValueInt32 + i * field.MonsterCards.Gap - centerOffsetX, monsterCardStart.Y.ValueInt32 - centerOffsetY, cardSizePoint.X, cardSizePoint.Y), 180);
+                        DrawCard(graphic, card, new Rectangle(monsterCardStart.X.ValueInt32 + i * monsterCards.Gap - centerOffsetX, monsterCardStart.Y.ValueInt32 - centerOffsetY, cardSizePoint.X, cardSizePoint.Y), 180);
                     }
                     else
                     {
-                        DrawCard(graphic, card, new Rectangle(monsterCardStart.X.ValueInt32 + i * field.MonsterCards.Gap - centerOffsetX, monsterCardStart.Y.ValueInt32 - centerOffsetY, cardSizePoint.X, cardSizePoint.Y), 0);
+                        DrawCard(graphic, card, new Rectangle(monsterCardStart.X.ValueInt32 + i * monsterCards.Gap - centerOffsetX, monsterCardStart.Y.ValueInt32 - centerOffsetY, cardSizePoint.X, cardSizePoint.Y), 0);
                     }
                 }
 
 
                 if (top)
                 {
-                    DrawCard(graphic, card, new Rectangle(magicCardStart.X.ValueInt32 + i * field.MagicCards.Gap - centerOffsetX, magicCardStart.Y.ValueInt32 - centerOffsetY, cardSizePoint.X - 1, cardSizePoint.Y - 1), 180);
+                    DrawCard(graphic, card, new Rectangle(magicCardStart.X.ValueInt32 + i * magicCards.Gap - centerOffsetX, magicCardStart.Y.ValueInt32 - centerOffsetY, cardSizePoint.X - 1, cardSizePoint.Y - 1), 180);
                 }
                 else
                 {
-                    DrawCard(graphic, card, new Rectangle(magicCardStart.X.ValueInt32 + i * field.MagicCards.Gap - centerOffsetX, magicCardStart.Y.ValueInt32 - centerOffsetY, cardSizePoint.X - 1, cardSizePoint.Y - 1), 0);
+                    DrawCard(graphic, card, new Rectangle(magicCardStart.X.ValueInt32 + i * magicCards.Gap - centerOffsetX, magicCardStart.Y.ValueInt32 - centerOffsetY, cardSizePoint.X - 1, cardSizePoint.Y - 1), 0);
                 }
             }
         }
@@ -691,7 +741,115 @@ namespace YuGiOh_PoC_Patcher
 
         private void label3_Click(object sender, EventArgs e)
         {
+            
+        }
 
+        private void runToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            YuGiDebugger debug = YuGiDebugger.Create(_structure);
+        }
+
+        private void treeView_DuelField_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            panel_DuelField_ValueEditor.Controls.Clear();
+            if (e.Node.Tag.GetType() == typeof(YuGiPoint))
+            {
+                PointUserControl userControl = new PointUserControl();
+                userControl.Point = (YuGiPoint)e.Node.Tag;
+                panel_DuelField_ValueEditor.Controls.Add(userControl);
+                userControl.Dock = DockStyle.Fill;
+            }
+            if (e.Node.Tag.GetType() == typeof(YuGiPointBundle))
+            {
+                PointBundleUserControl userControl = new PointBundleUserControl();
+                userControl.PointBundle = (YuGiPointBundle)e.Node.Tag;
+                panel_DuelField_ValueEditor.Controls.Add(userControl);
+                userControl.Dock = DockStyle.Fill;
+            }
+            if (e.Node.Tag.GetType() == typeof(YuGiValue))
+            {
+                GroupBox groupBox = new GroupBox();
+                groupBox.Text = ((YuGiValue)e.Node.Tag).Name;
+                ValueUserControl userControl = new ValueUserControl();
+                userControl.Value = (YuGiValue)e.Node.Tag;
+                groupBox.Controls.Add(userControl);
+                panel_DuelField_ValueEditor.Controls.Add(groupBox);
+                groupBox.Dock = DockStyle.Fill;
+                userControl.Dock = DockStyle.Fill;
+            }
+            if (e.Node.Tag.GetType() == typeof(YuGiRectangle))
+            {
+                RectangleUserControl userControl = new RectangleUserControl();
+                userControl.Rectangle = (YuGiRectangle)e.Node.Tag;
+                panel_DuelField_ValueEditor.Controls.Add(userControl);
+                userControl.Dock = DockStyle.Fill;
+            }
+            if (e.Node.Tag.GetType() == typeof(YuGiValueList))
+            {
+                ValueListUserControl userControl = new ValueListUserControl();
+                userControl.Value = (YuGiValueList)e.Node.Tag;
+                panel_DuelField_ValueEditor.Controls.Add(userControl);
+                userControl.Dock = DockStyle.Fill;
+            }
+        }
+
+        private void treeView_DeckEditor_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            panel_DeckEditor_ValueEditor.Controls.Clear();
+            if (e.Node.Tag.GetType() == typeof(YuGiPoint))
+            {
+                PointUserControl userControl = new PointUserControl();
+                userControl.Point = (YuGiPoint)e.Node.Tag;
+                panel_DeckEditor_ValueEditor.Controls.Add(userControl);
+                userControl.Dock = DockStyle.Fill;
+            }
+            if (e.Node.Tag.GetType() == typeof(YuGiPointBundle))
+            {
+                PointBundleUserControl userControl = new PointBundleUserControl();
+                userControl.PointBundle = (YuGiPointBundle)e.Node.Tag;
+                panel_DeckEditor_ValueEditor.Controls.Add(userControl);
+                userControl.Dock = DockStyle.Fill;
+            }
+            if (e.Node.Tag.GetType() == typeof(YuGiValue))
+            {
+                GroupBox groupBox = new GroupBox();
+                groupBox.Text = ((YuGiValue)e.Node.Tag).Name;
+                ValueUserControl userControl = new ValueUserControl();
+                userControl.Value = (YuGiValue)e.Node.Tag;
+                groupBox.Controls.Add(userControl);
+                panel_DeckEditor_ValueEditor.Controls.Add(groupBox);
+                groupBox.Dock = DockStyle.Fill;
+                userControl.Dock = DockStyle.Fill;
+            }
+            if (e.Node.Tag.GetType() == typeof(YuGiRectangle))
+            {
+                RectangleUserControl userControl = new RectangleUserControl();
+                userControl.Rectangle = (YuGiRectangle)e.Node.Tag;
+                panel_DeckEditor_ValueEditor.Controls.Add(userControl);
+                userControl.Dock = DockStyle.Fill;
+            }
+            if (e.Node.Tag.GetType() == typeof(YuGiValueList))
+            {
+                ValueListUserControl userControl = new ValueListUserControl();
+                userControl.Value = (YuGiValueList)e.Node.Tag;
+                panel_DeckEditor_ValueEditor.Controls.Add(userControl);
+                userControl.Dock = DockStyle.Fill;
+            }
+        }
+
+        private void refreshToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            UpdatePreview();
+        }
+
+        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (tabControl1.SelectedIndex == 0)
+            {
+                UpdatePreview();
+                return;
+            }
+            pictureBox_Preview.Image = null;
         }
     }
 }

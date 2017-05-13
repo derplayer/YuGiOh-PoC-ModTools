@@ -22,42 +22,21 @@ namespace YuGiOh_PoC_Patcher
             set
             {
                 _point = value;
-                UpdateBinding();
+                if (_point != null) UpdateBinding();
             }
         }
 
         public PointUserControl()
         {
             InitializeComponent();
+
         }
 
         private void UpdateBinding()
         {
-            numericUpDown_X.DataBindings.Clear();
-            numericUpDown_Y.DataBindings.Clear();
-
-            if (Point == null) return;
-
-            //textBox1.DataBindings.Clear();
-            //textBox1.MaxLength = Point.Y.Length * 2;
-            //textBox1.DataBindings.Add("Text", Point.Y, "ValueAscii", true, DataSourceUpdateMode.OnPropertyChanged);
-
-            double length = Math.Pow(2, Point.X.Length * 8);
-            numericUpDown_X.Maximum = (decimal)length / 2 - 1;
-            numericUpDown_X.Minimum = (decimal)length / 2 * -1;
-
-            length = Math.Pow(2, Point.Y.Length * 8);
-            numericUpDown_Y.Maximum = (decimal)length / 2 - 1;
-            numericUpDown_Y.Minimum = (decimal)length / 2 * -1;
-
             groupBox.Text = Point.Name;
-            numericUpDown_X.DataBindings.Add("Value", Point.X, "ValueInt32", true, DataSourceUpdateMode.OnPropertyChanged);
-            numericUpDown_Y.DataBindings.Add("Value", Point.Y, "ValueInt32", true, DataSourceUpdateMode.OnPropertyChanged);
-        }
-
-        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
-        {
-
+            valueUserControl_X.Value = Point.X;
+            valueUserControl_Y.Value = Point.Y;
         }
 
     }

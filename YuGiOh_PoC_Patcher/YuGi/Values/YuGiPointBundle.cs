@@ -13,29 +13,9 @@ namespace YuGiOh_PoC_Patcher.YuGi.Values
     /// <summary>
     /// First cards coordinates and a gap in pixels is used to generate the other cards coordinates
     /// </summary>
-    public class YuGiPointBundle : INotifyPropertyChanged
+    public class YuGiPointBundle : YuGiNode
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private YuGiPoint[] _points;
         private int _gap;
-
-        [XmlIgnore]
-        public string Name { get; set; }
-
-        public YuGiPoint[] Points
-        {
-            get { return _points; }
-            set
-            {
-                _points = value;
-                if (value == null) return;
-                foreach (YuGiPoint point in _points)
-                {
-                    point.PropertyChanged += ValueChanged;
-                }
-            }
-        }
 
         public int Gap
         {
@@ -45,69 +25,44 @@ namespace YuGiOh_PoC_Patcher.YuGi.Values
                 _gap = value;
                 UpdateValues();
             }
-        }    
+        }
+
+        public YuGiPointBundle() { }
+
+        public YuGiPointBundle(string name, int gap)
+        {
+            Name = name;
+            Gap = gap;
+        }
 
         private void UpdateValues()
         {
-            if (Points == null) return;
-            if (Points.Length < 2) return;
-            for (int i = 1; i < Points.Length; i++)
+            if (Children.Count < 2) return;
+            YuGiPoint basePoint = (YuGiPoint)Children[0];
+            for (int i = 1; i < Children.Count; i++)
             {
-                YuGiPoint point = Points[i];
-                point.X.ValueInt32 = Points[0].X.ValueInt32 + i * Gap;
-                point.Y.ValueInt32 = Points[0].Y.ValueInt32;
+                YuGiPoint point = (YuGiPoint)Children[i];
+                point.X.ValueInt32 = basePoint.X.ValueInt32 + i * Gap;
+                point.Y.ValueInt32 = basePoint.Y.ValueInt32;
             }
         }
 
-        /// <summary>
-        /// Copies the values of the given instance to the current instance
-        /// </summary>
-        /// <param name="pointBundle"></param>
-        public void CopyValues(YuGiPointBundle pointBundle)
+        public override void CopyValues(YuGiNode pointBundle)
         {
-            Gap = pointBundle.Gap;
-            for (int i = 0; i < Points.Length; i++)
+            Gap = ((YuGiPointBundle)pointBundle).Gap;
+            for (int i = 0; i < Children.Count; i++)
             {
-                Points[i].CopyValues(pointBundle.Points[i]);
+                Children[i].CopyValues(pointBundle.Children[i]);
             }
         }
 
-        public void LoadValue(BinaryReader reader, bool update = false)
+        public override void LoadValues(BinaryReader reader, bool update = false)
         {
-            foreach (YuGiPoint point in Points)
+            foreach (YuGiNode point in Children)
             {
-                point.LoadValue(reader, update);
+                point.LoadValues(reader, update);
             }
-
-            Gap = Points[1].X.ValueInt32 - Points[0].X.ValueInt32;
-            OnPropertyChanged();
-        }
-
-        public void PatchValue(BinaryWriter writer)
-        {
-            foreach (YuGiPoint point in Points)
-            {
-                point.PatchValue(writer);
-            }
-        }
-
-        public void PatchDefault(BinaryWriter writer)
-        {
-            foreach (YuGiPoint point in Points)
-            {
-                point.PatchDefault(writer);
-            }
-        }
-
-
-        private void ValueChanged(object sender, PropertyChangedEventArgs e)
-        {
-            OnPropertyChanged(e.PropertyName);
-        }
-
-        protected virtual void OnPropertyChanged(string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            Gap = ((YuGiPoint)Children[1]).X.ValueInt32 - ((YuGiPoint)Children[0]).X.ValueInt32;
         }
     }
 }

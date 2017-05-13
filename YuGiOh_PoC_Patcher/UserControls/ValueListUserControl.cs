@@ -7,33 +7,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using YuGiOh_PoC_Patcher.YuGi;
 using YuGiOh_PoC_Patcher.YuGi.Values;
 
-namespace YuGiOh_PoC_Patcher
+namespace YuGiOh_PoC_Patcher.UserControls
 {
-    public partial class ValueUserControl : UserControl
+    public partial class ValueListUserControl : UserControl
     {
-        private YuGiValue _value;
+        private YuGiValueList _value;
 
-        public YuGiValue Value
+        public YuGiValueList Value
         {
             get { return _value; }
             set
             {
                 _value = value;
-                if (_value!= null) UpdateBinding();
+                if (_value != null) UpdateBinding();
             }
         }
 
-        public string ValueText
-        {
-            get { return label_ValueText.Text; }
-            set { label_ValueText.Text = value; }
-        }
-
-
-        public ValueUserControl()
+        public ValueListUserControl()
         {
             InitializeComponent();
         }
@@ -41,6 +33,7 @@ namespace YuGiOh_PoC_Patcher
         private void UpdateBinding()
         {
             _value.PropertyChanged += Value_PropertyChanged;
+            groupBox.Text = _value.Name;
 
             if (_value.IsReadOnly)
             {
@@ -51,11 +44,11 @@ namespace YuGiOh_PoC_Patcher
                 numericUpDown_Value.Enabled = true;
             }
 
-            double length = Math.Pow(2, Value.Length * 8);
+            double length = Math.Pow(2, Value.MaxLength * 8);
             numericUpDown_Value.Maximum = (decimal)length / 2 - 1;
             numericUpDown_Value.Minimum = (decimal)length / 2 * -1;
 
-            switch (Value.Length)
+            switch (Value.MaxLength)
             {
                 case 4:
                     numericUpDown_Value.Value = Value.ValueInt32;
@@ -70,12 +63,11 @@ namespace YuGiOh_PoC_Patcher
                     numericUpDown_Value.Value = 0;
                     break;
             }
-            
         }
 
         private void Value_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            switch (Value.Length)
+            switch (Value.MaxLength)
             {
                 case 4:
                     numericUpDown_Value.Value = Value.ValueInt32;
@@ -94,7 +86,7 @@ namespace YuGiOh_PoC_Patcher
 
         private void numericUpDown_Value_ValueChanged(object sender, EventArgs e)
         {
-            switch (Value.Length)
+            switch (Value.MaxLength)
             {
                 case 4:
                     Value.ValueInt32 = (int)numericUpDown_Value.Value;
@@ -108,7 +100,7 @@ namespace YuGiOh_PoC_Patcher
                 default:
                     break;
             }
-            
+
         }
     }
 }

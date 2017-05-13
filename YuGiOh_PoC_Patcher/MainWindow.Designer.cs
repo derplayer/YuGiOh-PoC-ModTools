@@ -30,6 +30,8 @@
         {
             System.Windows.Forms.TabPage tabPage3;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
+            this.panel_DeckEditor_ValueEditor = new System.Windows.Forms.Panel();
+            this.treeView_DeckEditor = new System.Windows.Forms.TreeView();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -42,20 +44,20 @@
             this.generateImagesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.checkEmToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.testToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.runToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.refreshToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.checkBox_Rotate = new System.Windows.Forms.CheckBox();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.panel_DuelField_ValueEditor = new System.Windows.Forms.Panel();
+            this.treeView_DuelField = new System.Windows.Forms.TreeView();
             this.label1 = new System.Windows.Forms.Label();
             this.button_Browse = new System.Windows.Forms.Button();
             this.button_Apply = new System.Windows.Forms.Button();
             this.textBox_FieldBackground = new System.Windows.Forms.TextBox();
-            this.tabControl = new System.Windows.Forms.TabControl();
-            this.tabPage_Player = new System.Windows.Forms.TabPage();
-            this.fieldUserControl_Player = new YuGiOh_PoC_Patcher.FieldUserControl();
-            this.tabPage_Enemy = new System.Windows.Forms.TabPage();
-            this.fieldUserControl_Enemy = new YuGiOh_PoC_Patcher.FieldUserControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.label3 = new System.Windows.Forms.Label();
             this.pointUserControl_WindowSize = new YuGiOh_PoC_Patcher.PointUserControl();
             this.groupBox_CardSize = new System.Windows.Forms.GroupBox();
             this.label_CardSize_Width = new System.Windows.Forms.Label();
@@ -66,9 +68,8 @@
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.pictureBox_Preview = new System.Windows.Forms.PictureBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             tabPage3 = new System.Windows.Forms.TabPage();
+            tabPage3.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -76,10 +77,6 @@
             this.splitContainer1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
-            this.tabControl.SuspendLayout();
-            this.tabPage_Player.SuspendLayout();
-            this.tabPage_Enemy.SuspendLayout();
-            tabPage3.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox_CardSize.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_CardSize_Width)).BeginInit();
@@ -88,6 +85,38 @@
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Preview)).BeginInit();
             this.SuspendLayout();
+            // 
+            // tabPage3
+            // 
+            tabPage3.Controls.Add(this.panel_DeckEditor_ValueEditor);
+            tabPage3.Controls.Add(this.treeView_DeckEditor);
+            tabPage3.Location = new System.Drawing.Point(4, 4);
+            tabPage3.Name = "tabPage3";
+            tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            tabPage3.Size = new System.Drawing.Size(314, 423);
+            tabPage3.TabIndex = 2;
+            tabPage3.Text = "Deck Editor";
+            tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // panel_DeckEditor_ValueEditor
+            // 
+            this.panel_DeckEditor_ValueEditor.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel_DeckEditor_ValueEditor.Location = new System.Drawing.Point(9, 47);
+            this.panel_DeckEditor_ValueEditor.Name = "panel_DeckEditor_ValueEditor";
+            this.panel_DeckEditor_ValueEditor.Size = new System.Drawing.Size(297, 152);
+            this.panel_DeckEditor_ValueEditor.TabIndex = 23;
+            // 
+            // treeView_DeckEditor
+            // 
+            this.treeView_DeckEditor.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.treeView_DeckEditor.Location = new System.Drawing.Point(9, 205);
+            this.treeView_DeckEditor.Name = "treeView_DeckEditor";
+            this.treeView_DeckEditor.Size = new System.Drawing.Size(297, 212);
+            this.treeView_DeckEditor.TabIndex = 22;
+            this.treeView_DeckEditor.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView_DeckEditor_AfterSelect);
             // 
             // menuStrip1
             // 
@@ -161,8 +190,9 @@
             this.debugToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.generateImagesToolStripMenuItem,
             this.checkEmToolStripMenuItem,
-            this.testToolStripMenuItem});
-            this.debugToolStripMenuItem.Enabled = false;
+            this.testToolStripMenuItem,
+            this.runToolStripMenuItem,
+            this.refreshToolStripMenuItem});
             this.debugToolStripMenuItem.Name = "debugToolStripMenuItem";
             this.debugToolStripMenuItem.Size = new System.Drawing.Size(54, 20);
             this.debugToolStripMenuItem.Text = "Debug";
@@ -187,6 +217,20 @@
             this.testToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
             this.testToolStripMenuItem.Text = "Test";
             this.testToolStripMenuItem.Click += new System.EventHandler(this.testToolStripMenuItem_Click);
+            // 
+            // runToolStripMenuItem
+            // 
+            this.runToolStripMenuItem.Name = "runToolStripMenuItem";
+            this.runToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.runToolStripMenuItem.Text = "Run";
+            this.runToolStripMenuItem.Click += new System.EventHandler(this.runToolStripMenuItem_Click);
+            // 
+            // refreshToolStripMenuItem
+            // 
+            this.refreshToolStripMenuItem.Name = "refreshToolStripMenuItem";
+            this.refreshToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.refreshToolStripMenuItem.Text = "Refresh";
+            this.refreshToolStripMenuItem.Click += new System.EventHandler(this.refreshToolStripMenuItem_Click);
             // 
             // checkBox_Rotate
             // 
@@ -238,14 +282,16 @@
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(322, 449);
             this.tabControl1.TabIndex = 25;
+            this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.panel_DuelField_ValueEditor);
+            this.tabPage2.Controls.Add(this.treeView_DuelField);
             this.tabPage2.Controls.Add(this.label1);
             this.tabPage2.Controls.Add(this.button_Browse);
             this.tabPage2.Controls.Add(this.button_Apply);
             this.tabPage2.Controls.Add(this.textBox_FieldBackground);
-            this.tabPage2.Controls.Add(this.tabControl);
             this.tabPage2.Location = new System.Drawing.Point(4, 4);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
@@ -253,6 +299,26 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Duel Field";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // panel_DuelField_ValueEditor
+            // 
+            this.panel_DuelField_ValueEditor.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel_DuelField_ValueEditor.Location = new System.Drawing.Point(9, 47);
+            this.panel_DuelField_ValueEditor.Name = "panel_DuelField_ValueEditor";
+            this.panel_DuelField_ValueEditor.Size = new System.Drawing.Size(297, 152);
+            this.panel_DuelField_ValueEditor.TabIndex = 21;
+            // 
+            // treeView_DuelField
+            // 
+            this.treeView_DuelField.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.treeView_DuelField.Location = new System.Drawing.Point(9, 205);
+            this.treeView_DuelField.Name = "treeView_DuelField";
+            this.treeView_DuelField.Size = new System.Drawing.Size(297, 212);
+            this.treeView_DuelField.TabIndex = 20;
+            this.treeView_DuelField.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView_DuelField_AfterSelect);
             // 
             // label1
             // 
@@ -294,70 +360,6 @@
             this.textBox_FieldBackground.Size = new System.Drawing.Size(112, 20);
             this.textBox_FieldBackground.TabIndex = 16;
             // 
-            // tabControl
-            // 
-            this.tabControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tabControl.Controls.Add(this.tabPage_Player);
-            this.tabControl.Controls.Add(this.tabPage_Enemy);
-            this.tabControl.Location = new System.Drawing.Point(3, 53);
-            this.tabControl.Name = "tabControl";
-            this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(308, 367);
-            this.tabControl.TabIndex = 15;
-            // 
-            // tabPage_Player
-            // 
-            this.tabPage_Player.Controls.Add(this.fieldUserControl_Player);
-            this.tabPage_Player.Location = new System.Drawing.Point(4, 22);
-            this.tabPage_Player.Name = "tabPage_Player";
-            this.tabPage_Player.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage_Player.Size = new System.Drawing.Size(300, 341);
-            this.tabPage_Player.TabIndex = 2;
-            this.tabPage_Player.Text = "Player Field";
-            this.tabPage_Player.UseVisualStyleBackColor = true;
-            // 
-            // fieldUserControl_Player
-            // 
-            this.fieldUserControl_Player.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.fieldUserControl_Player.Field = null;
-            this.fieldUserControl_Player.Location = new System.Drawing.Point(3, 3);
-            this.fieldUserControl_Player.Name = "fieldUserControl_Player";
-            this.fieldUserControl_Player.Size = new System.Drawing.Size(294, 335);
-            this.fieldUserControl_Player.TabIndex = 0;
-            // 
-            // tabPage_Enemy
-            // 
-            this.tabPage_Enemy.Controls.Add(this.fieldUserControl_Enemy);
-            this.tabPage_Enemy.Location = new System.Drawing.Point(4, 22);
-            this.tabPage_Enemy.Name = "tabPage_Enemy";
-            this.tabPage_Enemy.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage_Enemy.Size = new System.Drawing.Size(300, 341);
-            this.tabPage_Enemy.TabIndex = 3;
-            this.tabPage_Enemy.Text = "Enemy Field";
-            this.tabPage_Enemy.UseVisualStyleBackColor = true;
-            // 
-            // fieldUserControl_Enemy
-            // 
-            this.fieldUserControl_Enemy.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.fieldUserControl_Enemy.Field = null;
-            this.fieldUserControl_Enemy.Location = new System.Drawing.Point(3, 3);
-            this.fieldUserControl_Enemy.Name = "fieldUserControl_Enemy";
-            this.fieldUserControl_Enemy.Size = new System.Drawing.Size(294, 335);
-            this.fieldUserControl_Enemy.TabIndex = 0;
-            // 
-            // tabPage3
-            // 
-            tabPage3.Controls.Add(this.label2);
-            tabPage3.Location = new System.Drawing.Point(4, 4);
-            tabPage3.Name = "tabPage3";
-            tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            tabPage3.Size = new System.Drawing.Size(314, 423);
-            tabPage3.TabIndex = 2;
-            tabPage3.Text = "Deck Editor";
-            tabPage3.UseVisualStyleBackColor = true;
-            // 
             // tabPage1
             // 
             this.tabPage1.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
@@ -371,6 +373,17 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Files";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(3, 3);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(205, 24);
+            this.label3.TabIndex = 1;
+            this.label3.Text = "Coming in next update!";
+            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // pointUserControl_WindowSize
             // 
@@ -498,27 +511,6 @@
             this.pictureBox_Preview.TabStop = false;
             this.pictureBox_Preview.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBox_Preview_MouseClick);
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(3, 3);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(205, 24);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "Coming in next update!";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(3, 3);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(205, 24);
-            this.label3.TabIndex = 1;
-            this.label3.Text = "Coming in next update!";
-            this.label3.Click += new System.EventHandler(this.label3_Click);
-            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -532,6 +524,7 @@
             this.Name = "MainWindow";
             this.Text = "Yu-Gi-Oh Power of Chaos - Patcher";
             this.Load += new System.EventHandler(this.MainWindow_Load);
+            tabPage3.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.splitContainer1.Panel1.ResumeLayout(false);
@@ -542,11 +535,6 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
-            this.tabControl.ResumeLayout(false);
-            this.tabPage_Player.ResumeLayout(false);
-            this.tabPage_Enemy.ResumeLayout(false);
-            tabPage3.ResumeLayout(false);
-            tabPage3.PerformLayout();
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
             this.groupBox_CardSize.ResumeLayout(false);
@@ -569,7 +557,6 @@
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.PictureBox pictureBox_Preview;
-        private System.Windows.Forms.TabControl tabControl;
         private System.Windows.Forms.Label label_CardSize_Height;
         private System.Windows.Forms.Label label_CardSize_Width;
         private System.Windows.Forms.NumericUpDown numericUpDown_CardSize_Height;
@@ -582,10 +569,6 @@
         private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem debugToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem generateImagesToolStripMenuItem;
-        private System.Windows.Forms.TabPage tabPage_Player;
-        private System.Windows.Forms.TabPage tabPage_Enemy;
-        private FieldUserControl fieldUserControl_Player;
-        private FieldUserControl fieldUserControl_Enemy;
         private System.Windows.Forms.Panel panel1;
         private PointUserControl pointUserControl_WindowSize;
         private System.Windows.Forms.ToolStripMenuItem checkEmToolStripMenuItem;
@@ -601,8 +584,13 @@
         private System.Windows.Forms.ToolStripMenuItem dankYGAToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem dankToYGAToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem lZZSToDankToolStripMenuItem;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ToolStripMenuItem runToolStripMenuItem;
+        private System.Windows.Forms.Panel panel_DuelField_ValueEditor;
+        private System.Windows.Forms.TreeView treeView_DuelField;
+        private System.Windows.Forms.ToolStripMenuItem refreshToolStripMenuItem;
+        private System.Windows.Forms.Panel panel_DeckEditor_ValueEditor;
+        private System.Windows.Forms.TreeView treeView_DeckEditor;
     }
 }
 

@@ -21,7 +21,7 @@ namespace YuGiOh_PoC_Patcher.UserControls
             set
             {
                 _pointBundle = value;
-                UpdateBinding();
+                if (_pointBundle != null) UpdateBinding();
             }
         }
 
@@ -33,29 +33,15 @@ namespace YuGiOh_PoC_Patcher.UserControls
 
         private void UpdateBinding()
         {
-            numericUpDown_X.DataBindings.Clear();
-            numericUpDown_Y.DataBindings.Clear();
-            numericUpDown_Gap.DataBindings.Clear();
-
-            if (PointBundle == null) return;
-
-            //textBox1.DataBindings.Clear();
-            //textBox1.MaxLength = Point.Y.Length * 2;
-            //textBox1.DataBindings.Add("Text", Point.Y, "ValueAscii", true, DataSourceUpdateMode.OnPropertyChanged);
-
-            double length = Math.Pow(2, PointBundle.Points[0].X.Length * 8);
-            numericUpDown_X.Maximum = (decimal)length / 2 - 1;
-            numericUpDown_X.Minimum = (decimal)length / 2 * -1;
-
-            length = Math.Pow(2, PointBundle.Points[0].Y.Length * 8);
-            numericUpDown_Y.Maximum = (decimal)length / 2 - 1;
-            numericUpDown_Y.Minimum = (decimal)length / 2 * -1;
-
             groupBox.Text = PointBundle.Name;
-            numericUpDown_X.DataBindings.Add("Value", PointBundle.Points[0].X, "ValueInt32", true, DataSourceUpdateMode.OnPropertyChanged);
-            numericUpDown_Y.DataBindings.Add("Value", PointBundle.Points[0].Y, "ValueInt32", true, DataSourceUpdateMode.OnPropertyChanged);
-            numericUpDown_Gap.DataBindings.Add("Value", PointBundle, "Gap", true, DataSourceUpdateMode.OnPropertyChanged);
+            valueUserControl_X.Value = ((YuGiPoint)PointBundle.Children[0]).X;
+            valueUserControl_Y.Value = ((YuGiPoint)PointBundle.Children[0]).Y;
+            numericUpDown_Gap.Value = PointBundle.Gap;
         }
 
+        private void numericUpDown_Gap_ValueChanged(object sender, EventArgs e)
+        {
+            PointBundle.Gap = (int)numericUpDown_Gap.Value;
+        }
     }
 }

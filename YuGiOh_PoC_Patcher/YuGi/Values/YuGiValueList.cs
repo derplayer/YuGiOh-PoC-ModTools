@@ -4,82 +4,179 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace YuGiOh_PoC_Patcher.YuGi.Values
 {
-    public class YuGiValueList : List<YuGiValue>, INotifyPropertyChanged
+    public class YuGiValueList : YuGiNode
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-
+        [XmlIgnore]
         public byte[] Value
         {
             get
             {
-                if (Count == 0) return null;
-                return this[0].Value;
+                if (Children.Count == 0) return null;
+                return ((YuGiValue)Children[0]).Value;
             }
             set
             {
-                foreach (YuGiValue val in this)
+                foreach (YuGiNode node in Children)
                 {
-                    val.Value = value;
+                    ((YuGiValue)node).Value = value;
                 }
-                OnPropertyChanged("Value");
             }
         }
-        public YuGiValueList() {}
 
-        public YuGiValueList(List<YuGiValue> list)
+        [XmlIgnore]
+        public Int32 ValueInt32
         {
-            foreach (YuGiValue value in list)
+            get { return BitConverter.ToInt32(Value, 0); }
+            set
             {
-                value.PropertyChanged += ValueChanged;
-                Add(value);
+                Value = BitConverter.GetBytes(value);
+                ValuePropertyChanged();
             }
         }
 
-        public void CopyValues(YuGiValueList list)
+        [XmlIgnore]
+        public UInt32 ValueUInt32
         {
-            if (list.Count != Count) return;
-            for (int i = 0; i < Count; i++)
+            get { return BitConverter.ToUInt32(Value, 0); }
+            set
             {
-                this[i].CopyValue(list[i]);
+                Value = BitConverter.GetBytes(value);
+                ValuePropertyChanged();
             }
         }
 
-        public void LoadValue(BinaryReader reader, bool update = false)
+        [XmlIgnore]
+        public Int16 ValueInt16
         {
-            for (int i = 0; i < Count; i++)
+            get { return BitConverter.ToInt16(Value, 0); }
+            set
             {
-                this[i].LoadValue(reader, update);
+                Value = BitConverter.GetBytes(value);
+                ValuePropertyChanged();
             }
         }
 
-        public void PatchValue(BinaryWriter writer)
+        [XmlIgnore]
+        public UInt16 ValueUInt16
         {
-            for (int i = 0; i < Count; i++)
+            get { return BitConverter.ToUInt16(Value, 0); }
+            set
             {
-                this[i].PatchValue(writer);
+                Value = BitConverter.GetBytes(value);
+                ValuePropertyChanged();
             }
         }
 
-        public void PatchDefault(BinaryWriter writer)
+        [XmlIgnore]
+        public SByte ValueInt8
         {
-            for (int i = 0; i < Count; i++)
+            get { return Convert.ToSByte(Value[0]); }
+            set
             {
-                this[i].PatchDefault(writer);
+                Value = BitConverter.GetBytes(value);
+                ValuePropertyChanged();
             }
         }
 
-        private void ValueChanged(object sender, PropertyChangedEventArgs e)
+        [XmlIgnore]
+        public Byte ValueUInt8
         {
-            OnPropertyChanged(e.PropertyName);
+            get { return Convert.ToByte(Value[0]); }
+            set
+            {
+                Value = BitConverter.GetBytes(value);
+                ValuePropertyChanged();
+            }
         }
 
-        protected virtual void OnPropertyChanged(string propertyName = null)
+        [XmlIgnore]
+        public string ValueHexLittleEndian
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            get { return BitConverter.ToString(Value, 0).Replace("-", ""); }
+            set
+            {
+                if (value.Length > MaxLength * 2 || value.Length % 2 == 1 || !Regex.IsMatch(value, @"\A\b[0-9a-fA-F]+\b\Z")) return;
+                Value = new byte[MaxLength];
+                for (int i = 0; i < value.Length; i += 2)
+                {
+                    Value[i / 2] = Convert.ToByte(value.Substring(i, 2), 16); //fix this shit for odd string lengths
+                }
+                ValuePropertyChanged();
+            }
+        }
+
+        [XmlIgnore]
+        public string ValueHexBigEndian
+        {
+            get
+            {
+                string[] splitted = BitConverter.ToString(Value, 0).Split('-');
+                return String.Join("", splitted.Reverse());
+            }
+            set
+            {
+                if (value.Length > MaxLength * 2 || value.Length % 2 == 1 || !Regex.IsMatch(value, @"\A\b[0-9a-fA-F]+\b\Z")) return;
+                Value = new byte[MaxLength];
+                for (int i = 0; i < value.Length; i += 2)
+                {
+                    Value[i / 2] = Convert.ToByte(value.Substring(value.Length - i - 2, 2), 16);
+                }
+                ValuePropertyChanged();
+            }
+        }
+
+        [XmlIgnore]
+        public string ValueAscii
+        {
+            get { return Encoding.ASCII.GetString(Value); }
+            set
+            {
+                if (value.Length > 4) return;
+                Value = new byte[MaxLength];
+                Encoding.ASCII.GetBytes(value).CopyTo(Value, 0);
+                ValuePropertyChanged();
+            }
+        }
+
+
+        public int MaxLength
+        {
+            get
+            {
+                int length = ((YuGiValue)Children[0]).Length;
+                foreach (YuGiNode node in Children)
+                {
+                    YuGiValue value = (YuGiValue)node;
+                    if (value.Length < length) length = value.Length;
+                }
+                return length;
+            }
+        }
+
+        public YuGiValueList() { }
+        public YuGiValueList(string name)
+        {
+            Name = name;
+        }
+
+        private void ValuePropertyChanged()
+        {
+            OnPropertyChanged("Value");
+            OnPropertyChanged("ValueInt32");
+            OnPropertyChanged("ValueUInt32");
+            OnPropertyChanged("ValueInt16");
+            OnPropertyChanged("ValueUInt16");
+            OnPropertyChanged("ValueInt8");
+            OnPropertyChanged("ValueUInt8");
+            OnPropertyChanged("ValueHexLittleEndian");
+            OnPropertyChanged("ValueHexBigEndian");
+            OnPropertyChanged("ValueAscii");
         }
     }
 }
