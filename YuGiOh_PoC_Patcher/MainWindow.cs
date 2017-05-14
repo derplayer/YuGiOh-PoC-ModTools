@@ -66,7 +66,7 @@ namespace YuGiOh_PoC_Patcher
         private void _timer_Tick(object sender, EventArgs e)
         {
             _timer.Enabled = false;
-            UpdatePreview();
+            UpdatePreviewCheck();
         }
 
         private void GenerateTree(TreeNode treeNode, YuGiNode yugiNode)
@@ -93,7 +93,7 @@ namespace YuGiOh_PoC_Patcher
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "YuGiOh Preset|*.joey";
+            openFileDialog.Filter = "YuGiOh Preset|*.joey2";
 
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
@@ -105,6 +105,7 @@ namespace YuGiOh_PoC_Patcher
                     _structure.CopyValues((YuGiStructure)xmlSerializer.Deserialize(reader));
                     _loading = false;
                     UpdatePreview();
+
                 }
             }
         }
@@ -112,7 +113,7 @@ namespace YuGiOh_PoC_Patcher
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.Filter = "YuGiOh Preset|*.joey";
+            saveFileDialog.Filter = "YuGiOh Preset|*.joey2";
 
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
@@ -127,6 +128,7 @@ namespace YuGiOh_PoC_Patcher
         private void checkEmToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "YuGiOh PoC Executable|*.exe";
             if (openFileDialog.ShowDialog() != DialogResult.OK) return;
 
             string fileName = openFileDialog.FileName;
@@ -135,8 +137,18 @@ namespace YuGiOh_PoC_Patcher
                 _loading = true;
                 _structure.LoadValue(reader, true);
                 _loading = false;
-                UpdatePreview();
+                UpdatePreviewCheck();
             }
+
+            /*
+            string addedLinkes = String.Empty;
+            foreach (var line in YuGiValue.debugLog)
+            {
+                addedLinkes += line;
+            }
+
+            MessageBox.Show(addedLinkes);
+            */
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -150,7 +162,18 @@ namespace YuGiOh_PoC_Patcher
             {
                 _structure.PatchValue(writer);
             }
-        }
+
+            DialogResult dialogResult = MessageBox.Show("Do you want to test the new patch?", "Patch successful!", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                YuGi.Launcher.YuGiGameInit.startYuGi(fileName);
+            }
+            else if (dialogResult == DialogResult.No)
+            {
+                
+            }
+
+        }   
 
         private void UpdatePreview()
         {
@@ -170,6 +193,10 @@ namespace YuGiOh_PoC_Patcher
             }
 
             pictureBox_Preview.Image = bitmap;
+
+            //Field resize based on loaded values
+            this.Width = splitContainer1.Panel1.Width + 32 + _structure.WindowSizeOffset.X.ValueInt32;
+            this.Height = 72 + _structure.WindowSizeOffset.Y.ValueInt32;
         }
 
         private void DrawField(Graphics graphic, YuGiNode node, PointEx cardSize, bool top, bool rotate)
@@ -355,7 +382,7 @@ namespace YuGiOh_PoC_Patcher
 
         private void checkBox_Rotate_CheckedChanged(object sender, EventArgs e)
         {
-            UpdatePreview();
+            UpdatePreviewCheck();
         }
 
         private void pictureBox_Preview_MouseClick(object sender, MouseEventArgs e)
@@ -683,7 +710,6 @@ namespace YuGiOh_PoC_Patcher
             MyOpenFileDialogControl openFileDialog = new MyOpenFileDialogControl();
 
             //openFileDialog.Multiselect = true;
-            //openFileDialog.Filter = "Yu-Gi-Oh Graphics Acronym (*.yga)|*.yga";
 
             if (openFileDialog.ShowDialog(this) == DialogResult.OK){
                 //lblFilePath.Text = openDialog.MSDialog.FileName;
@@ -839,10 +865,15 @@ namespace YuGiOh_PoC_Patcher
 
         private void refreshToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            UpdatePreview();
+            UpdatePreviewCheck();
         }
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            UpdatePreviewCheck();
+        }
+
+        private void UpdatePreviewCheck()
         {
             if (tabControl1.SelectedIndex == 0)
             {
@@ -850,6 +881,11 @@ namespace YuGiOh_PoC_Patcher
                 return;
             }
             pictureBox_Preview.Image = null;
+        }
+
+        private void splitContainer1_Panel1_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

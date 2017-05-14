@@ -1,0 +1,549 @@
+<?xml version="1.0" encoding="utf-8"?>
+<YuGiStructure xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Rotate>false</Rotate>
+  <CardSize>
+    <X>102</X>
+    <Y>152</Y>
+  </CardSize>
+  <WindowSizeOffset Name="WindowSize">
+    <Children>
+      <YuGiNode xsi:type="YuGiValue" Name="Window Width (DDraw)" Offset="70505" Value="AAUAAA==">
+        <Children>
+          <YuGiNode xsi:type="YuGiValue" Name="DuelField Window Width 1" Offset="150661" Value="AAUAAA==">
+            <Children />
+          </YuGiNode>
+          <YuGiNode xsi:type="YuGiValue" Name="DuelField Window Width 2" Offset="150729" Value="AAUAAA==">
+            <Children />
+          </YuGiNode>
+          <YuGiNode xsi:type="YuGiValue" Name="Rect Fix Width" Offset="255309" Value="AAUAAA==">
+            <Children />
+          </YuGiNode>
+          <YuGiNode xsi:type="YuGiValue" Name="Effect Activator End Point Top Right Corner" Offset="150885" Value="AAUAAA==">
+            <Children />
+          </YuGiNode>
+          <YuGiNode xsi:type="YuGiValue" Name="Effect Activator End Point Mid Right Corner" Offset="150939" Value="AAUAAA==">
+            <Children />
+          </YuGiNode>
+        </Children>
+      </YuGiNode>
+      <YuGiNode xsi:type="YuGiValue" Name="Window Height (DDraw)" Offset="70497" Value="AAMAAA==">
+        <Children>
+          <YuGiNode xsi:type="YuGiValue" Name="DuelField Window Height 1" Offset="150666" Value="AAMAAA==">
+            <Children />
+          </YuGiNode>
+          <YuGiNode xsi:type="YuGiValue" Name="DuelField Window Height 2" Offset="150734" Value="AAMAAA==">
+            <Children />
+          </YuGiNode>
+          <YuGiNode xsi:type="YuGiValue" Name="Rect Fix Height" Offset="255353" Value="AAMAAA==">
+            <Children />
+          </YuGiNode>
+          <YuGiNode xsi:type="YuGiValue" Name="Effect Activator End Point Down Right Corner" Offset="150947" Value="AAMAAA==">
+            <Children />
+          </YuGiNode>
+          <YuGiNode xsi:type="YuGiValue" Name="Choose Zone (Deck Fix)" Offset="125001" Value="AAMAAA==">
+            <Children />
+          </YuGiNode>
+        </Children>
+      </YuGiNode>
+    </Children>
+  </WindowSizeOffset>
+  <DuelField>
+    <RootNode Name="DuelField">
+      <Children>
+        <YuGiNode Name="PlayerField">
+          <Children>
+            <YuGiNode xsi:type="YuGiPoint" Name="Deck">
+              <Children>
+                <YuGiNode xsi:type="YuGiValue" Name="Player Deck Offset X" Offset="1947056" Value="rgQAAA==">
+                  <Children />
+                </YuGiNode>
+                <YuGiNode xsi:type="YuGiValue" Name="Player Deck Offset Y" Offset="1947060" Value="YgIAAA==">
+                  <Children />
+                </YuGiNode>
+              </Children>
+            </YuGiNode>
+            <YuGiNode xsi:type="YuGiPoint" Name="Graveyard">
+              <Children>
+                <YuGiNode xsi:type="YuGiValue" Name="Player Graveyard Offset X" Offset="1947072" Value="twQAAA==">
+                  <Children />
+                </YuGiNode>
+                <YuGiNode xsi:type="YuGiValue" Name="Player Graveyard Offset Y" Offset="1947076" Value="sgEAAA==">
+                  <Children />
+                </YuGiNode>
+              </Children>
+            </YuGiNode>
+            <YuGiNode xsi:type="YuGiPoint" Name="Fusion">
+              <Children>
+                <YuGiNode xsi:type="YuGiValue" Name="Player Fusion Offset X" Offset="1947088" Value="NAEAAA==">
+                  <Children />
+                </YuGiNode>
+                <YuGiNode xsi:type="YuGiValue" Name="Player Fusion Offset Y" Offset="1947092" Value="lwIAAA==">
+                  <Children />
+                </YuGiNode>
+              </Children>
+            </YuGiNode>
+            <YuGiNode xsi:type="YuGiPoint" Name="Field Effect Card">
+              <Children>
+                <YuGiNode xsi:type="YuGiValue" Name="Player FieldEffect Offset X" Offset="1947104" Value="NAEAAA==">
+                  <Children />
+                </YuGiNode>
+                <YuGiNode xsi:type="YuGiValue" Name="Player FieldEffect Offset Y" Offset="1947108" Value="+AEAAA==">
+                  <Children />
+                </YuGiNode>
+              </Children>
+            </YuGiNode>
+            <YuGiNode xsi:type="YuGiPoint" Name="Hand">
+              <Children>
+                <YuGiNode xsi:type="YuGiValue" Name="Player Hand Offset X" Offset="1947144" Value="9gIAAA==">
+                  <Children />
+                </YuGiNode>
+                <YuGiNode xsi:type="YuGiValue" Name="Player Hand Offset Y" Offset="1947148" Value="FAMAAA==">
+                  <Children />
+                </YuGiNode>
+              </Children>
+            </YuGiNode>
+            <YuGiNode xsi:type="YuGiPoint" Name="Removed From Game">
+              <Children>
+                <YuGiNode xsi:type="YuGiValue" Name="Player RemovedFromGame Offset X" Offset="1947120" Value="twQAAA==">
+                  <Children />
+                </YuGiNode>
+                <YuGiNode xsi:type="YuGiValue" Name="Player RemovedFromGame Offset Y" Offset="1947124" Value="2AIAAA==">
+                  <Children />
+                </YuGiNode>
+              </Children>
+            </YuGiNode>
+            <YuGiNode xsi:type="YuGiPointBundle" Name="Spell/Trap Cards">
+              <Children>
+                <YuGiNode xsi:type="YuGiPoint" Name="Magic Card 1">
+                  <Children>
+                    <YuGiNode xsi:type="YuGiValue" Name="Player Magic Card 1 Offset X" Offset="1946896" Value="6AEAAA==">
+                      <Children />
+                    </YuGiNode>
+                    <YuGiNode xsi:type="YuGiValue" Name="Player Magic Card 1 Offset Y" Offset="1946900" Value="dAIAAA==">
+                      <Children />
+                    </YuGiNode>
+                  </Children>
+                </YuGiNode>
+                <YuGiNode xsi:type="YuGiPoint" Name="Magic Card 2">
+                  <Children>
+                    <YuGiNode xsi:type="YuGiValue" Name="Player Magic Card 2 Offset X" Offset="1946904" Value="bgIAAA==">
+                      <Children />
+                    </YuGiNode>
+                    <YuGiNode xsi:type="YuGiValue" Name="Player Magic Card 2 Offset Y" Offset="1946908" Value="dAIAAA==">
+                      <Children />
+                    </YuGiNode>
+                  </Children>
+                </YuGiNode>
+                <YuGiNode xsi:type="YuGiPoint" Name="Magic Card 3">
+                  <Children>
+                    <YuGiNode xsi:type="YuGiValue" Name="Player Magic Card 3 Offset X" Offset="1946912" Value="9AIAAA==">
+                      <Children />
+                    </YuGiNode>
+                    <YuGiNode xsi:type="YuGiValue" Name="Player Magic Card 3 Offset Y" Offset="1946916" Value="dAIAAA==">
+                      <Children />
+                    </YuGiNode>
+                  </Children>
+                </YuGiNode>
+                <YuGiNode xsi:type="YuGiPoint" Name="Magic Card 4">
+                  <Children>
+                    <YuGiNode xsi:type="YuGiValue" Name="Player Magic Card 4 Offset X" Offset="1946920" Value="egMAAA==">
+                      <Children />
+                    </YuGiNode>
+                    <YuGiNode xsi:type="YuGiValue" Name="Player Magic Card 4 Offset Y" Offset="1946924" Value="dAIAAA==">
+                      <Children />
+                    </YuGiNode>
+                  </Children>
+                </YuGiNode>
+                <YuGiNode xsi:type="YuGiPoint" Name="Magic Card 5">
+                  <Children>
+                    <YuGiNode xsi:type="YuGiValue" Name="Player Magic Card 5 Offset X" Offset="1946928" Value="AAQAAA==">
+                      <Children />
+                    </YuGiNode>
+                    <YuGiNode xsi:type="YuGiValue" Name="Player Magic Card 5 Offset Y" Offset="1946932" Value="dAIAAA==">
+                      <Children />
+                    </YuGiNode>
+                  </Children>
+                </YuGiNode>
+              </Children>
+              <Gap>134</Gap>
+            </YuGiNode>
+            <YuGiNode xsi:type="YuGiPointBundle" Name="Monster Cards">
+              <Children>
+                <YuGiNode xsi:type="YuGiPoint" Name="Monster Card 1">
+                  <Children>
+                    <YuGiNode xsi:type="YuGiValue" Name="Player Monster Card 1 Offset X" Offset="1946976" Value="6AEAAA==">
+                      <Children />
+                    </YuGiNode>
+                    <YuGiNode xsi:type="YuGiValue" Name="Player Monster Card 1 Offset Y" Offset="1946980" Value="1QEAAA==">
+                      <Children />
+                    </YuGiNode>
+                  </Children>
+                </YuGiNode>
+                <YuGiNode xsi:type="YuGiPoint" Name="Monster Card 2">
+                  <Children>
+                    <YuGiNode xsi:type="YuGiValue" Name="Player Monster Card 2 Offset X" Offset="1946984" Value="bgIAAA==">
+                      <Children />
+                    </YuGiNode>
+                    <YuGiNode xsi:type="YuGiValue" Name="Player Monster Card 2 Offset Y" Offset="1946988" Value="1QEAAA==">
+                      <Children />
+                    </YuGiNode>
+                  </Children>
+                </YuGiNode>
+                <YuGiNode xsi:type="YuGiPoint" Name="Monster Card 3">
+                  <Children>
+                    <YuGiNode xsi:type="YuGiValue" Name="Player Monster Card 3 Offset X" Offset="1946992" Value="9AIAAA==">
+                      <Children />
+                    </YuGiNode>
+                    <YuGiNode xsi:type="YuGiValue" Name="Player Monster Card 3 Offset Y" Offset="1946996" Value="1QEAAA==">
+                      <Children />
+                    </YuGiNode>
+                  </Children>
+                </YuGiNode>
+                <YuGiNode xsi:type="YuGiPoint" Name="Monster Card 4">
+                  <Children>
+                    <YuGiNode xsi:type="YuGiValue" Name="Player Monster Card 4 Offset X" Offset="1947000" Value="egMAAA==">
+                      <Children />
+                    </YuGiNode>
+                    <YuGiNode xsi:type="YuGiValue" Name="Player Monster Card 4 Offset Y" Offset="1947004" Value="1QEAAA==">
+                      <Children />
+                    </YuGiNode>
+                  </Children>
+                </YuGiNode>
+                <YuGiNode xsi:type="YuGiPoint" Name="Monster Card 5">
+                  <Children>
+                    <YuGiNode xsi:type="YuGiValue" Name="Player Monster Card 5 Offset X" Offset="1947008" Value="AAQAAA==">
+                      <Children />
+                    </YuGiNode>
+                    <YuGiNode xsi:type="YuGiValue" Name="Player Monster Card 5 Offset Y" Offset="1947012" Value="1QEAAA==">
+                      <Children />
+                    </YuGiNode>
+                  </Children>
+                </YuGiNode>
+              </Children>
+              <Gap>134</Gap>
+            </YuGiNode>
+          </Children>
+        </YuGiNode>
+        <YuGiNode Name="EnemyField">
+          <Children>
+            <YuGiNode xsi:type="YuGiPoint" Name="Deck">
+              <Children>
+                <YuGiNode xsi:type="YuGiValue" Name="Enemy Deck Offset X" Offset="1947064" Value="OAEAAA==">
+                  <Children />
+                </YuGiNode>
+                <YuGiNode xsi:type="YuGiValue" Name="Enemy Deck Offset Y" Offset="1947068" Value="mwAAAA==">
+                  <Children />
+                </YuGiNode>
+              </Children>
+            </YuGiNode>
+            <YuGiNode xsi:type="YuGiPoint" Name="Graveyard">
+              <Children>
+                <YuGiNode xsi:type="YuGiValue" Name="Enemy Graveyard Offset X" Offset="1947080" Value="NgEAAA==">
+                  <Children />
+                </YuGiNode>
+                <YuGiNode xsi:type="YuGiValue" Name="Enemy Graveyard Offset Y" Offset="1947084" Value="RQEAAA==">
+                  <Children />
+                </YuGiNode>
+              </Children>
+            </YuGiNode>
+            <YuGiNode xsi:type="YuGiPoint" Name="Fusion">
+              <Children>
+                <YuGiNode xsi:type="YuGiValue" Name="Enemy Fusion Offset X" Offset="1947096" Value="uQQAAA==">
+                  <Children />
+                </YuGiNode>
+                <YuGiNode xsi:type="YuGiValue" Name="Enemy Fusion Offset Y" Offset="1947100" Value="aQAAAA==">
+                  <Children />
+                </YuGiNode>
+              </Children>
+            </YuGiNode>
+            <YuGiNode xsi:type="YuGiPoint" Name="Field Effect Card">
+              <Children>
+                <YuGiNode xsi:type="YuGiValue" Name="Enemy FieldEffect Offset X" Offset="1947112" Value="uQQAAA==">
+                  <Children />
+                </YuGiNode>
+                <YuGiNode xsi:type="YuGiValue" Name="Enemy FieldEffect Offset Y" Offset="1947116" Value="CAEAAA==">
+                  <Children />
+                </YuGiNode>
+              </Children>
+            </YuGiNode>
+            <YuGiNode xsi:type="YuGiPoint" Name="Hand">
+              <Children>
+                <YuGiNode xsi:type="YuGiValue" Name="Enemy Hand Offset X" Offset="1947152" Value="+AIAAA==">
+                  <Children />
+                </YuGiNode>
+                <YuGiNode xsi:type="YuGiValue" Name="Enemy Hand Offset Y" Offset="1947156" Value="6////w==">
+                  <Children />
+                </YuGiNode>
+              </Children>
+            </YuGiNode>
+            <YuGiNode xsi:type="YuGiPoint" Name="Removed From Game">
+              <Children>
+                <YuGiNode xsi:type="YuGiValue" Name="Enemy RemovedFromGame Offset X" Offset="1947128" Value="NAEAAA==">
+                  <Children />
+                </YuGiNode>
+                <YuGiNode xsi:type="YuGiValue" Name="Enemy RemovedFromGame Offset Y" Offset="1947132" Value="KAAAAA==">
+                  <Children />
+                </YuGiNode>
+              </Children>
+            </YuGiNode>
+            <YuGiNode xsi:type="YuGiPointBundle" Name="Spell/Trap Cards">
+              <Children>
+                <YuGiNode xsi:type="YuGiPoint" Name="Magic Card 1">
+                  <Children>
+                    <YuGiNode xsi:type="YuGiValue" Name="Enemy Magic Card 1 Offset X" Offset="1946968" Value="6AEAAA==">
+                      <Children />
+                    </YuGiNode>
+                    <YuGiNode xsi:type="YuGiValue" Name="Enemy Magic Card 1 Offset Y" Offset="1946972" Value="jAAAAA==">
+                      <Children />
+                    </YuGiNode>
+                  </Children>
+                </YuGiNode>
+                <YuGiNode xsi:type="YuGiPoint" Name="Magic Card 2">
+                  <Children>
+                    <YuGiNode xsi:type="YuGiValue" Name="Enemy Magic Card 2 Offset X" Offset="1946960" Value="bwIAAA==">
+                      <Children />
+                    </YuGiNode>
+                    <YuGiNode xsi:type="YuGiValue" Name="Enemy Magic Card 2 Offset Y" Offset="1946964" Value="jAAAAA==">
+                      <Children />
+                    </YuGiNode>
+                  </Children>
+                </YuGiNode>
+                <YuGiNode xsi:type="YuGiPoint" Name="Magic Card 3">
+                  <Children>
+                    <YuGiNode xsi:type="YuGiValue" Name="Enemy Magic Card 3 Offset X" Offset="1946952" Value="9gIAAA==">
+                      <Children />
+                    </YuGiNode>
+                    <YuGiNode xsi:type="YuGiValue" Name="Enemy Magic Card 3 Offset Y" Offset="1946956" Value="jAAAAA==">
+                      <Children />
+                    </YuGiNode>
+                  </Children>
+                </YuGiNode>
+                <YuGiNode xsi:type="YuGiPoint" Name="Magic Card 4">
+                  <Children>
+                    <YuGiNode xsi:type="YuGiValue" Name="Enemy Magic Card 4 Offset X" Offset="1946944" Value="fQMAAA==">
+                      <Children />
+                    </YuGiNode>
+                    <YuGiNode xsi:type="YuGiValue" Name="Enemy Magic Card 4 Offset Y" Offset="1946948" Value="jAAAAA==">
+                      <Children />
+                    </YuGiNode>
+                  </Children>
+                </YuGiNode>
+                <YuGiNode xsi:type="YuGiPoint" Name="Magic Card 5">
+                  <Children>
+                    <YuGiNode xsi:type="YuGiValue" Name="Enemy Magic Card 5 Offset X" Offset="1946936" Value="BAQAAA==">
+                      <Children />
+                    </YuGiNode>
+                    <YuGiNode xsi:type="YuGiValue" Name="Enemy Magic Card 5 Offset Y" Offset="1946940" Value="jAAAAA==">
+                      <Children />
+                    </YuGiNode>
+                  </Children>
+                </YuGiNode>
+              </Children>
+              <Gap>135</Gap>
+            </YuGiNode>
+            <YuGiNode xsi:type="YuGiPointBundle" Name="Monster Cards">
+              <Children>
+                <YuGiNode xsi:type="YuGiPoint" Name="Monster Card 1">
+                  <Children>
+                    <YuGiNode xsi:type="YuGiValue" Name="Enemy Monster Card 1 Offset X" Offset="1947048" Value="6AEAAA==">
+                      <Children />
+                    </YuGiNode>
+                    <YuGiNode xsi:type="YuGiValue" Name="Enemy Monster Card 1 Offset Y" Offset="1947052" Value="KwEAAA==">
+                      <Children />
+                    </YuGiNode>
+                  </Children>
+                </YuGiNode>
+                <YuGiNode xsi:type="YuGiPoint" Name="Monster Card 2">
+                  <Children>
+                    <YuGiNode xsi:type="YuGiValue" Name="Enemy Monster Card 2 Offset X" Offset="1947040" Value="bwIAAA==">
+                      <Children />
+                    </YuGiNode>
+                    <YuGiNode xsi:type="YuGiValue" Name="Enemy Monster Card 2 Offset Y" Offset="1947044" Value="KwEAAA==">
+                      <Children />
+                    </YuGiNode>
+                  </Children>
+                </YuGiNode>
+                <YuGiNode xsi:type="YuGiPoint" Name="Monster Card 3">
+                  <Children>
+                    <YuGiNode xsi:type="YuGiValue" Name="Enemy Monster Card 3 Offset X" Offset="1947032" Value="9gIAAA==">
+                      <Children />
+                    </YuGiNode>
+                    <YuGiNode xsi:type="YuGiValue" Name="Enemy Monster Card 3 Offset Y" Offset="1947036" Value="KwEAAA==">
+                      <Children />
+                    </YuGiNode>
+                  </Children>
+                </YuGiNode>
+                <YuGiNode xsi:type="YuGiPoint" Name="Monster Card 4">
+                  <Children>
+                    <YuGiNode xsi:type="YuGiValue" Name="Enemy Monster Card 4 Offset X" Offset="1947024" Value="fQMAAA==">
+                      <Children />
+                    </YuGiNode>
+                    <YuGiNode xsi:type="YuGiValue" Name="Enemy Monster Card 4 Offset Y" Offset="1947028" Value="KwEAAA==">
+                      <Children />
+                    </YuGiNode>
+                  </Children>
+                </YuGiNode>
+                <YuGiNode xsi:type="YuGiPoint" Name="Monster Card 5">
+                  <Children>
+                    <YuGiNode xsi:type="YuGiValue" Name="Enemy Monster Card 5 Offset X" Offset="1947016" Value="BAQAAA==">
+                      <Children />
+                    </YuGiNode>
+                    <YuGiNode xsi:type="YuGiValue" Name="Enemy Monster Card 5 Offset Y" Offset="1947020" Value="KwEAAA==">
+                      <Children />
+                    </YuGiNode>
+                  </Children>
+                </YuGiNode>
+              </Children>
+              <Gap>135</Gap>
+            </YuGiNode>
+          </Children>
+        </YuGiNode>
+      </Children>
+    </RootNode>
+  </DuelField>
+  <DeckEditor>
+    <RootNode Name="DeckEditor">
+      <Children>
+        <YuGiNode Name="CardList">
+          <Children>
+            <YuGiNode Name="ScrollBar">
+              <Children>
+                <YuGiNode xsi:type="YuGiPoint" Name="CardList ScrollBar Offset">
+                  <Children>
+                    <YuGiNode xsi:type="YuGiValue" Name="CardList ScrollBar Offset X" Offset="451310" Value="BwMAAA==">
+                      <Children />
+                    </YuGiNode>
+                    <YuGiNode xsi:type="YuGiValue" Name="CardList ScrollBar Offset Y" Offset="451317" Value="MgAAAA==">
+                      <Children />
+                    </YuGiNode>
+                  </Children>
+                </YuGiNode>
+                <YuGiNode xsi:type="YuGiPoint" Name="CardList ScrollBar Background Offset">
+                  <Children>
+                    <YuGiNode xsi:type="YuGiValue" Name="CardList ScrollBar Background Offset X" Offset="450673" Value="/wIAAA==">
+                      <Children />
+                    </YuGiNode>
+                    <YuGiNode xsi:type="YuGiValue" Name="CardList ScrollBar Background Offset Y" Offset="450667" Value="AA==">
+                      <Children />
+                    </YuGiNode>
+                  </Children>
+                </YuGiNode>
+                <YuGiNode xsi:type="YuGiValue" Name="CardList ScrollBar Length" Offset="451273" Value="cgIAAA==">
+                  <Children />
+                </YuGiNode>
+              </Children>
+            </YuGiNode>
+            <YuGiNode xsi:type="YuGiValueList" Name="CardSpacing">
+              <Children>
+                <YuGiNode xsi:type="YuGiValue" Name="CardList CardSpacing CardImage" Offset="420418" Value="Nw==">
+                  <Children />
+                </YuGiNode>
+                <YuGiNode xsi:type="YuGiValue" Name="CardList CardSpacing ElementSymbols" Offset="443913" Value="Nw==">
+                  <Children />
+                </YuGiNode>
+                <YuGiNode xsi:type="YuGiValue" Name="CardList Closed CardSpacing ATK/DFS" Offset="449826" Value="Nw==">
+                  <Children />
+                </YuGiNode>
+                <YuGiNode xsi:type="YuGiValue" Name="CardList CardSpacing CardText" Offset="450352" Value="Nw==">
+                  <Children />
+                </YuGiNode>
+                <YuGiNode xsi:type="YuGiValue" Name="CardList CardSpacing CountText" Offset="450830" Value="Nw==">
+                  <Children />
+                </YuGiNode>
+              </Children>
+            </YuGiNode>
+            <YuGiNode xsi:type="YuGiValueList" Name="CardCount">
+              <Children>
+                <YuGiNode xsi:type="YuGiValue" Name="CardList CardCount CardImage" Offset="448261" Value="CgAAAA==">
+                  <Children />
+                </YuGiNode>
+                <YuGiNode xsi:type="YuGiValue" Name="CardList CardCount Text/Element/ATK/DFS" Offset="449910" Value="CgAAAA==">
+                  <Children />
+                </YuGiNode>
+                <YuGiNode xsi:type="YuGiValue" Name="CardList CardCount CountText/BannedSymbol" Offset="450739" Value="CgAAAA==">
+                  <Children />
+                </YuGiNode>
+              </Children>
+            </YuGiNode>
+            <YuGiNode xsi:type="YuGiValueList" Name="Calculated Values">
+              <Children>
+                <YuGiNode xsi:type="YuGiValue" Name="CardList CardSpacing ElementSymbols Max" Offset="443922" Value="JgIAAA==">
+                  <Children />
+                </YuGiNode>
+              </Children>
+            </YuGiNode>
+          </Children>
+        </YuGiNode>
+        <YuGiNode Name="Deck">
+          <Children>
+            <YuGiNode xsi:type="YuGiRectangle" Name="Deck Zone">
+              <Children>
+                <YuGiNode xsi:type="YuGiValue" Name="Deck Zone Left" Offset="1947232" Value="BgEAAA==">
+                  <Children />
+                </YuGiNode>
+                <YuGiNode xsi:type="YuGiValue" Name="Deck Zone Top" Offset="1947236" Value="FwAAAA==">
+                  <Children />
+                </YuGiNode>
+                <YuGiNode xsi:type="YuGiValue" Name="Deck Zone Right" Offset="1947240" Value="ngIAAA==">
+                  <Children />
+                </YuGiNode>
+                <YuGiNode xsi:type="YuGiValue" Name="Deck Zone Bottom" Offset="1947244" Value="ewEAAA==">
+                  <Children />
+                </YuGiNode>
+              </Children>
+            </YuGiNode>
+            <YuGiNode xsi:type="YuGiValue" Name="Deck Zone Horizontal Card Spacing" Offset="419067" Value="Cg==">
+              <Children />
+            </YuGiNode>
+          </Children>
+        </YuGiNode>
+        <YuGiNode Name="SideDeck">
+          <Children>
+            <YuGiNode xsi:type="YuGiRectangle" Name="SideDeck Zone">
+              <Children>
+                <YuGiNode xsi:type="YuGiValue" Name="SideDeck Zone Left" Offset="1947248" Value="BgEAAA==">
+                  <Children />
+                </YuGiNode>
+                <YuGiNode xsi:type="YuGiValue" Name="SideDeck Zone Top" Offset="1947252" Value="nAEAAA==">
+                  <Children />
+                </YuGiNode>
+                <YuGiNode xsi:type="YuGiValue" Name="SideDeck Zone Right" Offset="1947256" Value="ngIAAA==">
+                  <Children />
+                </YuGiNode>
+                <YuGiNode xsi:type="YuGiValue" Name="SideDeck Zone Bottom" Offset="1947260" Value="AAIAAA==">
+                  <Children />
+                </YuGiNode>
+              </Children>
+            </YuGiNode>
+            <YuGiNode xsi:type="YuGiValue" Name="SideDeck Zone Horizontal Card Spacing" Offset="419097" Value="Cg==">
+              <Children />
+            </YuGiNode>
+          </Children>
+        </YuGiNode>
+        <YuGiNode Name="FusionDeck">
+          <Children>
+            <YuGiNode xsi:type="YuGiRectangle" Name="FusionDeck Zone">
+              <Children>
+                <YuGiNode xsi:type="YuGiValue" Name="FusionDeckFusionDeck Zone Left" Offset="1947264" Value="BgEAAA==">
+                  <Children />
+                </YuGiNode>
+                <YuGiNode xsi:type="YuGiValue" Name="FusionDeck Zone Top" Offset="1947268" Value="AwIAAA==">
+                  <Children />
+                </YuGiNode>
+                <YuGiNode xsi:type="YuGiValue" Name="FusionDeck Zone Right" Offset="1947272" Value="ngIAAA==">
+                  <Children />
+                </YuGiNode>
+                <YuGiNode xsi:type="YuGiValue" Name="FusionDeck Zone Bottom" Offset="1947276" Value="aAIAAA==">
+                  <Children />
+                </YuGiNode>
+              </Children>
+            </YuGiNode>
+            <YuGiNode xsi:type="YuGiValue" Name="FusionDeck Zone Horizontal Card Spacing" Offset="419146" Value="Cg==">
+              <Children />
+            </YuGiNode>
+          </Children>
+        </YuGiNode>
+      </Children>
+    </RootNode>
+  </DeckEditor>
+</YuGiStructure>

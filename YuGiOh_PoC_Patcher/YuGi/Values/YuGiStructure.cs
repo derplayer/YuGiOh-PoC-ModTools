@@ -54,8 +54,8 @@ namespace YuGiOh_PoC_Patcher.YuGi.Values
             {
                 Children =
                 {
-                    new YuGiValue("DuelField Window Width 1", 0x00024C85, BitConverter.GetBytes(800), true),
-                    new YuGiValue("DuelField Window Width 2", 0x00024CC9, BitConverter.GetBytes(800), true),
+                    new YuGiValue("DuelField Window Width 1", 0x00024C8A, BitConverter.GetBytes(800), true),
+                    new YuGiValue("DuelField Window Width 2", 0x00024CCE, BitConverter.GetBytes(800), true),
                     new YuGiValue("Rect Fix Width", 0x0003E54D, BitConverter.GetBytes(800), true),
                     new YuGiValue("Effect Activator End Point Top Right Corner", 0x00024D65, BitConverter.GetBytes(800), true),
                     new YuGiValue("Effect Activator End Point Mid Right Corner", 0x00024D9B, BitConverter.GetBytes(800), true)
@@ -65,8 +65,8 @@ namespace YuGiOh_PoC_Patcher.YuGi.Values
             {
                 Children =
                 {
-                    new YuGiValue("DuelField Window Height 1", 0x00024C8A, BitConverter.GetBytes(600), true),
-                    new YuGiValue("DuelField Window Height 2", 0x00024CCE, BitConverter.GetBytes(600), true),
+                    new YuGiValue("DuelField Window Height 1", 0x00024C85, BitConverter.GetBytes(600), true),
+                    new YuGiValue("DuelField Window Height 2", 0x00024CC9, BitConverter.GetBytes(600), true),
                     new YuGiValue("Rect Fix Height", 0x0003E579, BitConverter.GetBytes(600), true),
                     new YuGiValue("Effect Activator End Point Down Right Corner", 0x00024DA3, BitConverter.GetBytes(600), true),
                     new YuGiValue("Choose Zone (Deck Fix)", 0x0001E849, BitConverter.GetBytes(600), true)

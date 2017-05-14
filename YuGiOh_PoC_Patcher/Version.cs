@@ -10,7 +10,7 @@ namespace YuGiOh_PoC_Patcher
     public static class Version
     {
         //Version
-        public static double actualVerison = 1.00;
+        public static double actualVerison = 1.1;
         public static string urlversion = "http://goo.gl/9BQohW";
     }
 

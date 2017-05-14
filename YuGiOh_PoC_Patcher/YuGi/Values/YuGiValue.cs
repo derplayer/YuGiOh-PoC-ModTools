@@ -13,6 +13,7 @@ namespace YuGiOh_PoC_Patcher.YuGi.Values
     public class YuGiValue : YuGiNode
     {
         private byte[] _value;
+        public static List<string> debugLog;
 
         [XmlAttribute("Offset")]
         public int Offset { get; set; }
@@ -231,7 +232,10 @@ namespace YuGiOh_PoC_Patcher.YuGi.Values
             if (Length == 4) return String.Format("[{0}] {1}: 0x{2} ({3})", Offset.ToString("X8"), Name, ValueHexLittleEndian, ValueInt32);
             if (Length == 2) return String.Format("[{0}] {1}: 0x{2} ({3})", Offset.ToString("X8"), Name, ValueHexLittleEndian, ValueInt16);
             if (Length == 1) return String.Format("[{0}] {1}: 0x{2} ({3})", Offset.ToString("X8"), Name, ValueHexLittleEndian, ValueInt8);
-            return String.Format("[{0}] {1}: 0x{2}", Offset.ToString("X8"), Name, ValueHexLittleEndian);
+
+            string finalString = String.Format("[{0}] {1}: 0x{2}", Offset.ToString("X8"), Name, ValueHexLittleEndian);
+            debugLog.Add(DateTime.Now.ToString() + " | " + finalString);
+            return finalString;
         }
 
         private void ValuePropertyChanged()

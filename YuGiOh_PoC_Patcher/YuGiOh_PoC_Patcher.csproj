@@ -136,6 +136,7 @@
     <Compile Include="Version.cs" />
     <Compile Include="YuGi\Filetypes\YGAFile.cs" />
     <Compile Include="YuGi\Headers\YGAHeader.cs" />
+    <Compile Include="YuGi\Launcher\YuGiGameInit.cs" />
     <Compile Include="YuGi\Values\ChildItemCollection.cs" />
     <Compile Include="YuGi\Values\IChildItem.cs" />
     <Compile Include="YuGi\Values\YuGiCalcValue.cs" />

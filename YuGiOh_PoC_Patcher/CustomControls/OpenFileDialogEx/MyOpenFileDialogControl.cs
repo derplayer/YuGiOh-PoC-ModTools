@@ -88,7 +88,7 @@ namespace CustomControls
 
                     lblSizeValue.Text = (fi.Length / 1024).ToString() + "KB";
                     lblColorsValue.Text = GetColorsCountFromImage(pbxPreview.Image);
-                    lblFormatValue.Text = GetFormatFromImage(pbxPreview.Image);
+                    lblFormatValue.Text = "Yu-Gi-Oh Graphics Acronym (*.yga)";
                     FileDlgEnableOkBtn = true;
                 }
                 catch (Exception) { FileDlgEnableOkBtn = false; }
