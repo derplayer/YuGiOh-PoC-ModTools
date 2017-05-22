@@ -153,7 +153,7 @@ namespace YuGiOh_PoC_Patcher
 
         private void Button_ChangePath_Click(object sender, EventArgs e)
         {
-            new YuGiExtendedMethods().SetDefaultGamePath();
+            YuGiExtendedMethods.SetDefaultGamePath();
         }
 
         private void button1_Click(object sender, EventArgs e)

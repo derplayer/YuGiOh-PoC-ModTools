@@ -6,10 +6,19 @@ using System.Threading.Tasks;
 
 namespace YuGiOh_PoC_Patcher.YuGi
 {
+    /// <summary>
+    /// Compressed word(2 bytes) of the LZSS compression
+    /// </summary>
     class YuGiCompressedWord
     {
-        public ushort Offset;
-        public ushort Length;
+        /// <summary>
+        /// Offset of the compressed word inside the sliding window
+        /// </summary>
+        public ushort Offset { get; set; }
+        /// <summary>
+        /// Length of the compressed word
+        /// </summary>
+        public ushort Length { get; set; }
 
         public YuGiCompressedWord(ushort offset, ushort length)
         {

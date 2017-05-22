@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace YuGiOh_PoC_Patcher.YuGi.Values
 {
+    /// <summary>
+    /// All the YuGiNodes/YuGiValues for the Duel Field
+    /// </summary>
     public class YuGiDuelField : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;

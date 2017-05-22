@@ -3,6 +3,9 @@ using System.Text;
 
 namespace YuGiOh_PoC_Patcher.YuGi
 {
+    /// <summary>
+    /// YuGi .dat file entry
+    /// </summary>
     public class YuGiDataEntry
     {
         public int Offset;

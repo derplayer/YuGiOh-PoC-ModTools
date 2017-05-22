@@ -7,8 +7,17 @@ using System.Threading.Tasks;
 
 namespace YuGiOh_PoC_Patcher.YuGi
 {
+    /// <summary>
+    /// LZSS de/compressor
+    /// </summary>
     public static class YuGiLZSS
     {
+        /// <summary>
+        /// Decompresses the given data byte array with the given length
+        /// </summary>
+        /// <param name="data">LZSS compressed data</param>
+        /// <param name="length">Length?</param>
+        /// <returns>Decompressed data</returns>
         public static byte[] Decompress(byte[] data, int length = -1)
         {
             YuGiBuffer yuGiBuffer = new YuGiBuffer(4096, 0xFEE);
@@ -57,6 +66,11 @@ namespace YuGiOh_PoC_Patcher.YuGi
             }
         }
 
+        /// <summary>
+        /// Converts the flag byte to bool array
+        /// </summary>
+        /// <param name="data">Flag byte</param>
+        /// <returns>Flag bool array</returns>
         private static bool[] GetFlags(byte data)
         {
             bool[] result = new bool[8];

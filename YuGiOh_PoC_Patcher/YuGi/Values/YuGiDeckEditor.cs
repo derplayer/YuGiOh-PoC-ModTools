@@ -9,6 +9,9 @@ using System.Xml.Serialization;
 
 namespace YuGiOh_PoC_Patcher.YuGi.Values
 {
+    /// <summary>
+    /// All the YuGiNodes/YuGiValues for the Deck Editor
+    /// </summary>
     public class YuGiDeckEditor : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;

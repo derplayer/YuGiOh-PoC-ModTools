@@ -10,6 +10,9 @@ using System.Xml.Serialization;
 
 namespace YuGiOh_PoC_Patcher.YuGi.Values
 {
+    /// <summary>
+    /// List of multiple YuGiValues that will be patched with the same value
+    /// </summary>
     public class YuGiValueList : YuGiNode
     {
         [XmlIgnore]

@@ -50,7 +50,7 @@ namespace CustomControls
         protected override void OnPrepareMSDialog()
         {
             //Default yugi directory with fallback
-            base.FileDlgInitialDirectory = new YuGiExtendedMethods().GetDefaultGamePath()[0];//Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
+            base.FileDlgInitialDirectory = YuGiExtendedMethods.GetDefaultGamePath()[0];//Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
             base.FileDlgShowHelp = false;
             base.FileDlgMultiselect = true;
             

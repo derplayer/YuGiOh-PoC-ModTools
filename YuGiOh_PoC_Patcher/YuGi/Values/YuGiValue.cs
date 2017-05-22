@@ -12,19 +12,38 @@ namespace YuGiOh_PoC_Patcher.YuGi.Values
 {
     public class YuGiValue : YuGiNode
     {
-        private byte[] _value;
+        /// <summary>
+        /// debugLog?
+        /// </summary>
         public static List<string> debugLog;
 
+        private byte[] _value;
+
+        /// <summary>
+        /// Offset inside the executable
+        /// </summary>
         [XmlAttribute("Offset")]
         public int Offset { get; set; }
+        /// <summary>
+        /// Length of the value in bytes
+        /// </summary>
         [XmlIgnore]
         public int Length { get; }
+        /// <summary>
+        /// Default value
+        /// </summary>
         [XmlIgnore]
         public byte[] DefaultValue { get; set; }
-
+        /// <summary>
+        /// [UNUSED] Concept not fleshed out
+        /// </summary>
         [XmlIgnore]
         Func<int, int> Expression { get; set; }
 
+        /// <summary>
+        /// Value that will be patched to executable.
+        /// When setting the value all children will be patched with the same value
+        /// </summary>
         [XmlAttribute("Value")]
         public byte[] Value
         {
@@ -162,6 +181,13 @@ namespace YuGiOh_PoC_Patcher.YuGi.Values
             IsReadOnly = readOnly;
         }
 
+        /// <summary>
+        /// [UNUSED] Concept not fleshed out
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="offset"></param>
+        /// <param name="defaultValue"></param>
+        /// <param name="expression"></param>
         public YuGiValue(string name, int offset, byte[] defaultValue, Func<int, int> expression)
         {
             Name = name;
@@ -173,7 +199,13 @@ namespace YuGiOh_PoC_Patcher.YuGi.Values
             IsReadOnly = true;
         }
 
-        //outdated
+        /// <summary>
+        /// [OUTDATED]
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="offset"></param>
+        /// <param name="defaultValue"></param>
+        /// <param name="eventHandler"></param>
         public YuGiValue(string name, int offset, byte[] defaultValue, PropertyChangedEventHandler eventHandler)
         {
             Name = name;
@@ -185,6 +217,10 @@ namespace YuGiOh_PoC_Patcher.YuGi.Values
             IsReadOnly = true;
         }
 
+        /// <summary>
+        /// Copies the value of another YuGiValue
+        /// </summary>
+        /// <param name="value">The YuGiValue that will be copied from</param>
         public override void CopyValues(YuGiNode value)
         {
             YuGiValue val = (YuGiValue)value;
@@ -196,6 +232,11 @@ namespace YuGiOh_PoC_Patcher.YuGi.Values
             Value = val.Value; //overrides the children values by setting the value
         }
 
+        /// <summary>
+        /// Reads the value from the executable
+        /// </summary>
+        /// <param name="reader">BinaryReader that points to the executable</param>
+        /// <param name="update"></param>
         public override void LoadValues(BinaryReader reader, bool update = false)
         {
             base.LoadValues(reader, update);
@@ -205,6 +246,10 @@ namespace YuGiOh_PoC_Patcher.YuGi.Values
             Console.WriteLine(ToString());
         }
 
+        /// <summary>
+        /// Writes the value to the executable
+        /// </summary>
+        /// <param name="writer">BinaryWriter that points to the executable</param>
         public override void PatchValues(BinaryWriter writer)
         {
             writer.Seek(Offset, SeekOrigin.Begin);
@@ -213,6 +258,10 @@ namespace YuGiOh_PoC_Patcher.YuGi.Values
             base.PatchValues(writer);
         }
 
+        /// <summary>
+        /// Writes the default value to the executable
+        /// </summary>
+        /// <param name="writer">BinaryWriter thats points to the executable</param>
         public override void PatchDefault(BinaryWriter writer)
         {
             writer.Seek(Offset, SeekOrigin.Begin);
@@ -221,6 +270,9 @@ namespace YuGiOh_PoC_Patcher.YuGi.Values
             base.PatchDefault(writer);
         }
 
+        /// <summary>
+        /// Writes the value into the memory when the YuGiDebugger is running
+        /// </summary>
         public override void DebugPatchValues()
         {
             YuGiDebugger.PatchMemory(this);

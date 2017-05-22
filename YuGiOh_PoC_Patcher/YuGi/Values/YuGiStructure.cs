@@ -7,6 +7,10 @@ using YuGiOh_PoC_Patcher.YuGi.Values;
 
 namespace YuGiOh_PoC_Patcher.YuGi.Values
 {
+    /// <summary>
+    /// Structure that contains all the YuGiNodes/YuGiValues
+    /// and some other info for patching
+    /// </summary>
     public class YuGiStructure : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;

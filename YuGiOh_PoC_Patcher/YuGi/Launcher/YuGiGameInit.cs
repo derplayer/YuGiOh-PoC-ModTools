@@ -44,7 +44,7 @@ namespace YuGiOh_PoC_Patcher.YuGi.Launcher
                 file = filepath;
             } else
             {
-                string[] FileDirectoryFromGame = new YuGiExtendedMethods().GetDefaultGamePath();
+                string[] FileDirectoryFromGame = YuGiExtendedMethods.GetDefaultGamePath();
                 directory = FileDirectoryFromGame[0];
                 file = FileDirectoryFromGame[1];
             }

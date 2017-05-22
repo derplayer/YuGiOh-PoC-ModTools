@@ -5,6 +5,9 @@ using System.Xml.Serialization;
 
 namespace YuGiOh_PoC_Patcher.YuGi.Values
 {
+    /// <summary>
+    /// Point that contains two YuGiValues
+    /// </summary>
     public class YuGiPoint : YuGiNode
     {
         [XmlIgnore]

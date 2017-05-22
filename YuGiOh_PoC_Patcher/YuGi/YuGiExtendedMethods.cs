@@ -9,7 +9,10 @@ using Microsoft.Win32;
 
 namespace YuGiOh_PoC_Patcher.YuGi
 {
-    class YuGiExtendedMethods
+    /// <summary>
+    /// Static Extension Methods
+    /// </summary>
+    public static class YuGiExtendedMethods
     {
         /// <summary>
         /// ArrayItem[0] = directory
@@ -17,7 +20,7 @@ namespace YuGiOh_PoC_Patcher.YuGi
         /// </summary>
         /// <param name="exePath"></param>
         /// <returns></returns>
-        public string[] GetDefaultGamePath()
+        public static string[] GetDefaultGamePath()
         {
             string[] finalReturn = new string[2];
             string directory = String.Empty;
@@ -26,7 +29,7 @@ namespace YuGiOh_PoC_Patcher.YuGi
             directory = (string)Registry.GetValue("HKEY_CURRENT_USER\\SOFTWARE\\YuGiOhModLauncher\\v1\\", "GamePath", -1);
             if (directory == "NaN")
             {
-                directory = this.SetDefaultGamePath();
+                directory = YuGiExtendedMethods.SetDefaultGamePath();
             }
 
             finalReturn[0] = directory;
@@ -35,7 +38,7 @@ namespace YuGiOh_PoC_Patcher.YuGi
             return finalReturn;
         }
 
-        public string SetDefaultGamePath()
+        public static string SetDefaultGamePath()
         {
             string directory = null, file = null;
 

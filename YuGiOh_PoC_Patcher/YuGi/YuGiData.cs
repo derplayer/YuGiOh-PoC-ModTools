@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace YuGiOh_PoC_Patcher.YuGi
 {
+    /// <summary>
+    /// [WIP] YuGi .dat file
+    /// </summary>
     public class YuGiData
     {
         public string FileName { get; set; }

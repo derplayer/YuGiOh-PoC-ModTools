@@ -9,6 +9,9 @@ using System.Xml.Serialization;
 
 namespace YuGiOh_PoC_Patcher.YuGi.Values
 {
+    /// <summary>
+    /// Rectangle that contains four YuGiValues
+    /// </summary>
     public class YuGiRectangle : YuGiNode
     {
         [XmlIgnore]
