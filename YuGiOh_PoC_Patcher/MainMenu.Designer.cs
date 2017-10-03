@@ -36,12 +36,12 @@ namespace YuGiOh_PoC_Patcher
             this.linkLabel_ThePage = new System.Windows.Forms.LinkLabel();
             this.label1 = new System.Windows.Forms.Label();
             this.Button_ChangePath = new System.Windows.Forms.Button();
-            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.Button_Settings = new YuGiOh_PoC_Patcher.CustomControls.RoundButton();
             this.Button_ModLauncher = new YuGiOh_PoC_Patcher.CustomControls.RoundButton();
             this.button1 = new YuGiOh_PoC_Patcher.CustomControls.RoundButton();
             this.Button_Exit = new YuGiOh_PoC_Patcher.CustomControls.RoundButton();
             this.Button_Game = new YuGiOh_PoC_Patcher.CustomControls.RoundButton();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.ctlModernBlack1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -69,12 +69,12 @@ namespace YuGiOh_PoC_Patcher
             this.linkLabel_ThePage.ActiveLinkColor = System.Drawing.Color.Blue;
             this.linkLabel_ThePage.AutoSize = true;
             this.linkLabel_ThePage.BackColor = System.Drawing.SystemColors.Window;
-            this.linkLabel_ThePage.Location = new System.Drawing.Point(308, 474);
+            this.linkLabel_ThePage.Location = new System.Drawing.Point(348, 474);
             this.linkLabel_ThePage.Name = "linkLabel_ThePage";
-            this.linkLabel_ThePage.Size = new System.Drawing.Size(99, 13);
+            this.linkLabel_ThePage.Size = new System.Drawing.Size(59, 13);
             this.linkLabel_ThePage.TabIndex = 7;
             this.linkLabel_ThePage.TabStop = true;
-            this.linkLabel_ThePage.Text = "http://derplayer.xyz";
+            this.linkLabel_ThePage.Text = "Homepage";
             this.linkLabel_ThePage.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_ThePage_LinkClicked);
             // 
             // label1
@@ -97,10 +97,6 @@ namespace YuGiOh_PoC_Patcher
             this.Button_ChangePath.Text = "Change Game Path";
             this.Button_ChangePath.UseVisualStyleBackColor = true;
             this.Button_ChangePath.Click += new System.EventHandler(this.Button_ChangePath_Click);
-            // 
-            // openFileDialog1
-            // 
-            this.openFileDialog1.FileName = "openFileDialog1";
             // 
             // Button_Settings
             // 
@@ -154,6 +150,10 @@ namespace YuGiOh_PoC_Patcher
             this.Button_Game.Text = "Launch/Start";
             this.Button_Game.UseVisualStyleBackColor = true;
             this.Button_Game.Click += new System.EventHandler(this.Button_Game_Click);
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
             // 
             // MainMenu
             // 

@@ -133,6 +133,7 @@ namespace YuGiOh_PoC_Patcher
                 //key.SetValue("DefaultSkip", "true");
             }
             base.SetVisibleCore(true);
+            base.Text += Version.actualVerison.ToString("0.0", System.Globalization.CultureInfo.InvariantCulture);
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -179,7 +180,7 @@ namespace YuGiOh_PoC_Patcher
 
         private void linkLabel_ThePage_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            System.Diagnostics.Process.Start("http://derplayer.xyz");
+            System.Diagnostics.Process.Start("http://derplayer.neocities.org");
         }
     }
 
