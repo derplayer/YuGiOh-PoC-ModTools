@@ -41,11 +41,9 @@
             this.dankToYGAToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lZZSToDankToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.debugToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.generateImagesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.checkEmToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.testToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.runToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.refreshToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.testToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.generateImagesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.checkBox_Rotate = new System.Windows.Forms.CheckBox();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.tabControl1 = new System.Windows.Forms.TabControl();
@@ -58,6 +56,7 @@
             this.textBox_FieldBackground = new System.Windows.Forms.TextBox();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.label3 = new System.Windows.Forms.Label();
+            this.pointUserControl_WindowSize = new YuGiOh_PoC_Patcher.PointUserControl();
             this.groupBox_CardSize = new System.Windows.Forms.GroupBox();
             this.label_CardSize_Width = new System.Windows.Forms.Label();
             this.label_CardSize_Height = new System.Windows.Forms.Label();
@@ -67,7 +66,9 @@
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.pictureBox_Preview = new System.Windows.Forms.PictureBox();
-            this.pointUserControl_WindowSize = new YuGiOh_PoC_Patcher.PointUserControl();
+            this.injectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.runToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.checkEmToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             tabPage3 = new System.Windows.Forms.TabPage();
             tabPage3.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -123,6 +124,7 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.convertToolStripMenuItem,
+            this.injectionToolStripMenuItem,
             this.debugToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -188,8 +190,6 @@
             // debugToolStripMenuItem
             // 
             this.debugToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.runToolStripMenuItem,
-            this.checkEmToolStripMenuItem,
             this.refreshToolStripMenuItem,
             this.testToolStripMenuItem,
             this.generateImagesToolStripMenuItem});
@@ -197,40 +197,26 @@
             this.debugToolStripMenuItem.Size = new System.Drawing.Size(54, 20);
             this.debugToolStripMenuItem.Text = "Debug";
             // 
-            // generateImagesToolStripMenuItem
+            // refreshToolStripMenuItem
             // 
-            this.generateImagesToolStripMenuItem.Name = "generateImagesToolStripMenuItem";
-            this.generateImagesToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
-            this.generateImagesToolStripMenuItem.Text = "Generate Images";
-            this.generateImagesToolStripMenuItem.Click += new System.EventHandler(this.generateImagesToolStripMenuItem_Click);
-            // 
-            // checkEmToolStripMenuItem
-            // 
-            this.checkEmToolStripMenuItem.Name = "checkEmToolStripMenuItem";
-            this.checkEmToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
-            this.checkEmToolStripMenuItem.Text = "Load Values from EXE";
-            this.checkEmToolStripMenuItem.Click += new System.EventHandler(this.checkEmToolStripMenuItem_Click);
+            this.refreshToolStripMenuItem.Name = "refreshToolStripMenuItem";
+            this.refreshToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.refreshToolStripMenuItem.Text = "Force Preview Refresh";
+            this.refreshToolStripMenuItem.Click += new System.EventHandler(this.refreshToolStripMenuItem_Click);
             // 
             // testToolStripMenuItem
             // 
             this.testToolStripMenuItem.Name = "testToolStripMenuItem";
-            this.testToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
+            this.testToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
             this.testToolStripMenuItem.Text = "Test Yu-Gi-Oh Data File";
             this.testToolStripMenuItem.Click += new System.EventHandler(this.testToolStripMenuItem_Click);
             // 
-            // runToolStripMenuItem
+            // generateImagesToolStripMenuItem
             // 
-            this.runToolStripMenuItem.Name = "runToolStripMenuItem";
-            this.runToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
-            this.runToolStripMenuItem.Text = "Inject JIT Value Debugger";
-            this.runToolStripMenuItem.Click += new System.EventHandler(this.runToolStripMenuItem_Click);
-            // 
-            // refreshToolStripMenuItem
-            // 
-            this.refreshToolStripMenuItem.Name = "refreshToolStripMenuItem";
-            this.refreshToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
-            this.refreshToolStripMenuItem.Text = "Force Preview Refresh";
-            this.refreshToolStripMenuItem.Click += new System.EventHandler(this.refreshToolStripMenuItem_Click);
+            this.generateImagesToolStripMenuItem.Name = "generateImagesToolStripMenuItem";
+            this.generateImagesToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.generateImagesToolStripMenuItem.Text = "Generate Images";
+            this.generateImagesToolStripMenuItem.Click += new System.EventHandler(this.generateImagesToolStripMenuItem_Click);
             // 
             // checkBox_Rotate
             // 
@@ -386,6 +372,14 @@
             this.label3.Text = "Coming in next update!";
             this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
+            // pointUserControl_WindowSize
+            // 
+            this.pointUserControl_WindowSize.Location = new System.Drawing.Point(8, 74);
+            this.pointUserControl_WindowSize.Name = "pointUserControl_WindowSize";
+            this.pointUserControl_WindowSize.Point = null;
+            this.pointUserControl_WindowSize.Size = new System.Drawing.Size(146, 75);
+            this.pointUserControl_WindowSize.TabIndex = 24;
+            // 
             // groupBox_CardSize
             // 
             this.groupBox_CardSize.Controls.Add(this.label_CardSize_Width);
@@ -504,13 +498,27 @@
             this.pictureBox_Preview.TabStop = false;
             this.pictureBox_Preview.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBox_Preview_MouseClick);
             // 
-            // pointUserControl_WindowSize
+            // injectionToolStripMenuItem
             // 
-            this.pointUserControl_WindowSize.Location = new System.Drawing.Point(8, 74);
-            this.pointUserControl_WindowSize.Name = "pointUserControl_WindowSize";
-            this.pointUserControl_WindowSize.Point = null;
-            this.pointUserControl_WindowSize.Size = new System.Drawing.Size(146, 75);
-            this.pointUserControl_WindowSize.TabIndex = 24;
+            this.injectionToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.checkEmToolStripMenuItem,
+            this.runToolStripMenuItem});
+            this.injectionToolStripMenuItem.Name = "injectionToolStripMenuItem";
+            this.injectionToolStripMenuItem.Size = new System.Drawing.Size(72, 20);
+            this.injectionToolStripMenuItem.Text = "Advanced";
+            // 
+            // runToolStripMenuItem
+            // 
+            this.runToolStripMenuItem.Name = "runToolStripMenuItem";
+            this.runToolStripMenuItem.Size = new System.Drawing.Size(269, 22);
+            this.runToolStripMenuItem.Text = "Inject Real-time Value Updater (*.exe)";
+            this.runToolStripMenuItem.Click += new System.EventHandler(this.runToolStripMenuItem_Click_1);
+            // 
+            // checkEmToolStripMenuItem
+            // 
+            this.checkEmToolStripMenuItem.Name = "checkEmToolStripMenuItem";
+            this.checkEmToolStripMenuItem.Size = new System.Drawing.Size(269, 22);
+            this.checkEmToolStripMenuItem.Text = "Load Values from (*.exe)";
             // 
             // MainWindow
             // 
@@ -572,7 +580,6 @@
         private System.Windows.Forms.ToolStripMenuItem generateImagesToolStripMenuItem;
         private System.Windows.Forms.Panel panel1;
         private PointUserControl pointUserControl_WindowSize;
-        private System.Windows.Forms.ToolStripMenuItem checkEmToolStripMenuItem;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
@@ -586,12 +593,14 @@
         private System.Windows.Forms.ToolStripMenuItem dankToYGAToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem lZZSToDankToolStripMenuItem;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ToolStripMenuItem runToolStripMenuItem;
         private System.Windows.Forms.Panel panel_DuelField_ValueEditor;
         private System.Windows.Forms.TreeView treeView_DuelField;
         private System.Windows.Forms.ToolStripMenuItem refreshToolStripMenuItem;
         private System.Windows.Forms.Panel panel_DeckEditor_ValueEditor;
         private System.Windows.Forms.TreeView treeView_DeckEditor;
+        private System.Windows.Forms.ToolStripMenuItem injectionToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem checkEmToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem runToolStripMenuItem;
     }
 }
 

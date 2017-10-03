@@ -68,7 +68,18 @@ namespace YuGiOh_PoC_Patcher.YuGi
         {
             if (_instance == null) return;
             if (MemorySharp == null) return;
-            MemorySharp.Write((IntPtr)value.Offset, value.Value);
+
+            try
+            {
+                MemorySharp.Write((IntPtr)value.Offset, value.Value);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Critical Error!\n\r\n\rDid you just closed the Game?\n\rApplication will now close!\n\r" + e);
+                Application.Exit();
+                return;
+            }
+    
         }
 
         /// <summary>
@@ -76,19 +87,29 @@ namespace YuGiOh_PoC_Patcher.YuGi
         /// </summary>
         private YuGiDebugger()
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            if (openFileDialog.ShowDialog() != DialogResult.OK) return;
-
-            ProcessStartInfo startInfo = new ProcessStartInfo();
-            startInfo.FileName = openFileDialog.FileName;
-            startInfo.WorkingDirectory = Path.GetDirectoryName(openFileDialog.FileName);
-
             Process = new Process();
-            Process.EnableRaisingEvents = true;
-            Process.Exited += Process_Exited;
-            Process.StartInfo = startInfo;
 
-            Process.Start();
+            DialogResult dialogResult = MessageBox.Show("Do you want to use the default executeable?\n\rNote: Will also start with all Launch Settings!",
+                "Injection - Use the default executeable?", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                Process = YuGi.Launcher.YuGiGameInit.startYuGiBase(null, false);
+            }
+            else if (dialogResult == DialogResult.No)
+            {
+                OpenFileDialog openFileDialog = new OpenFileDialog();
+                if (openFileDialog.ShowDialog() != DialogResult.OK) return;
+
+                ProcessStartInfo startInfo = new ProcessStartInfo();
+                startInfo.FileName = openFileDialog.FileName;
+                startInfo.WorkingDirectory = Path.GetDirectoryName(openFileDialog.FileName);
+                
+                Process.EnableRaisingEvents = true;
+                Process.Exited += Process_Exited;
+                Process.StartInfo = startInfo;
+
+                Process.Start();
+            }
 
             MemorySharp = new MemorySharp(Process);
 

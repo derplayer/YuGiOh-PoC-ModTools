@@ -33,7 +33,7 @@ namespace YuGiOh_PoC_Patcher.YuGi.Launcher
             startYuGiBase(exeFilePath, true);
         }
 
-        static private void startYuGiBase(string filepath, bool customDirectories)
+        static public Process startYuGiBase(string filepath, bool customDirectories)
         {
             Process theGame = new Process();
             string directory, file;
@@ -125,6 +125,8 @@ namespace YuGiOh_PoC_Patcher.YuGi.Launcher
                 theGame.StartInfo.Verb = "runas";
                 theGame.Start();
             }
+
+            return theGame;
         }
 
     }

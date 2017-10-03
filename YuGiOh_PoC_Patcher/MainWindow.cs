@@ -770,7 +770,7 @@ namespace YuGiOh_PoC_Patcher
             
         }
 
-        private void runToolStripMenuItem_Click(object sender, EventArgs e)
+        private void runToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
             YuGiDebugger debug = YuGiDebugger.Create(_structure);
         }
