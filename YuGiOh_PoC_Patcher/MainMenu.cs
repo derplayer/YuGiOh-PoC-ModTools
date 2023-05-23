@@ -35,6 +35,7 @@ namespace YuGiOh_PoC_Patcher
         private void MainMenu_Load(object sender, EventArgs e)
         {
             base.SetVisibleCore(false);
+
             WebClient w = new WebClient(); //TODO: Shorter Timeout Range
             w.Headers.Add("user-agent", "Mozilla/5.0 (Yu-Gi-Oh Updater; Linux; rv:1.0) Gecko/20160408 Yu-Gi-Oh-Client/" + Version.actualVerison);
             
@@ -72,7 +73,10 @@ namespace YuGiOh_PoC_Patcher
 
             }
 
-            //Timeout, false/dead url
+            /*  //Timeout, false/dead url
+             *  
+             *  TODO: github needs not TLS 2.0, and .net 4.8 can max. TLS 1.3, so updater broken
+             *  
             if (actualVersion.newestVersion == 0)
             {
                 string message = "Connection to the update server could not be etablished! \n\nPress OK to continue...";
@@ -84,6 +88,7 @@ namespace YuGiOh_PoC_Patcher
                 }
 
             }
+            */
 
             //Check if registry for yugi exists
             RegistryKey checkSettings = Registry.CurrentUser.OpenSubKey("SOFTWARE\\YuGiOhModLauncher\\v1\\", true);

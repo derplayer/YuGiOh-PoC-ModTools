@@ -40,6 +40,10 @@
             this.dankYGAToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dankToYGAToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lZZSToDankToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.lZSSDecompressRecrusiveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.injectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.checkEmToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.runToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.debugToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.refreshToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.testToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -56,7 +60,6 @@
             this.textBox_FieldBackground = new System.Windows.Forms.TextBox();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.label3 = new System.Windows.Forms.Label();
-            this.pointUserControl_WindowSize = new YuGiOh_PoC_Patcher.PointUserControl();
             this.groupBox_CardSize = new System.Windows.Forms.GroupBox();
             this.label_CardSize_Width = new System.Windows.Forms.Label();
             this.label_CardSize_Height = new System.Windows.Forms.Label();
@@ -66,9 +69,8 @@
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.pictureBox_Preview = new System.Windows.Forms.PictureBox();
-            this.injectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.runToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.checkEmToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.lZSSDecompressRecrusiveBinToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pointUserControl_WindowSize = new YuGiOh_PoC_Patcher.PointUserControl();
             tabPage3 = new System.Windows.Forms.TabPage();
             tabPage3.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -145,14 +147,14 @@
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
             this.openToolStripMenuItem.Text = "Open Patch Template";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
             this.saveToolStripMenuItem.Text = "Save Patch Template";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
@@ -161,7 +163,9 @@
             this.convertToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.dankYGAToolStripMenuItem,
             this.dankToYGAToolStripMenuItem,
-            this.lZZSToDankToolStripMenuItem});
+            this.lZZSToDankToolStripMenuItem,
+            this.lZSSDecompressRecrusiveToolStripMenuItem,
+            this.lZSSDecompressRecrusiveBinToolStripMenuItem});
             this.convertToolStripMenuItem.Name = "convertToolStripMenuItem";
             this.convertToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
             this.convertToolStripMenuItem.Text = "Convert";
@@ -169,23 +173,52 @@
             // dankYGAToolStripMenuItem
             // 
             this.dankYGAToolStripMenuItem.Name = "dankYGAToolStripMenuItem";
-            this.dankYGAToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
+            this.dankYGAToolStripMenuItem.Size = new System.Drawing.Size(266, 22);
             this.dankYGAToolStripMenuItem.Text = "YGA ➯ PNG";
             this.dankYGAToolStripMenuItem.Click += new System.EventHandler(this.dankYGAToolStripMenuItem_Click_1);
             // 
             // dankToYGAToolStripMenuItem
             // 
             this.dankToYGAToolStripMenuItem.Name = "dankToYGAToolStripMenuItem";
-            this.dankToYGAToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
+            this.dankToYGAToolStripMenuItem.Size = new System.Drawing.Size(266, 22);
             this.dankToYGAToolStripMenuItem.Text = "PNG ➯ YGA";
             this.dankToYGAToolStripMenuItem.Click += new System.EventHandler(this.dankToYGAToolStripMenuItem_Click_1);
             // 
             // lZZSToDankToolStripMenuItem
             // 
             this.lZZSToDankToolStripMenuItem.Name = "lZZSToDankToolStripMenuItem";
-            this.lZZSToDankToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
-            this.lZZSToDankToolStripMenuItem.Text = "\"LZSS\" Decompress";
+            this.lZZSToDankToolStripMenuItem.Size = new System.Drawing.Size(266, 22);
+            this.lZZSToDankToolStripMenuItem.Text = "\"LZSS\" Decompress (RAW, no trim)";
             this.lZZSToDankToolStripMenuItem.Click += new System.EventHandler(this.lZZSToDankToolStripMenuItem_Click_1);
+            // 
+            // lZSSDecompressRecrusiveToolStripMenuItem
+            // 
+            this.lZSSDecompressRecrusiveToolStripMenuItem.Name = "lZSSDecompressRecrusiveToolStripMenuItem";
+            this.lZSSDecompressRecrusiveToolStripMenuItem.Size = new System.Drawing.Size(266, 22);
+            this.lZSSDecompressRecrusiveToolStripMenuItem.Text = "\"LZSS\" Decompress (Recrusive, *.txt)";
+            this.lZSSDecompressRecrusiveToolStripMenuItem.Click += new System.EventHandler(this.lZSSDecompressRecrusiveToolStripMenuItem_Click);
+            // 
+            // injectionToolStripMenuItem
+            // 
+            this.injectionToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.checkEmToolStripMenuItem,
+            this.runToolStripMenuItem});
+            this.injectionToolStripMenuItem.Name = "injectionToolStripMenuItem";
+            this.injectionToolStripMenuItem.Size = new System.Drawing.Size(72, 20);
+            this.injectionToolStripMenuItem.Text = "Advanced";
+            // 
+            // checkEmToolStripMenuItem
+            // 
+            this.checkEmToolStripMenuItem.Name = "checkEmToolStripMenuItem";
+            this.checkEmToolStripMenuItem.Size = new System.Drawing.Size(270, 22);
+            this.checkEmToolStripMenuItem.Text = "Load Values from (*.exe)";
+            // 
+            // runToolStripMenuItem
+            // 
+            this.runToolStripMenuItem.Name = "runToolStripMenuItem";
+            this.runToolStripMenuItem.Size = new System.Drawing.Size(270, 22);
+            this.runToolStripMenuItem.Text = "Inject Real-time Value Updater (*.exe)";
+            this.runToolStripMenuItem.Click += new System.EventHandler(this.runToolStripMenuItem_Click_1);
             // 
             // debugToolStripMenuItem
             // 
@@ -200,21 +233,21 @@
             // refreshToolStripMenuItem
             // 
             this.refreshToolStripMenuItem.Name = "refreshToolStripMenuItem";
-            this.refreshToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.refreshToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
             this.refreshToolStripMenuItem.Text = "Force Preview Refresh";
             this.refreshToolStripMenuItem.Click += new System.EventHandler(this.refreshToolStripMenuItem_Click);
             // 
             // testToolStripMenuItem
             // 
             this.testToolStripMenuItem.Name = "testToolStripMenuItem";
-            this.testToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.testToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
             this.testToolStripMenuItem.Text = "Test Yu-Gi-Oh Data File";
             this.testToolStripMenuItem.Click += new System.EventHandler(this.testToolStripMenuItem_Click);
             // 
             // generateImagesToolStripMenuItem
             // 
             this.generateImagesToolStripMenuItem.Name = "generateImagesToolStripMenuItem";
-            this.generateImagesToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.generateImagesToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
             this.generateImagesToolStripMenuItem.Text = "Generate Images";
             this.generateImagesToolStripMenuItem.Click += new System.EventHandler(this.generateImagesToolStripMenuItem_Click);
             // 
@@ -372,14 +405,6 @@
             this.label3.Text = "Coming in next update!";
             this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
-            // pointUserControl_WindowSize
-            // 
-            this.pointUserControl_WindowSize.Location = new System.Drawing.Point(8, 74);
-            this.pointUserControl_WindowSize.Name = "pointUserControl_WindowSize";
-            this.pointUserControl_WindowSize.Point = null;
-            this.pointUserControl_WindowSize.Size = new System.Drawing.Size(146, 75);
-            this.pointUserControl_WindowSize.TabIndex = 24;
-            // 
             // groupBox_CardSize
             // 
             this.groupBox_CardSize.Controls.Add(this.label_CardSize_Width);
@@ -498,27 +523,20 @@
             this.pictureBox_Preview.TabStop = false;
             this.pictureBox_Preview.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBox_Preview_MouseClick);
             // 
-            // injectionToolStripMenuItem
+            // lZSSDecompressRecrusiveBinToolStripMenuItem
             // 
-            this.injectionToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.checkEmToolStripMenuItem,
-            this.runToolStripMenuItem});
-            this.injectionToolStripMenuItem.Name = "injectionToolStripMenuItem";
-            this.injectionToolStripMenuItem.Size = new System.Drawing.Size(72, 20);
-            this.injectionToolStripMenuItem.Text = "Advanced";
+            this.lZSSDecompressRecrusiveBinToolStripMenuItem.Name = "lZSSDecompressRecrusiveBinToolStripMenuItem";
+            this.lZSSDecompressRecrusiveBinToolStripMenuItem.Size = new System.Drawing.Size(266, 22);
+            this.lZSSDecompressRecrusiveBinToolStripMenuItem.Text = "\"LZSS\" Decompress (Recrusive, *.bin";
+            this.lZSSDecompressRecrusiveBinToolStripMenuItem.Click += new System.EventHandler(this.lZSSDecompressRecrusiveBinToolStripMenuItem_Click);
             // 
-            // runToolStripMenuItem
+            // pointUserControl_WindowSize
             // 
-            this.runToolStripMenuItem.Name = "runToolStripMenuItem";
-            this.runToolStripMenuItem.Size = new System.Drawing.Size(269, 22);
-            this.runToolStripMenuItem.Text = "Inject Real-time Value Updater (*.exe)";
-            this.runToolStripMenuItem.Click += new System.EventHandler(this.runToolStripMenuItem_Click_1);
-            // 
-            // checkEmToolStripMenuItem
-            // 
-            this.checkEmToolStripMenuItem.Name = "checkEmToolStripMenuItem";
-            this.checkEmToolStripMenuItem.Size = new System.Drawing.Size(269, 22);
-            this.checkEmToolStripMenuItem.Text = "Load Values from (*.exe)";
+            this.pointUserControl_WindowSize.Location = new System.Drawing.Point(8, 74);
+            this.pointUserControl_WindowSize.Name = "pointUserControl_WindowSize";
+            this.pointUserControl_WindowSize.Point = null;
+            this.pointUserControl_WindowSize.Size = new System.Drawing.Size(146, 75);
+            this.pointUserControl_WindowSize.TabIndex = 24;
             // 
             // MainWindow
             // 
@@ -601,6 +619,8 @@
         private System.Windows.Forms.ToolStripMenuItem injectionToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem checkEmToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem runToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem lZSSDecompressRecrusiveToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem lZSSDecompressRecrusiveBinToolStripMenuItem;
     }
 }
 

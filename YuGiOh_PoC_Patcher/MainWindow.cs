@@ -14,6 +14,7 @@ using YuGiOh_PoC_Patcher.CustomControls;
 using FileDialogExtenders;
 using System.Collections.Generic;
 using YuGiOh_PoC_Patcher.UserControls;
+using System.Linq;
 
 namespace YuGiOh_PoC_Patcher
 {
@@ -886,6 +887,81 @@ namespace YuGiOh_PoC_Patcher
         private void splitContainer1_Panel1_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void lZSSDecompressRecrusiveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DecompressRecrusive("*.txt");
+        }
+
+        private void lZSSDecompressRecrusiveBinToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DecompressRecrusive("*.bin");
+        }
+
+        private void DecompressRecrusive(string wildcard)
+        {
+            bool alternativeTrim = false;
+            FolderBrowserEx.FolderBrowserDialog selectFolderDialog = new FolderBrowserEx.FolderBrowserDialog();
+            if (selectFolderDialog.ShowDialog() != DialogResult.OK) return;
+
+            var selectedFolder = selectFolderDialog.SelectedFolder;
+
+            // decompress txt files
+            foreach (var file in Directory.EnumerateFiles(selectedFolder, wildcard, SearchOption.AllDirectories))
+            {
+                byte[] bufferClean;
+
+                using (BinaryReader reader = new BinaryReader(new FileStream(file, FileMode.Open)))
+                {
+                    byte[] buffer = new byte[reader.BaseStream.Length];
+                    reader.Read(buffer, 0, buffer.Length);
+
+                    // Compressed file flag!
+                    if (buffer[0] == 0xFF || buffer[0] == 0xDF || buffer[0] == 0x7F)
+                    {
+                        byte[] o = YuGiLZSS.Decompress(buffer);
+                        int s = 0;
+
+                        // The input size equals the valid output size, when the circular buffer does not move?
+                        if (alternativeTrim == false)
+                        {
+                            s = buffer.Length;
+                        }
+                        else
+                        {
+                            // try to detect stream garbage
+                            for (int i = 0; i < o.Length; i++)
+                            {
+                                // pre-check
+                                if (o[i] == 0x00)
+                                {
+                                    // real EOF detected, skip garbage anti-modding protection
+                                    if (o[i] == 0x00 && o[i + 1] == 0x00 && o[i + 2] == 0x00 && o[i + 3] == 0x00 && o[i + 4] == 0x00)
+                                    {
+                                        s = i;
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+
+                        bufferClean = new byte[s];
+                        Array.Copy(o, bufferClean, s);
+                    }
+                    else
+                    {
+                        continue;
+                    }
+                }
+
+                // Write to file
+                using (BinaryWriter writer = new BinaryWriter(new FileStream(file, FileMode.OpenOrCreate)))
+                {
+                    writer.Write(bufferClean);
+                }
+
+            }
         }
     }
 }

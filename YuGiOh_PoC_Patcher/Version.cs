@@ -10,8 +10,8 @@ namespace YuGiOh_PoC_Patcher
     public static class Version
     {
         //Version
-        public static double actualVerison = 1.1;
-        public static string urlversion = "http://goo.gl/9BQohW";
+        public static double actualVerison = 1.2;
+        public static string urlversion = "https://derplayer.neocities.org/repo/yugioh/version.json";
     }
 
     [DataContract]
