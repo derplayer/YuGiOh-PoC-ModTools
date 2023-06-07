@@ -15,13 +15,16 @@ using FileDialogExtenders;
 using System.Collections.Generic;
 using YuGiOh_PoC_Patcher.UserControls;
 using System.Linq;
+using System.Text;
 
 namespace YuGiOh_PoC_Patcher
 {
     public partial class MainWindow : Form
     {
+        private static readonly Encoding SHIFT_JIS = Encoding.GetEncoding("Shift_JIS");
 
         private YuGiStructure _structure = new YuGiStructure();
+        private YuGiData _data;
         private bool _loading;
         private Bitmap _background = Resources.fie_normal;
         private Timer _timer = new Timer();
@@ -79,6 +82,20 @@ namespace YuGiOh_PoC_Patcher
 
                 GenerateTree(n, node);
                 treeNode.Nodes.Add(n);
+            }
+        }
+
+        private void GenerateFileTree()
+        {
+            if (_data == null) return;
+            treeView_Files.Nodes.Clear();
+
+            foreach (YuGiDataEntry node in _data.Files)
+            {
+                TreeNode n = new TreeNode(node.FileName);
+                n.Tag = node;
+
+                treeView_Files.Nodes.Add(n);
             }
         }
 
@@ -882,6 +899,8 @@ namespace YuGiOh_PoC_Patcher
                 return;
             }
             pictureBox_Preview.Image = null;
+            richTextBox_Data.Visible = false;
+            audioPlayer_Preview.Visible = false; // TODO: stop playing audio too
         }
 
         private void splitContainer1_Panel1_Paint(object sender, PaintEventArgs e)
@@ -901,7 +920,6 @@ namespace YuGiOh_PoC_Patcher
 
         private void DecompressRecrusive(string wildcard)
         {
-            bool alternativeTrim = false;
             FolderBrowserEx.FolderBrowserDialog selectFolderDialog = new FolderBrowserEx.FolderBrowserDialog();
             if (selectFolderDialog.ShowDialog() != DialogResult.OK) return;
 
@@ -917,42 +935,7 @@ namespace YuGiOh_PoC_Patcher
                     byte[] buffer = new byte[reader.BaseStream.Length];
                     reader.Read(buffer, 0, buffer.Length);
 
-                    // Compressed file flag!
-                    if (buffer[0] == 0xFF || buffer[0] == 0xDF || buffer[0] == 0x7F)
-                    {
-                        byte[] o = YuGiLZSS.Decompress(buffer);
-                        int s = 0;
-
-                        // The input size equals the valid output size, when the circular buffer does not move?
-                        if (alternativeTrim == false)
-                        {
-                            s = buffer.Length;
-                        }
-                        else
-                        {
-                            // try to detect stream garbage
-                            for (int i = 0; i < o.Length; i++)
-                            {
-                                // pre-check
-                                if (o[i] == 0x00)
-                                {
-                                    // real EOF detected, skip garbage anti-modding protection
-                                    if (o[i] == 0x00 && o[i + 1] == 0x00 && o[i + 2] == 0x00 && o[i + 3] == 0x00 && o[i + 4] == 0x00)
-                                    {
-                                        s = i;
-                                        break;
-                                    }
-                                }
-                            }
-                        }
-
-                        bufferClean = new byte[s];
-                        Array.Copy(o, bufferClean, s);
-                    }
-                    else
-                    {
-                        continue;
-                    }
+                    bufferClean = DecompressPipeline(buffer);
                 }
 
                 // Write to file
@@ -961,6 +944,215 @@ namespace YuGiOh_PoC_Patcher
                     writer.Write(bufferClean);
                 }
 
+            }
+        }
+
+        private byte[] DecompressPipeline(byte[] buffer)
+        {
+            bool alternativeTrim = false; // only for testing
+            byte[] bufferClean;
+
+            // Compressed file flag!
+            // 0x5F found in other Power of Chaos variants (eg. win00#.bmp)
+            if (buffer[0] == 0xFF || buffer[0] == 0xDF || buffer[0] == 0x7F || buffer[0] == 0x5F)
+            {
+                byte[] o = YuGiLZSS.Decompress(buffer);
+                int s = 0;
+
+                // The input size equals the valid output size, when the circular buffer does not move?
+                if (alternativeTrim == false)
+                {
+                    s = buffer.Length;
+                }
+                else
+                {
+                    // try to detect stream garbage
+                    for (int i = 0; i < o.Length; i++)
+                    {
+                        // pre-check
+                        if (o[i] == 0x00)
+                        {
+                            // real EOF detected, skip garbage anti-modding protection
+                            if (o[i] == 0x00 && o[i + 1] == 0x00 && o[i + 2] == 0x00 && o[i + 3] == 0x00 && o[i + 4] == 0x00)
+                            {
+                                s = i;
+                                break;
+                            }
+                        }
+                    }
+                }
+
+                bufferClean = new byte[s];
+                Array.Copy(o, bufferClean, s);
+                return bufferClean;
+            }
+            else
+            {
+                return buffer; // just passtrough bytes, when flags are not there
+            }
+        }
+
+        private void button_datBtn_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "YuGi Data Container (*.dat)|*.dat";
+            if (openFileDialog.ShowDialog() != DialogResult.OK) return;
+            textBox_datPath.Text = openFileDialog.FileName;
+        }
+
+        private void button_datLoad_Click(object sender, EventArgs e)
+        {
+            if (!File.Exists(textBox_datPath.Text))
+            {
+                textBox_datPath.Text = "";
+                MessageBox.Show("File path is invalid!");
+                return;
+            }
+
+            // Init. data object
+            _data = new YuGiData(textBox_datPath.Text);
+            _data.LoadFileList();
+
+            // Generate tree for path and assign to ui
+            GenerateFileTree();
+        }
+
+        private void toolStripMenuItem_AudioTest_Click(object sender, EventArgs e)
+        {
+            var audioTest = new AudioPlayerUserControl();
+            var dummyForm = new Form();
+            dummyForm.Size = new Size(350, 150);
+            dummyForm.Controls.Add(audioTest);
+            dummyForm.Show();
+            //this.Controls.Add(dummyForm);
+        }
+        private void rtb_ContentsResized(object sender, ContentsResizedEventArgs e)
+        {
+            ((RichTextBox)sender).Height = e.NewRectangle.Height + 5;
+        }
+
+        private void treeView_Files_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            var node = (TreeNode)e.Node;
+
+            // Find file in data container
+            var file = _data.FindFileByName(node.Text);
+            var res = _data.GetDataFromEntry(file);
+
+            // Handle casting for filetypes
+            var fileType = Path.GetExtension(file.FileName);
+            pictureBox_Preview.Image = null;
+            audioPlayer_Preview.Visible = false;
+            richTextBox_Data.Visible = false;
+
+            // Some files are randomly compressed
+            res = DecompressPipeline(res);
+
+            if (fileType == ".bmp")
+            {
+                Bitmap bmp;
+                using (var ms = new MemoryStream(res))
+                {
+                    bmp = new Bitmap(ms);
+                }
+                pictureBox_Preview.Image = bmp;
+                return;
+            }
+
+            if (fileType == ".yga")
+            {
+                YGAFile ygaFile = new YGAFile(res);
+                ygaFile.Filename = file.FileName;
+
+                pictureBox_Preview.Image = ygaFile.Decompress();
+                return;
+            }
+
+            if (fileType == ".wav")
+            {
+                audioPlayer_Preview.Visible = true;
+                audioPlayer_Preview.LoadAudioData(res);
+
+                return;
+            }
+
+            if (fileType == ".txt")
+            {
+                var text = SHIFT_JIS.GetString(res, 0, res.Length);
+                richTextBox_Data.Visible = true;
+                richTextBox_Data.Text = text;
+                return;
+            }
+
+            MessageBox.Show("Prevew for this file is unsupported yet!");
+        }
+
+        private void button_ExportFile_Click(object sender, EventArgs e)
+        {
+            var node = (TreeNode)treeView_Files.SelectedNode;
+
+            // Find file in data container
+            var file = _data.FindFileByName(node.Text);
+            var res = _data.GetDataFromEntry(file);
+            var fileType = Path.GetExtension(file.FileName);
+            var fileName = Path.GetFileName(file.FileName);
+
+            byte[] exportBuffer = DecompressPipeline(res);
+
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.FileName = fileName;
+
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                using (BinaryWriter writer = new BinaryWriter(new FileStream(saveFileDialog.FileName, FileMode.OpenOrCreate)))
+                {
+                    writer.Write(exportBuffer);
+                }
+            }
+        }
+        private void button_ExportFiles_Click(object sender, EventArgs e)
+        {
+            FolderBrowserEx.FolderBrowserDialog selectFolderDialog = new FolderBrowserEx.FolderBrowserDialog();
+            if (selectFolderDialog.ShowDialog() != DialogResult.OK) return;
+
+            var selectedFolder = selectFolderDialog.SelectedFolder;
+
+            foreach (var file in _data.Files)
+            {
+                var res = _data.GetDataFromEntry(file);
+                byte[] exportBuffer = DecompressPipeline(res);
+                var fileType = Path.GetExtension(file.FileName);
+
+                var filePath = selectedFolder + "\\" + file.FileName;
+                System.IO.Directory.CreateDirectory(Path.GetDirectoryName(filePath));
+
+                using (BinaryWriter writer = new BinaryWriter(new FileStream(filePath, FileMode.OpenOrCreate)))
+                {
+                    writer.Write(exportBuffer);
+                }
+            }
+        }
+
+        private void button_ExportFilesRaw_Click(object sender, EventArgs e)
+        {
+            FolderBrowserEx.FolderBrowserDialog selectFolderDialog = new FolderBrowserEx.FolderBrowserDialog();
+            if (selectFolderDialog.ShowDialog() != DialogResult.OK) return;
+
+            var selectedFolder = selectFolderDialog.SelectedFolder;
+
+            foreach (var file in _data.Files)
+            {
+                var res = _data.GetDataFromEntry(file);
+                byte[] exportBuffer = res;
+                var fileType = Path.GetExtension(file.FileName);
+
+                var filePath = selectedFolder + "\\" + file.FileName;
+                System.IO.Directory.CreateDirectory(Path.GetDirectoryName(filePath));
+
+                using (BinaryWriter writer = new BinaryWriter(new FileStream(filePath, FileMode.OpenOrCreate)))
+                {
+                    writer.Write(exportBuffer);
+                }
             }
         }
     }

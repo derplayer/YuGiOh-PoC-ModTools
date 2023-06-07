@@ -41,6 +41,7 @@
             this.dankToYGAToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lZZSToDankToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lZSSDecompressRecrusiveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.lZSSDecompressRecrusiveBinToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.injectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.checkEmToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.runToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -48,6 +49,9 @@
             this.refreshToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.testToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.generateImagesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem_AudioTest = new System.Windows.Forms.ToolStripMenuItem();
+            this.cardsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openToolStrip_CCGen = new System.Windows.Forms.ToolStripMenuItem();
             this.checkBox_Rotate = new System.Windows.Forms.CheckBox();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.tabControl1 = new System.Windows.Forms.TabControl();
@@ -59,7 +63,11 @@
             this.button_Apply = new System.Windows.Forms.Button();
             this.textBox_FieldBackground = new System.Windows.Forms.TextBox();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.label3 = new System.Windows.Forms.Label();
+            this.label_datContainer = new System.Windows.Forms.Label();
+            this.button_datBtn = new System.Windows.Forms.Button();
+            this.button_datLoad = new System.Windows.Forms.Button();
+            this.textBox_datPath = new System.Windows.Forms.TextBox();
+            this.treeView_Files = new System.Windows.Forms.TreeView();
             this.groupBox_CardSize = new System.Windows.Forms.GroupBox();
             this.label_CardSize_Width = new System.Windows.Forms.Label();
             this.label_CardSize_Height = new System.Windows.Forms.Label();
@@ -68,9 +76,13 @@
             this.button_Patch = new System.Windows.Forms.Button();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.richTextBox_Data = new System.Windows.Forms.RichTextBox();
             this.pictureBox_Preview = new System.Windows.Forms.PictureBox();
-            this.lZSSDecompressRecrusiveBinToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.button_ExportFiles = new System.Windows.Forms.Button();
+            this.button_ExportFile = new System.Windows.Forms.Button();
             this.pointUserControl_WindowSize = new YuGiOh_PoC_Patcher.PointUserControl();
+            this.audioPlayer_Preview = new YuGiOh_PoC_Patcher.UserControls.AudioPlayerUserControl();
+            this.button_ExportFilesRaw = new System.Windows.Forms.Button();
             tabPage3 = new System.Windows.Forms.TabPage();
             tabPage3.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -127,7 +139,8 @@
             this.fileToolStripMenuItem,
             this.convertToolStripMenuItem,
             this.injectionToolStripMenuItem,
-            this.debugToolStripMenuItem});
+            this.debugToolStripMenuItem,
+            this.cardsToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
@@ -198,6 +211,13 @@
             this.lZSSDecompressRecrusiveToolStripMenuItem.Text = "\"LZSS\" Decompress (Recrusive, *.txt)";
             this.lZSSDecompressRecrusiveToolStripMenuItem.Click += new System.EventHandler(this.lZSSDecompressRecrusiveToolStripMenuItem_Click);
             // 
+            // lZSSDecompressRecrusiveBinToolStripMenuItem
+            // 
+            this.lZSSDecompressRecrusiveBinToolStripMenuItem.Name = "lZSSDecompressRecrusiveBinToolStripMenuItem";
+            this.lZSSDecompressRecrusiveBinToolStripMenuItem.Size = new System.Drawing.Size(266, 22);
+            this.lZSSDecompressRecrusiveBinToolStripMenuItem.Text = "\"LZSS\" Decompress (Recrusive, *.bin";
+            this.lZSSDecompressRecrusiveBinToolStripMenuItem.Click += new System.EventHandler(this.lZSSDecompressRecrusiveBinToolStripMenuItem_Click);
+            // 
             // injectionToolStripMenuItem
             // 
             this.injectionToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -225,7 +245,8 @@
             this.debugToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.refreshToolStripMenuItem,
             this.testToolStripMenuItem,
-            this.generateImagesToolStripMenuItem});
+            this.generateImagesToolStripMenuItem,
+            this.toolStripMenuItem_AudioTest});
             this.debugToolStripMenuItem.Name = "debugToolStripMenuItem";
             this.debugToolStripMenuItem.Size = new System.Drawing.Size(54, 20);
             this.debugToolStripMenuItem.Text = "Debug";
@@ -250,6 +271,27 @@
             this.generateImagesToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
             this.generateImagesToolStripMenuItem.Text = "Generate Images";
             this.generateImagesToolStripMenuItem.Click += new System.EventHandler(this.generateImagesToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem_AudioTest
+            // 
+            this.toolStripMenuItem_AudioTest.Name = "toolStripMenuItem_AudioTest";
+            this.toolStripMenuItem_AudioTest.Size = new System.Drawing.Size(196, 22);
+            this.toolStripMenuItem_AudioTest.Text = "Test AudioPlayer";
+            this.toolStripMenuItem_AudioTest.Click += new System.EventHandler(this.toolStripMenuItem_AudioTest_Click);
+            // 
+            // cardsToolStripMenuItem
+            // 
+            this.cardsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.openToolStrip_CCGen});
+            this.cardsToolStripMenuItem.Name = "cardsToolStripMenuItem";
+            this.cardsToolStripMenuItem.Size = new System.Drawing.Size(49, 20);
+            this.cardsToolStripMenuItem.Text = "Cards";
+            // 
+            // openToolStrip_CCGen
+            // 
+            this.openToolStrip_CCGen.Name = "openToolStrip_CCGen";
+            this.openToolStrip_CCGen.Size = new System.Drawing.Size(185, 22);
+            this.openToolStrip_CCGen.Text = "Card Code Generator";
             // 
             // checkBox_Rotate
             // 
@@ -383,8 +425,14 @@
             // tabPage1
             // 
             this.tabPage1.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
-            this.tabPage1.Controls.Add(this.label3);
-            this.tabPage1.Cursor = System.Windows.Forms.Cursors.No;
+            this.tabPage1.Controls.Add(this.button_ExportFilesRaw);
+            this.tabPage1.Controls.Add(this.button_ExportFile);
+            this.tabPage1.Controls.Add(this.button_ExportFiles);
+            this.tabPage1.Controls.Add(this.label_datContainer);
+            this.tabPage1.Controls.Add(this.button_datBtn);
+            this.tabPage1.Controls.Add(this.button_datLoad);
+            this.tabPage1.Controls.Add(this.textBox_datPath);
+            this.tabPage1.Controls.Add(this.treeView_Files);
             this.tabPage1.ImeMode = System.Windows.Forms.ImeMode.Off;
             this.tabPage1.Location = new System.Drawing.Point(4, 4);
             this.tabPage1.Name = "tabPage1";
@@ -394,16 +442,56 @@
             this.tabPage1.Text = "Files";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // label3
+            // label_datContainer
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(3, 3);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(205, 24);
-            this.label3.TabIndex = 1;
-            this.label3.Text = "Coming in next update!";
-            this.label3.Click += new System.EventHandler(this.label3_Click);
+            this.label_datContainer.AutoSize = true;
+            this.label_datContainer.Location = new System.Drawing.Point(4, 10);
+            this.label_datContainer.Name = "label_datContainer";
+            this.label_datContainer.Size = new System.Drawing.Size(83, 13);
+            this.label_datContainer.TabIndex = 23;
+            this.label_datContainer.Text = "Data File (*.dat):";
+            // 
+            // button_datBtn
+            // 
+            this.button_datBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button_datBtn.Location = new System.Drawing.Point(222, 6);
+            this.button_datBtn.Name = "button_datBtn";
+            this.button_datBtn.Size = new System.Drawing.Size(26, 20);
+            this.button_datBtn.TabIndex = 22;
+            this.button_datBtn.Text = "...";
+            this.button_datBtn.UseVisualStyleBackColor = true;
+            this.button_datBtn.Click += new System.EventHandler(this.button_datBtn_Click);
+            // 
+            // button_datLoad
+            // 
+            this.button_datLoad.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button_datLoad.Location = new System.Drawing.Point(254, 6);
+            this.button_datLoad.Name = "button_datLoad";
+            this.button_datLoad.Size = new System.Drawing.Size(54, 20);
+            this.button_datLoad.TabIndex = 21;
+            this.button_datLoad.Text = "Load";
+            this.button_datLoad.UseVisualStyleBackColor = true;
+            this.button_datLoad.Click += new System.EventHandler(this.button_datLoad_Click);
+            // 
+            // textBox_datPath
+            // 
+            this.textBox_datPath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox_datPath.Location = new System.Drawing.Point(93, 6);
+            this.textBox_datPath.Name = "textBox_datPath";
+            this.textBox_datPath.Size = new System.Drawing.Size(123, 20);
+            this.textBox_datPath.TabIndex = 20;
+            // 
+            // treeView_Files
+            // 
+            this.treeView_Files.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.treeView_Files.Location = new System.Drawing.Point(7, 32);
+            this.treeView_Files.Name = "treeView_Files";
+            this.treeView_Files.Size = new System.Drawing.Size(301, 352);
+            this.treeView_Files.TabIndex = 0;
+            this.treeView_Files.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView_Files_AfterSelect);
             // 
             // groupBox_CardSize
             // 
@@ -498,6 +586,7 @@
             this.flowLayoutPanel1.AutoSize = true;
             this.flowLayoutPanel1.BackColor = System.Drawing.SystemColors.ControlDark;
             this.flowLayoutPanel1.Controls.Add(this.panel1);
+            this.flowLayoutPanel1.Controls.Add(this.audioPlayer_Preview);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
@@ -507,11 +596,22 @@
             // panel1
             // 
             this.panel1.AutoSize = true;
+            this.panel1.Controls.Add(this.richTextBox_Data);
             this.panel1.Controls.Add(this.pictureBox_Preview);
             this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(152, 114);
+            this.panel1.Size = new System.Drawing.Size(802, 114);
             this.panel1.TabIndex = 2;
+            // 
+            // richTextBox_Data
+            // 
+            this.richTextBox_Data.Location = new System.Drawing.Point(1, -3);
+            this.richTextBox_Data.Name = "richTextBox_Data";
+            this.richTextBox_Data.Size = new System.Drawing.Size(798, 114);
+            this.richTextBox_Data.TabIndex = 4;
+            this.richTextBox_Data.Text = "";
+            this.richTextBox_Data.Visible = false;
+            this.richTextBox_Data.ContentsResized += new System.Windows.Forms.ContentsResizedEventHandler(this.rtb_ContentsResized);
             // 
             // pictureBox_Preview
             // 
@@ -523,12 +623,27 @@
             this.pictureBox_Preview.TabStop = false;
             this.pictureBox_Preview.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBox_Preview_MouseClick);
             // 
-            // lZSSDecompressRecrusiveBinToolStripMenuItem
+            // button_ExportFiles
             // 
-            this.lZSSDecompressRecrusiveBinToolStripMenuItem.Name = "lZSSDecompressRecrusiveBinToolStripMenuItem";
-            this.lZSSDecompressRecrusiveBinToolStripMenuItem.Size = new System.Drawing.Size(266, 22);
-            this.lZSSDecompressRecrusiveBinToolStripMenuItem.Text = "\"LZSS\" Decompress (Recrusive, *.bin";
-            this.lZSSDecompressRecrusiveBinToolStripMenuItem.Click += new System.EventHandler(this.lZSSDecompressRecrusiveBinToolStripMenuItem_Click);
+            this.button_ExportFiles.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button_ExportFiles.Location = new System.Drawing.Point(114, 390);
+            this.button_ExportFiles.Name = "button_ExportFiles";
+            this.button_ExportFiles.Size = new System.Drawing.Size(85, 27);
+            this.button_ExportFiles.TabIndex = 24;
+            this.button_ExportFiles.Text = "Export ALL";
+            this.button_ExportFiles.UseVisualStyleBackColor = true;
+            this.button_ExportFiles.Click += new System.EventHandler(this.button_ExportFiles_Click);
+            // 
+            // button_ExportFile
+            // 
+            this.button_ExportFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.button_ExportFile.Location = new System.Drawing.Point(7, 390);
+            this.button_ExportFile.Name = "button_ExportFile";
+            this.button_ExportFile.Size = new System.Drawing.Size(100, 27);
+            this.button_ExportFile.TabIndex = 25;
+            this.button_ExportFile.Text = "Export selected";
+            this.button_ExportFile.UseVisualStyleBackColor = true;
+            this.button_ExportFile.Click += new System.EventHandler(this.button_ExportFile_Click);
             // 
             // pointUserControl_WindowSize
             // 
@@ -537,6 +652,25 @@
             this.pointUserControl_WindowSize.Point = null;
             this.pointUserControl_WindowSize.Size = new System.Drawing.Size(146, 75);
             this.pointUserControl_WindowSize.TabIndex = 24;
+            // 
+            // audioPlayer_Preview
+            // 
+            this.audioPlayer_Preview.Location = new System.Drawing.Point(3, 123);
+            this.audioPlayer_Preview.Name = "audioPlayer_Preview";
+            this.audioPlayer_Preview.Size = new System.Drawing.Size(473, 64);
+            this.audioPlayer_Preview.TabIndex = 3;
+            this.audioPlayer_Preview.Visible = false;
+            // 
+            // button_ExportFilesRaw
+            // 
+            this.button_ExportFilesRaw.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button_ExportFilesRaw.Location = new System.Drawing.Point(205, 390);
+            this.button_ExportFilesRaw.Name = "button_ExportFilesRaw";
+            this.button_ExportFilesRaw.Size = new System.Drawing.Size(103, 27);
+            this.button_ExportFilesRaw.TabIndex = 26;
+            this.button_ExportFilesRaw.Text = "Export ALL (RAW)";
+            this.button_ExportFilesRaw.UseVisualStyleBackColor = true;
+            this.button_ExportFilesRaw.Click += new System.EventHandler(this.button_ExportFilesRaw_Click);
             // 
             // MainWindow
             // 
@@ -549,7 +683,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainWindow";
-            this.Text = "Yu-Gi-Oh Power of Chaos - Patcher";
+            this.Text = "Yu-Gi-Oh Power of Chaos - Mod Tools";
             this.Load += new System.EventHandler(this.MainWindow_Load);
             tabPage3.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
@@ -610,7 +744,6 @@
         private System.Windows.Forms.ToolStripMenuItem dankYGAToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem dankToYGAToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem lZZSToDankToolStripMenuItem;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Panel panel_DuelField_ValueEditor;
         private System.Windows.Forms.TreeView treeView_DuelField;
         private System.Windows.Forms.ToolStripMenuItem refreshToolStripMenuItem;
@@ -621,6 +754,19 @@
         private System.Windows.Forms.ToolStripMenuItem runToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem lZSSDecompressRecrusiveToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem lZSSDecompressRecrusiveBinToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cardsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem openToolStrip_CCGen;
+        private System.Windows.Forms.Label label_datContainer;
+        private System.Windows.Forms.Button button_datBtn;
+        private System.Windows.Forms.Button button_datLoad;
+        private System.Windows.Forms.TextBox textBox_datPath;
+        private System.Windows.Forms.TreeView treeView_Files;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem_AudioTest;
+        private UserControls.AudioPlayerUserControl audioPlayer_Preview;
+        private System.Windows.Forms.RichTextBox richTextBox_Data;
+        private System.Windows.Forms.Button button_ExportFile;
+        private System.Windows.Forms.Button button_ExportFiles;
+        private System.Windows.Forms.Button button_ExportFilesRaw;
     }
 }
 

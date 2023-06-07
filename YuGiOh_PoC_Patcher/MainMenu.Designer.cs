@@ -106,7 +106,7 @@ namespace YuGiOh_PoC_Patcher
             this.Button_Settings.Name = "Button_Settings";
             this.Button_Settings.Size = new System.Drawing.Size(395, 60);
             this.Button_Settings.TabIndex = 3;
-            this.Button_Settings.Text = "Advanced Settings (+Mod Tools)";
+            this.Button_Settings.Text = "Mod Tools";
             this.Button_Settings.UseVisualStyleBackColor = true;
             this.Button_Settings.Click += new System.EventHandler(this.Button_Settings_Click);
             // 

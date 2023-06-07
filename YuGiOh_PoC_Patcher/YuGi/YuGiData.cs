@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace YuGiOh_PoC_Patcher.YuGi
 {
@@ -21,6 +22,23 @@ namespace YuGiOh_PoC_Patcher.YuGi
             FileName = fileName;
         }
 
+        public YuGiDataEntry FindFileByName(string name)
+        {
+            var res = Files.FirstOrDefault(datFile => datFile.FileName.Contains(name));
+            return res;
+        }
+
+        public byte[] GetDataFromEntry(YuGiDataEntry entry)
+        {
+            using (BinaryReader reader = new BinaryReader(new FileStream(FileName, FileMode.Open)))
+            {
+                reader.BaseStream.Seek(entry.Offset, SeekOrigin.Begin);
+                byte[] data = new byte[entry.Size];
+                reader.Read(data, 0, data.Length);
+
+                return data;
+            }
+        }
 
         public bool LoadFileList()
         {

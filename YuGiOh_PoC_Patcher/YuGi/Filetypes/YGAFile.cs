@@ -14,13 +14,17 @@ namespace YuGiOh_PoC_Patcher.YuGi.Filetypes
     public class YGAFile
     {
         public string Filename { get; set; }
+        public byte[] Data { get; set; }
 
         public YGAFile(string filename)
         {
             Filename = filename;
-
         }
 
+        public YGAFile(byte[] data)
+        {
+            Data = data;
+        }
 
         public static void ConvertToYGA(string inputFilename, string outputFilename)
         {
@@ -54,9 +58,16 @@ namespace YuGiOh_PoC_Patcher.YuGi.Filetypes
         public Bitmap Decompress()
         {
             byte[] buffer;
-            using (BinaryReader reader = new BinaryReader(new FileStream(Filename, FileMode.Open)))
+
+            if(Data == null) {
+                using (BinaryReader reader = new BinaryReader(new FileStream(Filename, FileMode.Open)))
+                {
+                    buffer = reader.ReadBytes((int)reader.BaseStream.Length - 1);
+                }
+            }
+            else
             {
-                buffer = reader.ReadBytes((int)reader.BaseStream.Length - 1);
+                buffer = Data;
             }
 
             byte[] headerBytes = new byte[24];

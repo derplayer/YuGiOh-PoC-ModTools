@@ -111,6 +111,12 @@
     <Compile Include="DebugPatchWindow.Designer.cs">
       <DependentUpon>DebugPatchWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="CardCodeGenerator.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CardCodeGenerator.Designer.cs">
+      <DependentUpon>CardCodeGenerator.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainMenu.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -132,6 +138,12 @@
     </Compile>
     <Compile Include="MainWindow.Designer.cs">
       <DependentUpon>MainWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\AudioPlayerUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\AudioPlayerUserControl.Designer.cs">
+      <DependentUpon>AudioPlayerUserControl.cs</DependentUpon>
     </Compile>
     <Compile Include="UserControls\RectangleUserControl.cs">
       <SubType>UserControl</SubType>
@@ -191,6 +203,9 @@
     <EmbeddedResource Include="BasicSettings.resx">
       <DependentUpon>BasicSettings.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="CardCodeGenerator.resx">
+      <DependentUpon>CardCodeGenerator.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CustomControls\OpenFileDialogEx\MyOpenFileDialogControl.resx" />
     <EmbeddedResource Include="DebugPatchWindow.resx">
       <DependentUpon>DebugPatchWindow.cs</DependentUpon>
@@ -203,6 +218,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\AudioPlayerUserControl.resx">
+      <DependentUpon>AudioPlayerUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\PointBundleUserControl.resx">
       <DependentUpon>PointBundleUserControl.cs</DependentUpon>
@@ -243,6 +261,7 @@
   <ItemGroup>
     <Content Include="Fasm.NET.xml" />
     <Content Include="joey.ico" />
+    <None Include="YuGiOh_PoC_Patcher.exe.config" />
     <None Include="YuGiOh_PoC_Patcher_TemporaryKey.pfx" />
     <None Include="YuGi\Resources\hand_deck.png" />
     <None Include="YuGi\Resources\jyogai_ji2.png" />

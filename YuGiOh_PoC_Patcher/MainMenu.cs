@@ -38,7 +38,7 @@ namespace YuGiOh_PoC_Patcher
 
             WebClient w = new WebClient(); //TODO: Shorter Timeout Range
             w.Headers.Add("user-agent", "Mozilla/5.0 (Yu-Gi-Oh Updater; Linux; rv:1.0) Gecko/20160408 Yu-Gi-Oh-Client/" + Version.actualVerison);
-            
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12; // Force TLS 1.2 on old .NET 4.5
             Version_JSON actualVersion;
 
             try
@@ -46,7 +46,7 @@ namespace YuGiOh_PoC_Patcher
                 string json_data = w.DownloadString(Version.urlversion);
                 actualVersion = JSONSerializer<Version_JSON>.DeSerialize(json_data);
             }
-            catch(WebException ex) //Timeout,Server dead,...
+            catch(WebException ex) // Timeout, Server dead, TLS 1.3 is forced (in 2030's?)...
             {
                 System.Diagnostics.Debug.WriteLine(ex.ToString());
                 actualVersion = new Version_JSON();
@@ -72,23 +72,6 @@ namespace YuGiOh_PoC_Patcher
                 }
 
             }
-
-            /*  //Timeout, false/dead url
-             *  
-             *  TODO: github needs not TLS 2.0, and .net 4.8 can max. TLS 1.3, so updater broken
-             *  
-            if (actualVersion.newestVersion == 0)
-            {
-                string message = "Connection to the update server could not be etablished! \n\nPress OK to continue...";
-                result = MessageBox.Show(message, caption, buttons_ok);
-
-                if (result == System.Windows.Forms.DialogResult.OK)
-                {
-                    //dunno
-                }
-
-            }
-            */
 
             //Check if registry for yugi exists
             RegistryKey checkSettings = Registry.CurrentUser.OpenSubKey("SOFTWARE\\YuGiOhModLauncher\\v1\\", true);
