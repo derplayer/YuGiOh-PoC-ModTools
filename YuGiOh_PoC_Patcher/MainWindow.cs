@@ -935,7 +935,7 @@ namespace YuGiOh_PoC_Patcher
                     byte[] buffer = new byte[reader.BaseStream.Length];
                     reader.Read(buffer, 0, buffer.Length);
 
-                    bufferClean = DecompressPipeline(buffer);
+                    bufferClean = DecompressPipeline(buffer, file);
                 }
 
                 // Write to file
@@ -947,14 +947,51 @@ namespace YuGiOh_PoC_Patcher
             }
         }
 
-        private byte[] DecompressPipeline(byte[] buffer)
+        private byte[] DecompressPipeline(byte[] buffer, string filename)
         {
             bool alternativeTrim = false; // only for testing
             byte[] bufferClean;
+            bool decompressFlag = false;
+            
+            // Some files in Yu-Gi-Oh: Online are empty placeholder (for future patches?)
+            if (buffer.Length <= 0)
+            {
+                return buffer;
+            }
 
-            // Compressed file flag!
-            // 0x5F found in other Power of Chaos variants (eg. win00#.bmp)
-            if (buffer[0] == 0xFF || buffer[0] == 0xDF || buffer[0] == 0x7F || buffer[0] == 0x5F)
+            // *.bin files are a bit... special
+            if (filename.Contains(".bin"))
+            {
+                // Decompression file blacklist for card_id.bin (has a 0xFF flag, but is NEVER compressed!)
+                if (filename.Contains("card_id")) return buffer;
+
+                // PoC - Yugi trial : in trial ver bin files only?
+                if (buffer[0] == 0xFE || buffer[0] == 0xF0 || buffer[0] == 0xAA)
+                {
+                    decompressFlag = true;
+                }
+            }
+
+            // Power of Chaos - Joey standard identifiers
+            if (buffer[0] == 0xFF || buffer[0] == 0xDF || buffer[0] == 0x7F)
+            {
+                decompressFlag = true;
+            }
+
+            // 0x5F found in other Power of Chaos variants (eg. win00#.bmp in PoC - Yugi trial)
+            if (buffer[0] == 0x5F)
+            {
+                decompressFlag = true;
+            }
+
+            // 0xAF found in Yu-Gi-Oh Online 2005+ patch dat variants (many .bmp files)
+            if (buffer[0] == 0xAF)
+            {
+                decompressFlag = true;
+            }
+
+            // Compressed file flag check!
+            if (decompressFlag)
             {
                 byte[] o = YuGiLZSS.Decompress(buffer);
                 int s = 0;
@@ -1046,17 +1083,27 @@ namespace YuGiOh_PoC_Patcher
             richTextBox_Data.Visible = false;
 
             // Some files are randomly compressed
-            res = DecompressPipeline(res);
+            res = DecompressPipeline(res, file.FileName);
 
-            if (fileType == ".bmp")
+            // PNG is in YGO 2006+ builds
+            if (fileType == ".bmp" || fileType == ".png")
             {
-                Bitmap bmp;
-                using (var ms = new MemoryStream(res))
+                try
                 {
-                    bmp = new Bitmap(ms);
+                    Bitmap image;
+                    using (var ms = new MemoryStream(res))
+                    {
+                        image = new Bitmap(ms);
+                    }
+                    pictureBox_Preview.Image = image;
+                    return;
                 }
-                pictureBox_Preview.Image = bmp;
-                return;
+                catch (Exception)
+                {
+                    MessageBox.Show("File ERROR!");
+                    return;
+                }
+
             }
 
             if (fileType == ".yga")
@@ -1076,7 +1123,8 @@ namespace YuGiOh_PoC_Patcher
                 return;
             }
 
-            if (fileType == ".txt")
+            // CSV is in YGO 2006+ builds
+            if (fileType == ".txt" || fileType == ".csv")
             {
                 var text = SHIFT_JIS.GetString(res, 0, res.Length);
                 richTextBox_Data.Visible = true;
@@ -1097,7 +1145,7 @@ namespace YuGiOh_PoC_Patcher
             var fileType = Path.GetExtension(file.FileName);
             var fileName = Path.GetFileName(file.FileName);
 
-            byte[] exportBuffer = DecompressPipeline(res);
+            byte[] exportBuffer = DecompressPipeline(res, file.FileName);
 
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.FileName = fileName;
@@ -1120,7 +1168,7 @@ namespace YuGiOh_PoC_Patcher
             foreach (var file in _data.Files)
             {
                 var res = _data.GetDataFromEntry(file);
-                byte[] exportBuffer = DecompressPipeline(res);
+                byte[] exportBuffer = DecompressPipeline(res, file.FileName);
                 var fileType = Path.GetExtension(file.FileName);
 
                 var filePath = selectedFolder + "\\" + file.FileName;

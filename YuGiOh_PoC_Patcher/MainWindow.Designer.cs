@@ -80,9 +80,9 @@
             this.pictureBox_Preview = new System.Windows.Forms.PictureBox();
             this.button_ExportFiles = new System.Windows.Forms.Button();
             this.button_ExportFile = new System.Windows.Forms.Button();
+            this.button_ExportFilesRaw = new System.Windows.Forms.Button();
             this.pointUserControl_WindowSize = new YuGiOh_PoC_Patcher.PointUserControl();
             this.audioPlayer_Preview = new YuGiOh_PoC_Patcher.UserControls.AudioPlayerUserControl();
-            this.button_ExportFilesRaw = new System.Windows.Forms.Button();
             tabPage3 = new System.Windows.Forms.TabPage();
             tabPage3.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -186,35 +186,35 @@
             // dankYGAToolStripMenuItem
             // 
             this.dankYGAToolStripMenuItem.Name = "dankYGAToolStripMenuItem";
-            this.dankYGAToolStripMenuItem.Size = new System.Drawing.Size(266, 22);
+            this.dankYGAToolStripMenuItem.Size = new System.Drawing.Size(317, 22);
             this.dankYGAToolStripMenuItem.Text = "YGA ➯ PNG";
             this.dankYGAToolStripMenuItem.Click += new System.EventHandler(this.dankYGAToolStripMenuItem_Click_1);
             // 
             // dankToYGAToolStripMenuItem
             // 
             this.dankToYGAToolStripMenuItem.Name = "dankToYGAToolStripMenuItem";
-            this.dankToYGAToolStripMenuItem.Size = new System.Drawing.Size(266, 22);
+            this.dankToYGAToolStripMenuItem.Size = new System.Drawing.Size(317, 22);
             this.dankToYGAToolStripMenuItem.Text = "PNG ➯ YGA";
             this.dankToYGAToolStripMenuItem.Click += new System.EventHandler(this.dankToYGAToolStripMenuItem_Click_1);
             // 
             // lZZSToDankToolStripMenuItem
             // 
             this.lZZSToDankToolStripMenuItem.Name = "lZZSToDankToolStripMenuItem";
-            this.lZZSToDankToolStripMenuItem.Size = new System.Drawing.Size(266, 22);
-            this.lZZSToDankToolStripMenuItem.Text = "\"LZSS\" Decompress (RAW, no trim)";
+            this.lZZSToDankToolStripMenuItem.Size = new System.Drawing.Size(317, 22);
+            this.lZZSToDankToolStripMenuItem.Text = "\"LZSS\" Decompress (RAW, no trim, no checks)";
             this.lZZSToDankToolStripMenuItem.Click += new System.EventHandler(this.lZZSToDankToolStripMenuItem_Click_1);
             // 
             // lZSSDecompressRecrusiveToolStripMenuItem
             // 
             this.lZSSDecompressRecrusiveToolStripMenuItem.Name = "lZSSDecompressRecrusiveToolStripMenuItem";
-            this.lZSSDecompressRecrusiveToolStripMenuItem.Size = new System.Drawing.Size(266, 22);
+            this.lZSSDecompressRecrusiveToolStripMenuItem.Size = new System.Drawing.Size(317, 22);
             this.lZSSDecompressRecrusiveToolStripMenuItem.Text = "\"LZSS\" Decompress (Recrusive, *.txt)";
             this.lZSSDecompressRecrusiveToolStripMenuItem.Click += new System.EventHandler(this.lZSSDecompressRecrusiveToolStripMenuItem_Click);
             // 
             // lZSSDecompressRecrusiveBinToolStripMenuItem
             // 
             this.lZSSDecompressRecrusiveBinToolStripMenuItem.Name = "lZSSDecompressRecrusiveBinToolStripMenuItem";
-            this.lZSSDecompressRecrusiveBinToolStripMenuItem.Size = new System.Drawing.Size(266, 22);
+            this.lZSSDecompressRecrusiveBinToolStripMenuItem.Size = new System.Drawing.Size(317, 22);
             this.lZSSDecompressRecrusiveBinToolStripMenuItem.Text = "\"LZSS\" Decompress (Recrusive, *.bin";
             this.lZSSDecompressRecrusiveBinToolStripMenuItem.Click += new System.EventHandler(this.lZSSDecompressRecrusiveBinToolStripMenuItem_Click);
             // 
@@ -645,6 +645,17 @@
             this.button_ExportFile.UseVisualStyleBackColor = true;
             this.button_ExportFile.Click += new System.EventHandler(this.button_ExportFile_Click);
             // 
+            // button_ExportFilesRaw
+            // 
+            this.button_ExportFilesRaw.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button_ExportFilesRaw.Location = new System.Drawing.Point(205, 390);
+            this.button_ExportFilesRaw.Name = "button_ExportFilesRaw";
+            this.button_ExportFilesRaw.Size = new System.Drawing.Size(103, 27);
+            this.button_ExportFilesRaw.TabIndex = 26;
+            this.button_ExportFilesRaw.Text = "Export ALL (RAW)";
+            this.button_ExportFilesRaw.UseVisualStyleBackColor = true;
+            this.button_ExportFilesRaw.Click += new System.EventHandler(this.button_ExportFilesRaw_Click);
+            // 
             // pointUserControl_WindowSize
             // 
             this.pointUserControl_WindowSize.Location = new System.Drawing.Point(8, 74);
@@ -660,17 +671,6 @@
             this.audioPlayer_Preview.Size = new System.Drawing.Size(473, 64);
             this.audioPlayer_Preview.TabIndex = 3;
             this.audioPlayer_Preview.Visible = false;
-            // 
-            // button_ExportFilesRaw
-            // 
-            this.button_ExportFilesRaw.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button_ExportFilesRaw.Location = new System.Drawing.Point(205, 390);
-            this.button_ExportFilesRaw.Name = "button_ExportFilesRaw";
-            this.button_ExportFilesRaw.Size = new System.Drawing.Size(103, 27);
-            this.button_ExportFilesRaw.TabIndex = 26;
-            this.button_ExportFilesRaw.Text = "Export ALL (RAW)";
-            this.button_ExportFilesRaw.UseVisualStyleBackColor = true;
-            this.button_ExportFilesRaw.Click += new System.EventHandler(this.button_ExportFilesRaw_Click);
             // 
             // MainWindow
             // 

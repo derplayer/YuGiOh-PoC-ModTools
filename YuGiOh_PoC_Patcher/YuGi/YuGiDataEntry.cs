@@ -8,6 +8,8 @@ namespace YuGiOh_PoC_Patcher.YuGi
     /// </summary>
     public class YuGiDataEntry
     {
+        private static readonly Encoding SHIFT_JIS = Encoding.GetEncoding("Shift_JIS");
+
         public int Offset;
         public int Size;
         public int SizeExtra;
@@ -29,7 +31,12 @@ namespace YuGiOh_PoC_Patcher.YuGi
             {
                 result[i] = (byte)(((bytes[i] & 0xF0) >> 4) | ((bytes[i] & 0x0F) << 4));
             }
-            return Encoding.ASCII.GetString(result).Trim('\0');
+
+            // YuGiOh Online 2004 DATA.DAT:
+            // INFO: {Offset: 284891195, Size: 2720312, SizeExtra: 2720312, FileName: y\online\option\option_item01_??.bmp}
+            // They really did a typo in SJIS for a filename... so we handle ALL files like SJIS from now on
+            var res = SHIFT_JIS.GetString(result, 0, result.Length).Trim('\0');
+            return res;
         }
 
         private byte[] ConvertToBytes(string fileName)
