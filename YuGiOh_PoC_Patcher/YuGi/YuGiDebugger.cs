@@ -119,6 +119,15 @@ namespace YuGiOh_PoC_Patcher.YuGi
             timer.Interval = 5000;
             timer.Tick += Timer_Tick;
             timer.Start();
+
+            if (YuGiExtendedMethods.IsPatchable(Process.MainModule.FileName) == false)
+            {
+                Process.Kill();
+                MemorySharp.Dispose();
+                timer.Stop();
+                MessageBox.Show("This executable is not compatible with the patcher.");
+                return;
+            }
         }
 
         private void Process_Exited(object sender, EventArgs e)

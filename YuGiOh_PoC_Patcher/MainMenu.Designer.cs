@@ -36,12 +36,12 @@ namespace YuGiOh_PoC_Patcher
             this.linkLabel_ThePage = new System.Windows.Forms.LinkLabel();
             this.label1 = new System.Windows.Forms.Label();
             this.Button_ChangePath = new System.Windows.Forms.Button();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.Button_Settings = new YuGiOh_PoC_Patcher.CustomControls.RoundButton();
             this.Button_ModLauncher = new YuGiOh_PoC_Patcher.CustomControls.RoundButton();
             this.button1 = new YuGiOh_PoC_Patcher.CustomControls.RoundButton();
             this.Button_Exit = new YuGiOh_PoC_Patcher.CustomControls.RoundButton();
             this.Button_Game = new YuGiOh_PoC_Patcher.CustomControls.RoundButton();
-            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.ctlModernBlack1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -90,13 +90,17 @@ namespace YuGiOh_PoC_Patcher
             // 
             // Button_ChangePath
             // 
-            this.Button_ChangePath.Location = new System.Drawing.Point(346, 52);
+            this.Button_ChangePath.Location = new System.Drawing.Point(308, 52);
             this.Button_ChangePath.Name = "Button_ChangePath";
-            this.Button_ChangePath.Size = new System.Drawing.Size(52, 47);
+            this.Button_ChangePath.Size = new System.Drawing.Size(90, 47);
             this.Button_ChangePath.TabIndex = 5;
-            this.Button_ChangePath.Text = "Change Game Path";
+            this.Button_ChangePath.Text = "Change default game path";
             this.Button_ChangePath.UseVisualStyleBackColor = true;
             this.Button_ChangePath.Click += new System.EventHandler(this.Button_ChangePath_Click);
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
             // 
             // Button_Settings
             // 
@@ -150,10 +154,6 @@ namespace YuGiOh_PoC_Patcher
             this.Button_Game.Text = "Launch/Start";
             this.Button_Game.UseVisualStyleBackColor = true;
             this.Button_Game.Click += new System.EventHandler(this.Button_Game_Click);
-            // 
-            // openFileDialog1
-            // 
-            this.openFileDialog1.FileName = "openFileDialog1";
             // 
             // MainMenu
             // 

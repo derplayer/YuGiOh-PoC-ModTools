@@ -11,6 +11,7 @@ namespace YuGiOh_PoC_Patcher.YuGi.Values
 {
     /// <summary>
     /// All the YuGiNodes/YuGiValues for the Deck Editor
+    /// TODO: v1.0 offsets and official exe offsets...!
     /// </summary>
     public class YuGiDeckEditor : INotifyPropertyChanged
     {

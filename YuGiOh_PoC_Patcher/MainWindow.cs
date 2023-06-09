@@ -176,6 +176,12 @@ namespace YuGiOh_PoC_Patcher
 
             string fileName = openFileDialog.FileName;
 
+            if(YuGiExtendedMethods.IsPatchable(fileName) == false)
+            {
+                MessageBox.Show("This executable is not compatible with the patcher.");
+                return;
+            }
+
             using (BinaryWriter writer = new BinaryWriter(new FileStream(fileName, FileMode.Open)))
             {
                 _structure.PatchValue(writer);

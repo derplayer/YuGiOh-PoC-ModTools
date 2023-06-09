@@ -63,11 +63,15 @@
             this.button_Apply = new System.Windows.Forms.Button();
             this.textBox_FieldBackground = new System.Windows.Forms.TextBox();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.button_ExportFilesRaw = new System.Windows.Forms.Button();
+            this.button_ExportFile = new System.Windows.Forms.Button();
+            this.button_ExportFiles = new System.Windows.Forms.Button();
             this.label_datContainer = new System.Windows.Forms.Label();
             this.button_datBtn = new System.Windows.Forms.Button();
             this.button_datLoad = new System.Windows.Forms.Button();
             this.textBox_datPath = new System.Windows.Forms.TextBox();
             this.treeView_Files = new System.Windows.Forms.TreeView();
+            this.pointUserControl_WindowSize = new YuGiOh_PoC_Patcher.PointUserControl();
             this.groupBox_CardSize = new System.Windows.Forms.GroupBox();
             this.label_CardSize_Width = new System.Windows.Forms.Label();
             this.label_CardSize_Height = new System.Windows.Forms.Label();
@@ -78,11 +82,8 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.richTextBox_Data = new System.Windows.Forms.RichTextBox();
             this.pictureBox_Preview = new System.Windows.Forms.PictureBox();
-            this.button_ExportFiles = new System.Windows.Forms.Button();
-            this.button_ExportFile = new System.Windows.Forms.Button();
-            this.button_ExportFilesRaw = new System.Windows.Forms.Button();
-            this.pointUserControl_WindowSize = new YuGiOh_PoC_Patcher.PointUserControl();
             this.audioPlayer_Preview = new YuGiOh_PoC_Patcher.UserControls.AudioPlayerUserControl();
+            this.label_infodatafolder = new System.Windows.Forms.Label();
             tabPage3 = new System.Windows.Forms.TabPage();
             tabPage3.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -180,8 +181,8 @@
             this.lZSSDecompressRecrusiveToolStripMenuItem,
             this.lZSSDecompressRecrusiveBinToolStripMenuItem});
             this.convertToolStripMenuItem.Name = "convertToolStripMenuItem";
-            this.convertToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
-            this.convertToolStripMenuItem.Text = "Convert";
+            this.convertToolStripMenuItem.Size = new System.Drawing.Size(131, 20);
+            this.convertToolStripMenuItem.Text = "Convert/Decompress";
             // 
             // dankYGAToolStripMenuItem
             // 
@@ -229,6 +230,7 @@
             // 
             // checkEmToolStripMenuItem
             // 
+            this.checkEmToolStripMenuItem.Enabled = false;
             this.checkEmToolStripMenuItem.Name = "checkEmToolStripMenuItem";
             this.checkEmToolStripMenuItem.Size = new System.Drawing.Size(270, 22);
             this.checkEmToolStripMenuItem.Text = "Load Values from (*.exe)";
@@ -425,6 +427,7 @@
             // tabPage1
             // 
             this.tabPage1.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
+            this.tabPage1.Controls.Add(this.label_infodatafolder);
             this.tabPage1.Controls.Add(this.button_ExportFilesRaw);
             this.tabPage1.Controls.Add(this.button_ExportFile);
             this.tabPage1.Controls.Add(this.button_ExportFiles);
@@ -441,6 +444,39 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Files";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // button_ExportFilesRaw
+            // 
+            this.button_ExportFilesRaw.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button_ExportFilesRaw.Location = new System.Drawing.Point(205, 390);
+            this.button_ExportFilesRaw.Name = "button_ExportFilesRaw";
+            this.button_ExportFilesRaw.Size = new System.Drawing.Size(103, 27);
+            this.button_ExportFilesRaw.TabIndex = 26;
+            this.button_ExportFilesRaw.Text = "Export ALL (RAW)";
+            this.button_ExportFilesRaw.UseVisualStyleBackColor = true;
+            this.button_ExportFilesRaw.Click += new System.EventHandler(this.button_ExportFilesRaw_Click);
+            // 
+            // button_ExportFile
+            // 
+            this.button_ExportFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.button_ExportFile.Location = new System.Drawing.Point(7, 390);
+            this.button_ExportFile.Name = "button_ExportFile";
+            this.button_ExportFile.Size = new System.Drawing.Size(100, 27);
+            this.button_ExportFile.TabIndex = 25;
+            this.button_ExportFile.Text = "Export selected";
+            this.button_ExportFile.UseVisualStyleBackColor = true;
+            this.button_ExportFile.Click += new System.EventHandler(this.button_ExportFile_Click);
+            // 
+            // button_ExportFiles
+            // 
+            this.button_ExportFiles.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button_ExportFiles.Location = new System.Drawing.Point(114, 390);
+            this.button_ExportFiles.Name = "button_ExportFiles";
+            this.button_ExportFiles.Size = new System.Drawing.Size(85, 27);
+            this.button_ExportFiles.TabIndex = 24;
+            this.button_ExportFiles.Text = "Export ALL";
+            this.button_ExportFiles.UseVisualStyleBackColor = true;
+            this.button_ExportFiles.Click += new System.EventHandler(this.button_ExportFiles_Click);
             // 
             // label_datContainer
             // 
@@ -489,9 +525,17 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.treeView_Files.Location = new System.Drawing.Point(7, 32);
             this.treeView_Files.Name = "treeView_Files";
-            this.treeView_Files.Size = new System.Drawing.Size(301, 352);
+            this.treeView_Files.Size = new System.Drawing.Size(301, 339);
             this.treeView_Files.TabIndex = 0;
             this.treeView_Files.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView_Files_AfterSelect);
+            // 
+            // pointUserControl_WindowSize
+            // 
+            this.pointUserControl_WindowSize.Location = new System.Drawing.Point(8, 74);
+            this.pointUserControl_WindowSize.Name = "pointUserControl_WindowSize";
+            this.pointUserControl_WindowSize.Point = null;
+            this.pointUserControl_WindowSize.Size = new System.Drawing.Size(146, 75);
+            this.pointUserControl_WindowSize.TabIndex = 24;
             // 
             // groupBox_CardSize
             // 
@@ -623,47 +667,6 @@
             this.pictureBox_Preview.TabStop = false;
             this.pictureBox_Preview.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBox_Preview_MouseClick);
             // 
-            // button_ExportFiles
-            // 
-            this.button_ExportFiles.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button_ExportFiles.Location = new System.Drawing.Point(114, 390);
-            this.button_ExportFiles.Name = "button_ExportFiles";
-            this.button_ExportFiles.Size = new System.Drawing.Size(85, 27);
-            this.button_ExportFiles.TabIndex = 24;
-            this.button_ExportFiles.Text = "Export ALL";
-            this.button_ExportFiles.UseVisualStyleBackColor = true;
-            this.button_ExportFiles.Click += new System.EventHandler(this.button_ExportFiles_Click);
-            // 
-            // button_ExportFile
-            // 
-            this.button_ExportFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.button_ExportFile.Location = new System.Drawing.Point(7, 390);
-            this.button_ExportFile.Name = "button_ExportFile";
-            this.button_ExportFile.Size = new System.Drawing.Size(100, 27);
-            this.button_ExportFile.TabIndex = 25;
-            this.button_ExportFile.Text = "Export selected";
-            this.button_ExportFile.UseVisualStyleBackColor = true;
-            this.button_ExportFile.Click += new System.EventHandler(this.button_ExportFile_Click);
-            // 
-            // button_ExportFilesRaw
-            // 
-            this.button_ExportFilesRaw.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button_ExportFilesRaw.Location = new System.Drawing.Point(205, 390);
-            this.button_ExportFilesRaw.Name = "button_ExportFilesRaw";
-            this.button_ExportFilesRaw.Size = new System.Drawing.Size(103, 27);
-            this.button_ExportFilesRaw.TabIndex = 26;
-            this.button_ExportFilesRaw.Text = "Export ALL (RAW)";
-            this.button_ExportFilesRaw.UseVisualStyleBackColor = true;
-            this.button_ExportFilesRaw.Click += new System.EventHandler(this.button_ExportFilesRaw_Click);
-            // 
-            // pointUserControl_WindowSize
-            // 
-            this.pointUserControl_WindowSize.Location = new System.Drawing.Point(8, 74);
-            this.pointUserControl_WindowSize.Name = "pointUserControl_WindowSize";
-            this.pointUserControl_WindowSize.Point = null;
-            this.pointUserControl_WindowSize.Size = new System.Drawing.Size(146, 75);
-            this.pointUserControl_WindowSize.TabIndex = 24;
-            // 
             // audioPlayer_Preview
             // 
             this.audioPlayer_Preview.Location = new System.Drawing.Point(3, 123);
@@ -671,6 +674,15 @@
             this.audioPlayer_Preview.Size = new System.Drawing.Size(473, 64);
             this.audioPlayer_Preview.TabIndex = 3;
             this.audioPlayer_Preview.Visible = false;
+            // 
+            // label_infodatafolder
+            // 
+            this.label_infodatafolder.AutoSize = true;
+            this.label_infodatafolder.Location = new System.Drawing.Point(7, 375);
+            this.label_infodatafolder.Name = "label_infodatafolder";
+            this.label_infodatafolder.Size = new System.Drawing.Size(306, 13);
+            this.label_infodatafolder.TabIndex = 27;
+            this.label_infodatafolder.Text = "INFO: Extract files into \"data\" folder in game root. (File injection)";
             // 
             // MainWindow
             // 
@@ -767,6 +779,7 @@
         private System.Windows.Forms.Button button_ExportFile;
         private System.Windows.Forms.Button button_ExportFiles;
         private System.Windows.Forms.Button button_ExportFilesRaw;
+        private System.Windows.Forms.Label label_infodatafolder;
     }
 }
 
