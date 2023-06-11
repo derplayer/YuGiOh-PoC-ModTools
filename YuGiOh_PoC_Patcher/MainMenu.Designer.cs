@@ -166,7 +166,7 @@ namespace YuGiOh_PoC_Patcher
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "MainMenu";
-            this.Text = "Yu-Gi-Ph Power of Chaos Mod Launcher v";
+            this.Text = "Yu-Gi-Oh! Power of Chaos Mod Tools - v";
             this.Load += new System.EventHandler(this.MainMenu_Load);
             this.ctlModernBlack1.ResumeLayout(false);
             this.ctlModernBlack1.PerformLayout();

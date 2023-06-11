@@ -968,14 +968,30 @@ namespace YuGiOh_PoC_Patcher
             // *.bin files are a bit... special
             if (filename.Contains(".bin"))
             {
+                // Identifier list: JTP: 0xFF (generic), 0xAA (dlg_), 0xFE (card_prop), 0xF0 (card_name), 0x7F (card_pack)
+                // 0xAA (card_index)
+                // YGO2: 0x55 (card_index)
+
                 // Decompression file blacklist for card_id.bin (has a 0xFF flag, but is NEVER compressed!)
                 if (filename.Contains("card_id")) return buffer;
 
-                // PoC - Yugi trial : in trial ver bin files only?
-                if (buffer[0] == 0xFE || buffer[0] == 0xF0 || buffer[0] == 0xAA)
-                {
-                    decompressFlag = true;
-                }
+                // It's "compressed" in older ver. of PoC, but not in YGOv2+
+                if (filename.Contains("card_intid") && buffer[0] != 0xFF) return buffer; 
+                
+                // Wildcard, try to decompress them always (this was tested, but you never know)
+                decompressFlag = true;
+            }
+
+            // Yu-Gi-Oh: Online 2 - Index table for strings blob (bin)
+            if (filename.Contains(".idx"))
+            {
+                decompressFlag = true;
+            }
+
+            // Yu-Gi-Oh: Online 2 - Flag for list_card is different (JTP: 0xFF, YGO2: 0xFD)
+            if (filename.Contains(".txt"))
+            {
+                if (filename.Contains("list_card") && buffer[0] == 0xFD) decompressFlag = true;
             }
 
             // Power of Chaos - Joey standard identifiers
@@ -1141,6 +1157,7 @@ namespace YuGiOh_PoC_Patcher
             MessageBox.Show("Prevew for this file is unsupported yet!");
         }
 
+        #region COPYPASTA_EXPORT_BTN_MESS
         private void button_ExportFile_Click(object sender, EventArgs e)
         {
             var node = (TreeNode)treeView_Files.SelectedNode;
@@ -1209,5 +1226,30 @@ namespace YuGiOh_PoC_Patcher
                 }
             }
         }
+
+        private void button_ExportFileRaw_Click(object sender, EventArgs e)
+        {
+            var node = (TreeNode)treeView_Files.SelectedNode;
+
+            // Find file in data container
+            var file = _data.FindFileByName(node.Text);
+            var res = _data.GetDataFromEntry(file);
+            var fileType = Path.GetExtension(file.FileName);
+            var fileName = Path.GetFileName(file.FileName);
+
+            byte[] exportBuffer = res;
+
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.FileName = fileName;
+
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                using (BinaryWriter writer = new BinaryWriter(new FileStream(saveFileDialog.FileName, FileMode.OpenOrCreate)))
+                {
+                    writer.Write(exportBuffer);
+                }
+            }
+        }
+        #endregion
     }
 }
