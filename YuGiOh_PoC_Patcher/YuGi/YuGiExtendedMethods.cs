@@ -52,7 +52,9 @@ namespace YuGiOh_PoC_Patcher.YuGi
                 return false; // v1.0
             }
 
-            return true; // v1.1
+            //return true; // v1.1
+            // TODO: The offsets are missing for the normal version...
+            return false; 
         }
 
         /// <summary>
