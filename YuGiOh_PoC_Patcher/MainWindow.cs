@@ -1140,7 +1140,7 @@ namespace YuGiOh_PoC_Patcher
             if (fileType == ".wav")
             {
                 audioPlayer_Preview.Visible = true;
-                audioPlayer_Preview.LoadAudioData(res);
+                audioPlayer_Preview.LoadAudioData(res, file.FileName);
 
                 return;
             }

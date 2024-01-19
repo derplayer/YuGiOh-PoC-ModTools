@@ -110,7 +110,7 @@
             tabPage3.Location = new System.Drawing.Point(4, 4);
             tabPage3.Name = "tabPage3";
             tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            tabPage3.Size = new System.Drawing.Size(314, 423);
+            tabPage3.Size = new System.Drawing.Size(314, 376);
             tabPage3.TabIndex = 2;
             tabPage3.Text = "Deck Editor";
             tabPage3.UseVisualStyleBackColor = true;
@@ -131,7 +131,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.treeView_DeckEditor.Location = new System.Drawing.Point(9, 205);
             this.treeView_DeckEditor.Name = "treeView_DeckEditor";
-            this.treeView_DeckEditor.Size = new System.Drawing.Size(297, 212);
+            this.treeView_DeckEditor.Size = new System.Drawing.Size(297, 165);
             this.treeView_DeckEditor.TabIndex = 22;
             this.treeView_DeckEditor.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView_DeckEditor_AfterSelect);
             // 
@@ -146,7 +146,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.menuStrip1.Size = new System.Drawing.Size(1146, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1144, 24);
             this.menuStrip1.TabIndex = 6;
             this.menuStrip1.Text = "menuStrip";
             // 
@@ -300,7 +300,7 @@
             // 
             this.checkBox_Rotate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.checkBox_Rotate.AutoSize = true;
-            this.checkBox_Rotate.Location = new System.Drawing.Point(1063, 4);
+            this.checkBox_Rotate.Location = new System.Drawing.Point(1061, 4);
             this.checkBox_Rotate.Name = "checkBox_Rotate";
             this.checkBox_Rotate.Size = new System.Drawing.Size(83, 17);
             this.checkBox_Rotate.TabIndex = 23;
@@ -328,7 +328,7 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.flowLayoutPanel1);
-            this.splitContainer1.Size = new System.Drawing.Size(1146, 607);
+            this.splitContainer1.Size = new System.Drawing.Size(1144, 560);
             this.splitContainer1.SplitterDistance = 328;
             this.splitContainer1.TabIndex = 5;
             // 
@@ -345,7 +345,7 @@
             this.tabControl1.Multiline = true;
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(322, 449);
+            this.tabControl1.Size = new System.Drawing.Size(322, 402);
             this.tabControl1.TabIndex = 25;
             this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             // 
@@ -360,7 +360,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 4);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(314, 423);
+            this.tabPage2.Size = new System.Drawing.Size(314, 376);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Duel Field";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -381,7 +381,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.treeView_DuelField.Location = new System.Drawing.Point(9, 205);
             this.treeView_DuelField.Name = "treeView_DuelField";
-            this.treeView_DuelField.Size = new System.Drawing.Size(297, 212);
+            this.treeView_DuelField.Size = new System.Drawing.Size(297, 165);
             this.treeView_DuelField.TabIndex = 20;
             this.treeView_DuelField.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView_DuelField_AfterSelect);
             // 
@@ -442,7 +442,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 4);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(314, 423);
+            this.tabPage1.Size = new System.Drawing.Size(314, 376);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Files";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -450,7 +450,7 @@
             // button_ExportFileRaw
             // 
             this.button_ExportFileRaw.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.button_ExportFileRaw.Location = new System.Drawing.Point(99, 390);
+            this.button_ExportFileRaw.Location = new System.Drawing.Point(99, 343);
             this.button_ExportFileRaw.Name = "button_ExportFileRaw";
             this.button_ExportFileRaw.Size = new System.Drawing.Size(53, 27);
             this.button_ExportFileRaw.TabIndex = 28;
@@ -462,7 +462,7 @@
             // 
             this.label_infodatafolder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label_infodatafolder.AutoSize = true;
-            this.label_infodatafolder.Location = new System.Drawing.Point(7, 375);
+            this.label_infodatafolder.Location = new System.Drawing.Point(7, 328);
             this.label_infodatafolder.Name = "label_infodatafolder";
             this.label_infodatafolder.Size = new System.Drawing.Size(306, 13);
             this.label_infodatafolder.TabIndex = 27;
@@ -471,7 +471,7 @@
             // button_ExportFilesRaw
             // 
             this.button_ExportFilesRaw.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button_ExportFilesRaw.Location = new System.Drawing.Point(254, 390);
+            this.button_ExportFilesRaw.Location = new System.Drawing.Point(254, 343);
             this.button_ExportFilesRaw.Name = "button_ExportFilesRaw";
             this.button_ExportFilesRaw.Size = new System.Drawing.Size(54, 27);
             this.button_ExportFilesRaw.TabIndex = 26;
@@ -482,7 +482,7 @@
             // button_ExportFile
             // 
             this.button_ExportFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.button_ExportFile.Location = new System.Drawing.Point(7, 390);
+            this.button_ExportFile.Location = new System.Drawing.Point(7, 343);
             this.button_ExportFile.Name = "button_ExportFile";
             this.button_ExportFile.Size = new System.Drawing.Size(100, 27);
             this.button_ExportFile.TabIndex = 25;
@@ -493,7 +493,7 @@
             // button_ExportFiles
             // 
             this.button_ExportFiles.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button_ExportFiles.Location = new System.Drawing.Point(179, 390);
+            this.button_ExportFiles.Location = new System.Drawing.Point(179, 343);
             this.button_ExportFiles.Name = "button_ExportFiles";
             this.button_ExportFiles.Size = new System.Drawing.Size(85, 27);
             this.button_ExportFiles.TabIndex = 24;
@@ -548,7 +548,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.treeView_Files.Location = new System.Drawing.Point(7, 32);
             this.treeView_Files.Name = "treeView_Files";
-            this.treeView_Files.Size = new System.Drawing.Size(301, 339);
+            this.treeView_Files.Size = new System.Drawing.Size(301, 292);
             this.treeView_Files.TabIndex = 0;
             this.treeView_Files.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView_Files_AfterSelect);
             // 
@@ -645,21 +645,21 @@
             this.flowLayoutPanel1.AutoSize = true;
             this.flowLayoutPanel1.BackColor = System.Drawing.SystemColors.ControlDark;
             this.flowLayoutPanel1.Controls.Add(this.panel1);
-            this.flowLayoutPanel1.Controls.Add(this.audioPlayer_Preview);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(814, 607);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(812, 560);
             this.flowLayoutPanel1.TabIndex = 0;
             // 
             // panel1
             // 
             this.panel1.AutoSize = true;
+            this.panel1.Controls.Add(this.audioPlayer_Preview);
             this.panel1.Controls.Add(this.richTextBox_Data);
             this.panel1.Controls.Add(this.pictureBox_Preview);
             this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(802, 114);
+            this.panel1.Size = new System.Drawing.Size(802, 319);
             this.panel1.TabIndex = 2;
             // 
             // richTextBox_Data
@@ -692,9 +692,9 @@
             // 
             // audioPlayer_Preview
             // 
-            this.audioPlayer_Preview.Location = new System.Drawing.Point(3, 123);
+            this.audioPlayer_Preview.Location = new System.Drawing.Point(3, 0);
             this.audioPlayer_Preview.Name = "audioPlayer_Preview";
-            this.audioPlayer_Preview.Size = new System.Drawing.Size(473, 64);
+            this.audioPlayer_Preview.Size = new System.Drawing.Size(473, 316);
             this.audioPlayer_Preview.TabIndex = 3;
             this.audioPlayer_Preview.Visible = false;
             // 
@@ -702,7 +702,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1146, 634);
+            this.ClientSize = new System.Drawing.Size(1144, 587);
             this.Controls.Add(this.checkBox_Rotate);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.menuStrip1);
