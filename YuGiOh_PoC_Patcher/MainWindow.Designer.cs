@@ -63,6 +63,7 @@
             this.button_Apply = new System.Windows.Forms.Button();
             this.textBox_FieldBackground = new System.Windows.Forms.TextBox();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.button_ExportFileRaw = new System.Windows.Forms.Button();
             this.label_infodatafolder = new System.Windows.Forms.Label();
             this.button_ExportFilesRaw = new System.Windows.Forms.Button();
             this.button_ExportFile = new System.Windows.Forms.Button();
@@ -72,7 +73,6 @@
             this.button_datLoad = new System.Windows.Forms.Button();
             this.textBox_datPath = new System.Windows.Forms.TextBox();
             this.treeView_Files = new System.Windows.Forms.TreeView();
-            this.pointUserControl_WindowSize = new YuGiOh_PoC_Patcher.PointUserControl();
             this.groupBox_CardSize = new System.Windows.Forms.GroupBox();
             this.label_CardSize_Width = new System.Windows.Forms.Label();
             this.label_CardSize_Height = new System.Windows.Forms.Label();
@@ -83,8 +83,8 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.richTextBox_Data = new System.Windows.Forms.RichTextBox();
             this.pictureBox_Preview = new System.Windows.Forms.PictureBox();
+            this.pointUserControl_WindowSize = new YuGiOh_PoC_Patcher.PointUserControl();
             this.audioPlayer_Preview = new YuGiOh_PoC_Patcher.UserControls.AudioPlayerUserControl();
-            this.button_ExportFileRaw = new System.Windows.Forms.Button();
             tabPage3 = new System.Windows.Forms.TabPage();
             tabPage3.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -447,8 +447,20 @@
             this.tabPage1.Text = "Files";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // button_ExportFileRaw
+            // 
+            this.button_ExportFileRaw.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.button_ExportFileRaw.Location = new System.Drawing.Point(99, 390);
+            this.button_ExportFileRaw.Name = "button_ExportFileRaw";
+            this.button_ExportFileRaw.Size = new System.Drawing.Size(53, 27);
+            this.button_ExportFileRaw.TabIndex = 28;
+            this.button_ExportFileRaw.Text = "(RAW)";
+            this.button_ExportFileRaw.UseVisualStyleBackColor = true;
+            this.button_ExportFileRaw.Click += new System.EventHandler(this.button_ExportFileRaw_Click);
+            // 
             // label_infodatafolder
             // 
+            this.label_infodatafolder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label_infodatafolder.AutoSize = true;
             this.label_infodatafolder.Location = new System.Drawing.Point(7, 375);
             this.label_infodatafolder.Name = "label_infodatafolder";
@@ -539,14 +551,6 @@
             this.treeView_Files.Size = new System.Drawing.Size(301, 339);
             this.treeView_Files.TabIndex = 0;
             this.treeView_Files.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView_Files_AfterSelect);
-            // 
-            // pointUserControl_WindowSize
-            // 
-            this.pointUserControl_WindowSize.Location = new System.Drawing.Point(8, 74);
-            this.pointUserControl_WindowSize.Name = "pointUserControl_WindowSize";
-            this.pointUserControl_WindowSize.Point = null;
-            this.pointUserControl_WindowSize.Size = new System.Drawing.Size(146, 75);
-            this.pointUserControl_WindowSize.TabIndex = 24;
             // 
             // groupBox_CardSize
             // 
@@ -678,6 +682,14 @@
             this.pictureBox_Preview.TabStop = false;
             this.pictureBox_Preview.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBox_Preview_MouseClick);
             // 
+            // pointUserControl_WindowSize
+            // 
+            this.pointUserControl_WindowSize.Location = new System.Drawing.Point(8, 74);
+            this.pointUserControl_WindowSize.Name = "pointUserControl_WindowSize";
+            this.pointUserControl_WindowSize.Point = null;
+            this.pointUserControl_WindowSize.Size = new System.Drawing.Size(146, 75);
+            this.pointUserControl_WindowSize.TabIndex = 24;
+            // 
             // audioPlayer_Preview
             // 
             this.audioPlayer_Preview.Location = new System.Drawing.Point(3, 123);
@@ -685,17 +697,6 @@
             this.audioPlayer_Preview.Size = new System.Drawing.Size(473, 64);
             this.audioPlayer_Preview.TabIndex = 3;
             this.audioPlayer_Preview.Visible = false;
-            // 
-            // button_ExportFileRaw
-            // 
-            this.button_ExportFileRaw.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button_ExportFileRaw.Location = new System.Drawing.Point(99, 390);
-            this.button_ExportFileRaw.Name = "button_ExportFileRaw";
-            this.button_ExportFileRaw.Size = new System.Drawing.Size(53, 27);
-            this.button_ExportFileRaw.TabIndex = 28;
-            this.button_ExportFileRaw.Text = "(RAW)";
-            this.button_ExportFileRaw.UseVisualStyleBackColor = true;
-            this.button_ExportFileRaw.Click += new System.EventHandler(this.button_ExportFileRaw_Click);
             // 
             // MainWindow
             // 
