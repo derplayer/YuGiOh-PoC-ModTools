@@ -976,8 +976,16 @@ namespace YuGiOh_PoC_Patcher
                 if (filename.Contains("card_id")) return buffer;
 
                 // It's "compressed" in older ver. of PoC, but not in YGOv2+
-                if (filename.Contains("card_intid") && buffer[0] != 0xFF) return buffer; 
-                
+                if (filename.Contains("card_intid") && buffer[0] != 0xFF) return buffer;
+
+                // It's "compressed" in older ver. of PoC, but not in YGOv1+
+                if (filename.Contains("card_name") && buffer[0] != 0xF0) return buffer;
+                if (filename.Contains("card_desc") && buffer[0] != 0xFF) return buffer;
+                if (filename.Contains("dlg_text") && buffer[0] != 0xAA) return buffer;
+
+                // Special YGO: PoC Trial ver. only file
+                if (filename.Contains("multilng.bin") && buffer[0] != 0xFF) return buffer;
+
                 // Wildcard, try to decompress them always (this was tested, but you never know)
                 decompressFlag = true;
             }

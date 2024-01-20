@@ -170,15 +170,24 @@ namespace YuGiOh_PoC_Patcher
                     }
                 }
 
-                // xref name and list entry
-                for (int i = 0; i < cardList.Count; i++)
+                // out-of-sync check (this happend in one YGO1 patch from 2005-02, p05022401.dat)
+                if (cardNameList.Count < cardList.Count)
                 {
-                    cardList[i].CardName = cardNameList[i].Text;
+                    MessageBox.Show("card_nameeng.bin is out of sync! An attempt will be made to load card names from list_card.txt");
+                    useNameFallback = true;
+                }
+
+                // xref name and list entry
+                if(useNameFallback == false) {
+                    for (int i = 0; i < cardList.Count; i++)
+                    {
+                        cardList[i].CardName = cardNameList[i].Text;
+                    }
                 }
             }
             else
             {
-                MessageBox.Show("card_nameeng.bin is missing! An attempt will be made to load card names from list_card.txt.");
+                MessageBox.Show("card_nameeng.bin is missing! An attempt will be made to load card names from list_card.txt");
                 useNameFallback = true;
             }
 
@@ -203,8 +212,10 @@ namespace YuGiOh_PoC_Patcher
                 // xref name and list entry
                 for (int i = 0; i < cardList.Count; i++)
                 {
-                    cardList[i].CardImage = new Bitmap(pathBitmapCardMini + cardTxtList[i].ImageName);
-                    cardList[i].CardImageFull = pathBitmapCard + cardTxtList[i].ImageName;
+                    if(File.Exists(pathBitmapCardMini + cardTxtList[i].ImageName)) {
+                        cardList[i].CardImage = new Bitmap(pathBitmapCardMini + cardTxtList[i].ImageName);
+                        cardList[i].CardImageFull = pathBitmapCard + cardTxtList[i].ImageName;
+                    }
 
                     // skip first dummy card
                     if (i == 0) continue;
