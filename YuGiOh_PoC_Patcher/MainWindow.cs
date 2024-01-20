@@ -1157,6 +1157,14 @@ namespace YuGiOh_PoC_Patcher
             MessageBox.Show("Prevew for this file is unsupported yet!");
         }
 
+        private void openToolStrip_CPackEdit_Click(object sender, EventArgs e)
+        {
+            var dummyForm = new CardPackEdit();
+            //dummyForm.Size = new Size(350, 150);
+            //dummyForm.Controls.Add(audioTest);
+            dummyForm.Show();
+        }
+
         #region COPYPASTA_EXPORT_BTN_MESS
         private void button_ExportFile_Click(object sender, EventArgs e)
         {
@@ -1251,5 +1259,10 @@ namespace YuGiOh_PoC_Patcher
             }
         }
         #endregion
+
+        private void cardsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

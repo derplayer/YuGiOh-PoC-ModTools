@@ -36,12 +36,12 @@ namespace YuGiOh_PoC_Patcher
             this.linkLabel_ThePage = new System.Windows.Forms.LinkLabel();
             this.label1 = new System.Windows.Forms.Label();
             this.Button_ChangePath = new System.Windows.Forms.Button();
-            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.Button_Settings = new YuGiOh_PoC_Patcher.CustomControls.RoundButton();
             this.Button_ModLauncher = new YuGiOh_PoC_Patcher.CustomControls.RoundButton();
             this.button1 = new YuGiOh_PoC_Patcher.CustomControls.RoundButton();
             this.Button_Exit = new YuGiOh_PoC_Patcher.CustomControls.RoundButton();
             this.Button_Game = new YuGiOh_PoC_Patcher.CustomControls.RoundButton();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.ctlModernBlack1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -98,10 +98,6 @@ namespace YuGiOh_PoC_Patcher
             this.Button_ChangePath.UseVisualStyleBackColor = true;
             this.Button_ChangePath.Click += new System.EventHandler(this.Button_ChangePath_Click);
             // 
-            // openFileDialog1
-            // 
-            this.openFileDialog1.FileName = "openFileDialog1";
-            // 
             // Button_Settings
             // 
             this.Button_Settings.BackColor = System.Drawing.SystemColors.Control;
@@ -110,7 +106,7 @@ namespace YuGiOh_PoC_Patcher
             this.Button_Settings.Name = "Button_Settings";
             this.Button_Settings.Size = new System.Drawing.Size(395, 60);
             this.Button_Settings.TabIndex = 3;
-            this.Button_Settings.Text = "Mod Tools";
+            this.Button_Settings.Text = "Mod tools";
             this.Button_Settings.UseVisualStyleBackColor = true;
             this.Button_Settings.Click += new System.EventHandler(this.Button_Settings_Click);
             // 
@@ -120,7 +116,7 @@ namespace YuGiOh_PoC_Patcher
             this.Button_ModLauncher.Name = "Button_ModLauncher";
             this.Button_ModLauncher.Size = new System.Drawing.Size(395, 60);
             this.Button_ModLauncher.TabIndex = 1;
-            this.Button_ModLauncher.Text = "Mod Selector";
+            this.Button_ModLauncher.Text = "Mod selector";
             this.Button_ModLauncher.UseVisualStyleBackColor = true;
             this.Button_ModLauncher.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -130,7 +126,7 @@ namespace YuGiOh_PoC_Patcher
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(395, 60);
             this.button1.TabIndex = 4;
-            this.button1.Text = "Base Settings";
+            this.button1.Text = "Base settings";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -154,6 +150,10 @@ namespace YuGiOh_PoC_Patcher
             this.Button_Game.Text = "Launch/Start";
             this.Button_Game.UseVisualStyleBackColor = true;
             this.Button_Game.Click += new System.EventHandler(this.Button_Game_Click);
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
             // 
             // MainMenu
             // 

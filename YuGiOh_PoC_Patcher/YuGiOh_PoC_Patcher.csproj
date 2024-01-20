@@ -101,6 +101,15 @@
     <Compile Include="BasicSettings.Designer.cs">
       <DependentUpon>BasicSettings.cs</DependentUpon>
     </Compile>
+    <Compile Include="CardPackEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CardPackEdit.Designer.cs">
+      <DependentUpon>CardPackEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CustomControls\DataGridViewEx.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="CustomControls\FolderSelectDialog.cs" />
     <Compile Include="CustomControls\OpenFileDialogEx\ExtendedFolderBrowser.cs" />
     <Compile Include="CustomControls\OpenFileDialogEx\MyOpenFileDialogControl.cs">
@@ -111,6 +120,7 @@
     <Compile Include="CustomControls\RoundButton.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="CustomControls\ShellContextMenu.cs" />
     <Compile Include="DebugPatchWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -197,6 +207,7 @@
     <Compile Include="YuGi\Values\YuGiRectangle.cs" />
     <Compile Include="YuGi\Values\YuGiValueList.cs" />
     <Compile Include="YuGi\YuGiBuffer.cs" />
+    <Compile Include="YuGi\YuGiCardData.cs" />
     <Compile Include="YuGi\YuGiCompressedWord.cs" />
     <Compile Include="YuGi\YuGiData.cs" />
     <Compile Include="YuGi\YuGiDataEntry.cs" />
@@ -211,6 +222,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CardCodeGenerator.resx">
       <DependentUpon>CardCodeGenerator.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CardPackEdit.resx">
+      <DependentUpon>CardPackEdit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CustomControls\OpenFileDialogEx\MyOpenFileDialogControl.resx" />
     <EmbeddedResource Include="DebugPatchWindow.resx">

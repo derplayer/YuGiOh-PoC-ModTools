@@ -126,7 +126,7 @@ namespace YuGiOh_PoC_Patcher
 
         private void button2_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(@"Coming soon in new version! ¯\_(ツ)_/¯");
+            MessageBox.Show(@"Coming one day, i swear! ¯\_(ツ)_/¯");
         }
 
         private void Button_Settings_Click(object sender, EventArgs e)
