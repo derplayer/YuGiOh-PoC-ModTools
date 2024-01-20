@@ -113,7 +113,9 @@ namespace YuGiOh_PoC_Patcher
         {
             string path = _path;
             string pathPackBin = path + @"bin#\\card_pack.bin";
+            string pathPackYGOBin = path + @"bin\\card_pack.bin";
             string pathNameBin = path + @"bin#\\card_nameeng.bin";
+            string pathNameYGOBin = path + @"bin\\card_nameeng.bin";
             string pathListCard = path + @"card\\list_card.txt";
             string pathBitmapCard = path + @"card\\";
             string pathBitmapCardMini = path + @"mini\\";
@@ -121,6 +123,10 @@ namespace YuGiOh_PoC_Patcher
             cardList.Clear();
             cardNameList.Clear();
             cardTxtList.Clear();
+
+            // YGO1 has a different path
+            if (File.Exists(pathPackYGOBin)) pathPackBin = pathPackYGOBin;
+            if (File.Exists(pathNameYGOBin)) pathNameBin = pathNameYGOBin;
 
             if (File.Exists(pathPackBin))
             {
@@ -263,6 +269,10 @@ namespace YuGiOh_PoC_Patcher
 
             // verify integrity
             string binCheckPath = fl + @"\\bin#\\card_pack.bin";
+            string binCheckPathYGO = fl + @"\\bin\\card_pack.bin";
+
+            // YGO1 has a different path
+            if (File.Exists(binCheckPathYGO)) binCheckPath = binCheckPathYGO;
 
             // reset table
             cardList.Clear();
