@@ -109,8 +109,14 @@ namespace YuGiOh_PoC_Patcher
 
         }
 
-        private void InitializeCardList()
+        public void InitializeCardList(bool memoryMode = false)
         {
+            if (memoryMode)
+            {
+                _path = System.IO.Path.GetTempPath() + "\\YGO_MODTOOLS_TMP\\";
+                Directory.CreateDirectory(_path);
+            }
+
             string path = _path;
             string pathPackBin = path + @"bin#\\card_pack.bin";
             string pathPackYGOBin = path + @"bin\\card_pack.bin";
@@ -212,9 +218,11 @@ namespace YuGiOh_PoC_Patcher
                 // xref name and list entry
                 for (int i = 0; i < cardList.Count; i++)
                 {
-                    if(File.Exists(pathBitmapCardMini + cardTxtList[i].ImageName)) {
-                        cardList[i].CardImage = new Bitmap(pathBitmapCardMini + cardTxtList[i].ImageName);
-                        cardList[i].CardImageFull = pathBitmapCard + cardTxtList[i].ImageName;
+                    if(memoryMode == false) {
+                        if(File.Exists(pathBitmapCardMini + cardTxtList[i].ImageName)) {
+                            cardList[i].CardImage = new Bitmap(pathBitmapCardMini + cardTxtList[i].ImageName);
+                            cardList[i].CardImageFull = pathBitmapCard + cardTxtList[i].ImageName;
+                        }
                     }
 
                     // skip first dummy card

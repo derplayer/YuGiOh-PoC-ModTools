@@ -1,5 +1,5 @@
 ﻿
-namespace WindowsFormsApp1
+namespace YuGiOh_PoC_Patcher.UserControls
 {
     partial class FilterBox
     {
@@ -132,16 +132,16 @@ namespace WindowsFormsApp1
             this.buttonResetAll = new System.Windows.Forms.Button();
             this.buttonFilter = new System.Windows.Forms.Button();
             this.buttonResetPage = new System.Windows.Forms.Button();
-            this.fastTextBoxPassMax = new WindowsFormsApp1.FastTextBox();
-            this.fastTextBoxPassMin = new WindowsFormsApp1.FastTextBox();
-            this.fastTextBoxIDmax = new WindowsFormsApp1.FastTextBox();
-            this.fastTextBoxIDmin = new WindowsFormsApp1.FastTextBox();
-            this.fastTextBoxLVmax = new WindowsFormsApp1.FastTextBox();
-            this.fastTextBoxLVmin = new WindowsFormsApp1.FastTextBox();
-            this.fastTextBoxDEFmax = new WindowsFormsApp1.FastTextBox();
-            this.fastTextBoxDEFmin = new WindowsFormsApp1.FastTextBox();
-            this.fastTextBoxATKmax = new WindowsFormsApp1.FastTextBox();
-            this.fastTextBoxATKmin = new WindowsFormsApp1.FastTextBox();
+            this.fastTextBoxPassMax = new FastTextBox();
+            this.fastTextBoxPassMin = new FastTextBox();
+            this.fastTextBoxIDmax = new FastTextBox();
+            this.fastTextBoxIDmin = new FastTextBox();
+            this.fastTextBoxLVmax = new FastTextBox();
+            this.fastTextBoxLVmin = new FastTextBox();
+            this.fastTextBoxDEFmax = new FastTextBox();
+            this.fastTextBoxDEFmin = new FastTextBox();
+            this.fastTextBoxATKmax = new FastTextBox();
+            this.fastTextBoxATKmin = new FastTextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -1378,7 +1378,7 @@ namespace WindowsFormsApp1
             this.Controls.Add(this.buttonResetAll);
             this.Controls.Add(this.buttonCancel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            //this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FilterBox";

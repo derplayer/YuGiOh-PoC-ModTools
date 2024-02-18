@@ -14,10 +14,11 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Configuration;
 using System.Collections.Specialized;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using YuGiOh_PoC_Patcher.YuGi;
 
-namespace WindowsFormsApp1
+namespace YuGiOh_PoC_Patcher.UserControls
 {
-    public partial class FormCardEdit : Form
+    public partial class FormCardEdit : UserControl
     {
         public Guid InstanceID;
 
@@ -53,7 +54,7 @@ namespace WindowsFormsApp1
 
         // stolen from: https://stackoverflow.com/a/3301750
         // written by Dan Tao
-        T[] InitializeArray<T>(int length) where T : new()
+        public T[] InitializeArray<T>(int length) where T : new()
         {
             T[] array = new T[length];
             for (int i = 0; i < length; ++i)
@@ -64,7 +65,7 @@ namespace WindowsFormsApp1
             return array;
         }
 
-        int GetLangIndex()
+        public int GetLangIndex()
         {
             switch (CurrentLang)
             {
@@ -84,7 +85,7 @@ namespace WindowsFormsApp1
             }
         }
 
-        char SetLangIndex(int index)
+        public char SetLangIndex(int index)
         {
             switch (index)
             {
@@ -104,7 +105,7 @@ namespace WindowsFormsApp1
             }
         }
 
-        int SearchCardIndexByID(int CardID)
+        public int SearchCardIndexByID(int CardID)
         {
             for (int i = 0; i < ImportedCardsCount; i++)
             {
@@ -112,6 +113,26 @@ namespace WindowsFormsApp1
                     return i;
             }
             return 0;
+        }
+
+        public void ReadOnlyMode()
+        {
+            listView1.Items.Clear();
+            linkLabel1.Enabled = false;
+            linkLabel2.Enabled = false;
+            textBox1.Enabled = false;
+            propertyGrid1.Enabled = false;
+            label1.Visible = false;
+            label2.Visible = false;
+            label3.Visible = false;
+            label4.Visible = false;
+            label5.Visible = false;
+            label6.Visible = false;
+
+            splitContainer2.Visible = false;
+            menuStrip1.Visible = false;
+            statusStrip1.Visible = false;
+            listView1.CheckBoxes = false;
         }
 
         void ResetAppState()
@@ -323,7 +344,7 @@ namespace WindowsFormsApp1
            listView1.Items[listview_index].SubItems.Add(ImportDB[carddb_index].Description);
         }
 
-        void GenerateListView()
+        public void GenerateListView()
         {
             //listView1.SetObjects(ImportDB);
 
@@ -757,6 +778,50 @@ namespace WindowsFormsApp1
                 File.Copy(Path + "\\CARD_Genre.bin", CurrentCacheDir + "\\CARD_Genre.bin");
         }
 
+        public void ImportCardDBCustom(List<CardPackEntry> lst)
+        {
+            int CardImporterCounter = 0;
+
+            ImportedCardsCount = lst.Count;
+            //ImportDB = new TFCard[ImportedCardsCount];
+            ImportDB = InitializeArray<TFCard>(ImportedCardsCount);
+
+            if (listView1.Items.Count > 0)
+            {
+                ResetAppState();
+            }
+
+            toolStripProgressBar1.Enabled = true;
+            toolStripProgressBar1.Visible = true;
+            toolStripProgressBar1.Maximum = ImportedCardsCount;
+            toolStripProgressBar1.Value = 0;
+
+            foreach (var s in lst)
+            {
+                ImportDB[CardImporterCounter].CardID = s.Id;
+                ImportDB[CardImporterCounter].Name = s.CardName;
+                ImportDB[CardImporterCounter].Description = "TODO";
+                ImportDB[CardImporterCounter].ATK = 0;
+                ImportDB[CardImporterCounter].DEF = 0;
+                ImportDB[CardImporterCounter].Password = 0;
+                ImportDB[CardImporterCounter].CardExistFlag = true;
+                ImportDB[CardImporterCounter].Kind = CardKinds.unk1;
+                ImportDB[CardImporterCounter].Attr = CardAttributes.None;
+                ImportDB[CardImporterCounter].Level = 0;
+                ImportDB[CardImporterCounter].Icon = CardIcons.None;
+                ImportDB[CardImporterCounter].Type = CardTypes.None;
+                ImportDB[CardImporterCounter].Rarity = CardRarity.Common;
+
+                // also replace the newline character in card descriptions as we're loading them...
+                ImportDB[CardImporterCounter].Description = ImportDB[CardImporterCounter].Description.Replace('^', '\n').Replace('˘', '\r');
+
+                toolStripProgressBar1.Value++;
+                CardImporterCounter++;
+            }
+            toolStripProgressBar1.Visible = false;
+            toolStripProgressBar1.Enabled = false;
+        }
+
         void ImportCardDB(string Filename)
         {
             return;
@@ -987,7 +1052,7 @@ namespace WindowsFormsApp1
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Close();
+            //Close();
         }
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)

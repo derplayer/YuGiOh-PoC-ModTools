@@ -1,5 +1,5 @@
 ﻿
-namespace WindowsFormsApp1
+namespace YuGiOh_PoC_Patcher.UserControls
 {
     partial class ReplaceBox
     {
@@ -55,8 +55,8 @@ namespace WindowsFormsApp1
             this.buttonReplaceAll = new System.Windows.Forms.Button();
             this.comboBoxFind = new System.Windows.Forms.ComboBox();
             this.comboBoxReplace = new System.Windows.Forms.ComboBox();
-            this.fastTextBoxFind = new WindowsFormsApp1.FastTextBox();
-            this.fastTextBoxReplace = new WindowsFormsApp1.FastTextBox();
+            this.fastTextBoxFind = new FastTextBox();
+            this.fastTextBoxReplace = new FastTextBox();
             this.lookatBox.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -385,7 +385,7 @@ namespace WindowsFormsApp1
             this.Controls.Add(this.lookatBox);
             this.Controls.Add(this.findLabel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            //this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "ReplaceBox";

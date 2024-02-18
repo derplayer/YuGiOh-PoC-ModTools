@@ -1,5 +1,5 @@
 ﻿
-namespace WindowsFormsApp1
+namespace YuGiOh_PoC_Patcher.UserControls
 {
     partial class FormCardEdit
     {
@@ -30,7 +30,6 @@ namespace WindowsFormsApp1
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormCardEdit));
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -79,7 +78,7 @@ namespace WindowsFormsApp1
             this.propertyGrid1 = new System.Windows.Forms.PropertyGrid();
             this.panelMain = new System.Windows.Forms.Panel();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.listView1 = new WindowsFormsApp1.ListViewEx();
+            this.listView1 = new YuGiOh_PoC_Patcher.UserControls.ListViewEx();
             this.CardID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.CardName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Kind = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -123,7 +122,7 @@ namespace WindowsFormsApp1
             this.toolStripStatusLabel1,
             this.toolStripProgressBar1,
             this.toolStripStatusLabel2});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 529);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 570);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(1180, 22);
             this.statusStrip1.TabIndex = 5;
@@ -133,7 +132,7 @@ namespace WindowsFormsApp1
             // 
             this.toolStripStatusLabel1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(582, 17);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(416, 17);
             this.toolStripStatusLabel1.Spring = true;
             this.toolStripStatusLabel1.Text = "Welcome! Use \"File > Open\" to load a Card database.";
             this.toolStripStatusLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -149,7 +148,7 @@ namespace WindowsFormsApp1
             // toolStripStatusLabel2
             // 
             this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-            this.toolStripStatusLabel2.Size = new System.Drawing.Size(582, 17);
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(416, 17);
             this.toolStripStatusLabel2.Spring = true;
             this.toolStripStatusLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
@@ -405,8 +404,8 @@ namespace WindowsFormsApp1
             // 
             this.splitContainer1.Panel2.Controls.Add(this.splitContainer2);
             this.splitContainer1.Panel2MinSize = 120;
-            this.splitContainer1.Size = new System.Drawing.Size(1180, 499);
-            this.splitContainer1.SplitterDistance = 881;
+            this.splitContainer1.Size = new System.Drawing.Size(1180, 540);
+            this.splitContainer1.SplitterDistance = 965;
             this.splitContainer1.TabIndex = 4;
             // 
             // splitContainer2
@@ -425,8 +424,8 @@ namespace WindowsFormsApp1
             // 
             this.splitContainer2.Panel2.Controls.Add(this.propertyGrid1);
             this.splitContainer2.Panel2MinSize = 120;
-            this.splitContainer2.Size = new System.Drawing.Size(295, 499);
-            this.splitContainer2.SplitterDistance = 223;
+            this.splitContainer2.Size = new System.Drawing.Size(211, 540);
+            this.splitContainer2.SplitterDistance = 241;
             this.splitContainer2.TabIndex = 5;
             // 
             // tabControl1
@@ -437,7 +436,7 @@ namespace WindowsFormsApp1
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(295, 223);
+            this.tabControl1.Size = new System.Drawing.Size(211, 241);
             this.tabControl1.TabIndex = 4;
             // 
             // tabDesc
@@ -452,7 +451,7 @@ namespace WindowsFormsApp1
             this.tabDesc.Location = new System.Drawing.Point(4, 22);
             this.tabDesc.Name = "tabDesc";
             this.tabDesc.Padding = new System.Windows.Forms.Padding(3);
-            this.tabDesc.Size = new System.Drawing.Size(287, 197);
+            this.tabDesc.Size = new System.Drawing.Size(203, 215);
             this.tabDesc.TabIndex = 0;
             this.tabDesc.Text = "Description";
             this.tabDesc.UseVisualStyleBackColor = true;
@@ -461,7 +460,7 @@ namespace WindowsFormsApp1
             // 
             this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(6, 162);
+            this.label6.Location = new System.Drawing.Point(6, 180);
             this.label6.Margin = new System.Windows.Forms.Padding(3);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(55, 13);
@@ -516,7 +515,7 @@ namespace WindowsFormsApp1
             // 
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(119, 162);
+            this.label2.Location = new System.Drawing.Point(119, 180);
             this.label2.Margin = new System.Windows.Forms.Padding(3);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(165, 13);
@@ -547,7 +546,7 @@ namespace WindowsFormsApp1
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox1.Size = new System.Drawing.Size(281, 106);
+            this.textBox1.Size = new System.Drawing.Size(281, 124);
             this.textBox1.TabIndex = 0;
             this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
@@ -559,7 +558,7 @@ namespace WindowsFormsApp1
             this.tabActions.Location = new System.Drawing.Point(4, 22);
             this.tabActions.Name = "tabActions";
             this.tabActions.Padding = new System.Windows.Forms.Padding(3);
-            this.tabActions.Size = new System.Drawing.Size(287, 197);
+            this.tabActions.Size = new System.Drawing.Size(203, 215);
             this.tabActions.TabIndex = 1;
             this.tabActions.Text = "Actions";
             this.tabActions.UseVisualStyleBackColor = true;
@@ -613,7 +612,7 @@ namespace WindowsFormsApp1
             this.propertyGrid1.Enabled = false;
             this.propertyGrid1.Location = new System.Drawing.Point(0, 0);
             this.propertyGrid1.Name = "propertyGrid1";
-            this.propertyGrid1.Size = new System.Drawing.Size(295, 272);
+            this.propertyGrid1.Size = new System.Drawing.Size(211, 295);
             this.propertyGrid1.TabIndex = 3;
             this.propertyGrid1.PropertyValueChanged += new System.Windows.Forms.PropertyValueChangedEventHandler(this.propertyGrid1_PropertyValueChanged);
             // 
@@ -624,7 +623,7 @@ namespace WindowsFormsApp1
             this.panelMain.Location = new System.Drawing.Point(0, 30);
             this.panelMain.Margin = new System.Windows.Forms.Padding(0);
             this.panelMain.Name = "panelMain";
-            this.panelMain.Size = new System.Drawing.Size(1180, 499);
+            this.panelMain.Size = new System.Drawing.Size(1180, 540);
             this.panelMain.TabIndex = 8;
             // 
             // menuStrip1
@@ -664,7 +663,7 @@ namespace WindowsFormsApp1
             this.listView1.MultiSelect = false;
             this.listView1.Name = "listView1";
             this.listView1.ShowGroups = false;
-            this.listView1.Size = new System.Drawing.Size(881, 499);
+            this.listView1.Size = new System.Drawing.Size(965, 540);
             this.listView1.TabIndex = 3;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
@@ -751,21 +750,15 @@ namespace WindowsFormsApp1
             this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1180, 551);
             this.Controls.Add(this.panelMain);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MainMenuStrip = this.menuStrip1;
             this.MinimumSize = new System.Drawing.Size(693, 448);
             this.Name = "FormCardEdit";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Power of Chaos CardInfo Editor GUI";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
+            this.Size = new System.Drawing.Size(1180, 592);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.DragDrop += new System.Windows.Forms.DragEventHandler(this.Form1_DragDrop);
             this.DragEnter += new System.Windows.Forms.DragEventHandler(this.Form1_DragEnter);

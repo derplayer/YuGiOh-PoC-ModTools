@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
-namespace WindowsFormsApp1
+namespace YuGiOh_PoC_Patcher.UserControls
 {
     // https://stackoverflow.com/a/46125277
     // credit: Davide Cannizzo

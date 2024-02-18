@@ -185,11 +185,11 @@
     <Compile Include="UserControls\CardEditor\FindBox.Designer.cs">
       <DependentUpon>FindBox.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\CardEditor\Form1.cs">
-      <SubType>Form</SubType>
+    <Compile Include="UserControls\CardEditor\CardEditorUserControl.cs">
+      <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserControls\CardEditor\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="UserControls\CardEditor\CardEditorUserControl.Designer.cs">
+      <DependentUpon>CardEditorUserControl.cs</DependentUpon>
     </Compile>
     <Compile Include="UserControls\CardEditor\ListViewEx.cs">
       <SubType>Component</SubType>
@@ -291,7 +291,7 @@
     <EmbeddedResource Include="UserControls\CardEditor\AboutForm.resx" />
     <EmbeddedResource Include="UserControls\CardEditor\FilterBox.resx" />
     <EmbeddedResource Include="UserControls\CardEditor\FindBox.resx" />
-    <EmbeddedResource Include="UserControls\CardEditor\Form1.resx" />
+    <EmbeddedResource Include="UserControls\CardEditor\CardEditorUserControl.resx" />
     <EmbeddedResource Include="UserControls\CardEditor\ReplaceBox.resx" />
     <EmbeddedResource Include="UserControls\CardEditor\SaveQuestionBox.resx" />
     <EmbeddedResource Include="UserControls\PointBundleUserControl.resx">

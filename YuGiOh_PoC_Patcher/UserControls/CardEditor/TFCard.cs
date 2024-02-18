@@ -8,7 +8,7 @@ using System.Windows.Forms;
 using System.Globalization;
 using System.Reflection;
 
-namespace WindowsFormsApp1
+namespace YuGiOh_PoC_Patcher.UserControls
 {
     // stolen from: https://www.codeproject.com/Articles/22717/Using-PropertyGrid
     public class CardTypesConverter : EnumConverter

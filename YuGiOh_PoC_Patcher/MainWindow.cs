@@ -907,6 +907,7 @@ namespace YuGiOh_PoC_Patcher
             pictureBox_Preview.Image = null;
             richTextBox_Data.Visible = false;
             audioPlayer_Preview.Visible = false; // TODO: stop playing audio too
+            cardEdit_Preview.Visible = false;
         }
 
         private void splitContainer1_Panel1_Paint(object sender, PaintEventArgs e)
@@ -1093,6 +1094,16 @@ namespace YuGiOh_PoC_Patcher
             dummyForm.Show();
             //this.Controls.Add(dummyForm);
         }
+
+        private void toolStripMenuItem_CardEditTest_Click(object sender, EventArgs e)
+        {
+            var editTest = new FormCardEdit();
+            var dummyForm = new Form();
+            dummyForm.Size = new Size(768, 384);
+            dummyForm.Controls.Add(editTest);
+            dummyForm.Show();
+        }
+
         private void rtb_ContentsResized(object sender, ContentsResizedEventArgs e)
         {
             ((RichTextBox)sender).Height = e.NewRectangle.Height + 5;
@@ -1111,6 +1122,7 @@ namespace YuGiOh_PoC_Patcher
             pictureBox_Preview.Image = null;
             audioPlayer_Preview.Visible = false;
             richTextBox_Data.Visible = false;
+            cardEdit_Preview.Visible = false;
 
             // Some files are randomly compressed
             res = DecompressPipeline(res, file.FileName);
@@ -1159,6 +1171,50 @@ namespace YuGiOh_PoC_Patcher
                 var text = SHIFT_JIS.GetString(res, 0, res.Length);
                 richTextBox_Data.Visible = true;
                 richTextBox_Data.Text = text;
+                return;
+            }
+
+            // *.bin files for Cards (but only in read only mode)
+            if (fileType == ".bin")
+            {
+                // Extract all needed files into tmp file
+                var pth = System.IO.Path.GetTempPath() + "\\YGO_MODTOOLS_TMP\\";
+                Directory.CreateDirectory(pth + @"\\bin\\");
+                Directory.CreateDirectory(pth + @"\\card\\");
+
+                var binPack = _data.FindFileByName("card_pack.bin");
+                if (binPack == null)
+                {
+                    MessageBox.Show("This BIN data version is not supported yet.");
+                    return;
+                }
+
+                var binPackRes = _data.GetDataFromEntry(binPack);
+                var binName = _data.FindFileByName("card_nameeng.bin");
+                var binNameRes = _data.GetDataFromEntry(binName);
+                var txtList = _data.FindFileByName("list_card.txt");
+                var txtListRes = _data.GetDataFromEntry(txtList);
+
+                byte[] exportBuffer1 = DecompressPipeline(binPackRes, binPack.FileName);
+                byte[] exportBuffer2 = DecompressPipeline(binNameRes, binName.FileName);
+                byte[] exportBuffer3 = DecompressPipeline(txtListRes, txtList.FileName);
+
+                if (binPack != null)
+                    File.WriteAllBytes(pth + @"bin\\card_pack.bin", exportBuffer1);
+                if (binName != null)
+                    File.WriteAllBytes(pth + @"bin\\card_nameeng.bin", exportBuffer2);
+                if (txtList != null)
+                    File.WriteAllBytes(pth + @"card\\list_card.txt", exportBuffer3);
+
+                //create fake CardPackEdit obj (spaghetiii)
+                var fakeW = new CardPackEdit();
+                fakeW.InitializeCardList(true);
+
+                cardEdit_Preview.ReadOnlyMode();
+                cardEdit_Preview.ImportCardDBCustom(fakeW.cardList.ToList());
+                cardEdit_Preview.GenerateListView();
+
+                cardEdit_Preview.Visible = true;
                 return;
             }
 
@@ -1272,5 +1328,6 @@ namespace YuGiOh_PoC_Patcher
         {
 
         }
+
     }
 }

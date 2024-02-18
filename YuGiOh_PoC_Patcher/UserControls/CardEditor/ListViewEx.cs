@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace WindowsFormsApp1
+namespace YuGiOh_PoC_Patcher.UserControls
 {
     public class ListViewEx : ListView
     {
@@ -28,5 +28,4 @@ namespace WindowsFormsApp1
             }
         }
     }
-
 }
