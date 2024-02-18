@@ -161,6 +161,52 @@
     <Compile Include="UserControls\AudioPlayerUserControl.Designer.cs">
       <DependentUpon>AudioPlayerUserControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\CardEditor\AboutForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserControls\CardEditor\AboutForm.Designer.cs">
+      <DependentUpon>AboutForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\CardEditor\FastTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UserControls\CardEditor\FastTextBox.Designer.cs">
+      <DependentUpon>FastTextBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\CardEditor\FilterBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserControls\CardEditor\FilterBox.Designer.cs">
+      <DependentUpon>FilterBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\CardEditor\FindBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserControls\CardEditor\FindBox.Designer.cs">
+      <DependentUpon>FindBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\CardEditor\Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserControls\CardEditor\Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\CardEditor\ListViewEx.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UserControls\CardEditor\ReplaceBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserControls\CardEditor\ReplaceBox.Designer.cs">
+      <DependentUpon>ReplaceBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\CardEditor\SaveQuestionBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserControls\CardEditor\SaveQuestionBox.Designer.cs">
+      <DependentUpon>SaveQuestionBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\CardEditor\TFCard.cs" />
     <Compile Include="UserControls\RectangleUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -242,6 +288,12 @@
     <EmbeddedResource Include="UserControls\AudioPlayerUserControl.resx">
       <DependentUpon>AudioPlayerUserControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\CardEditor\AboutForm.resx" />
+    <EmbeddedResource Include="UserControls\CardEditor\FilterBox.resx" />
+    <EmbeddedResource Include="UserControls\CardEditor\FindBox.resx" />
+    <EmbeddedResource Include="UserControls\CardEditor\Form1.resx" />
+    <EmbeddedResource Include="UserControls\CardEditor\ReplaceBox.resx" />
+    <EmbeddedResource Include="UserControls\CardEditor\SaveQuestionBox.resx" />
     <EmbeddedResource Include="UserControls\PointBundleUserControl.resx">
       <DependentUpon>PointBundleUserControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -281,6 +333,16 @@
   <ItemGroup>
     <Content Include="Fasm.NET.xml" />
     <Content Include="joey.ico" />
+    <None Include="Resources\searchnext.png" />
+    <None Include="Resources\search_result.png" />
+    <None Include="Resources\search_replace.png" />
+    <None Include="Resources\saveas.png" />
+    <None Include="Resources\save_result.png" />
+    <None Include="Resources\resetnarrowsearch_result.png" />
+    <None Include="Resources\powericon.png" />
+    <None Include="Resources\narrowsearch_result.png" />
+    <None Include="Resources\load_result.png" />
+    <None Include="Resources\IconAbout.png" />
     <None Include="YuGiOh_PoC_Patcher.exe.config" />
     <None Include="YuGiOh_PoC_Patcher_TemporaryKey.pfx" />
     <None Include="YuGi\Resources\hand_deck.png" />
