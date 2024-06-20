@@ -36,7 +36,9 @@ namespace YuGiOh_PoC_Patcher.UserControls
         string CurrentCacheDir;
         string CurrentCacheIni;
 
-        char CurrentLang = 'E';
+        string CurrentLang = "E";
+        bool CurrentLangIsPoc = false;
+
         bool bJapaneseLangDetected = false;
         Font DefaultWestStyle = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
         Font DescWestStyle = new Font("Segoe UI Historic", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
@@ -48,9 +50,14 @@ namespace YuGiOh_PoC_Patcher.UserControls
 
         CardSearch cardSearch;
         CardSearchParams replaceParams;
-
-
         bool bUnsavedChangesMade = false;
+
+        string descBinPath = "";
+        string idxBinPath = "";
+        string propBinPath = "";
+        string passBinPath = "";
+        string iidBinPath = "";
+        string idBinPath = "";
 
         // stolen from: https://stackoverflow.com/a/3301750
         // written by Dan Tao
@@ -69,40 +76,69 @@ namespace YuGiOh_PoC_Patcher.UserControls
         {
             switch (CurrentLang)
             {
-                case 'J':
+                case "J":
+                case "jpn":
                     return 0;
-                case 'G':
+                case "G":
+                case "ger":
                     return 2;
-                case 'F':
+                case "F":
+                case "fra":
                     return 3;
-                case 'I':
+                case "I":
+                case "ita":
                     return 4;
-                case 'S':
+                case "S":
+                case "spa":
                     return 5;
-                case 'E':
+                case "E":
+                case "eng":
                 default:
                     return 1;
             }
         }
 
-        public char SetLangIndex(int index)
+        public string SetLangIndex(int index)
         {
-            switch (index)
+            if (CurrentLangIsPoc)
             {
-                case 0:
-                    return 'J';
-                case 2:
-                    return 'G';
-                case 3:
-                    return 'F';
-                case 4:
-                    return 'I';
-                case 5:
-                    return 'S';
-                case 1:
-                default:
-                    return 'E';
+                switch (index)
+                {
+                    case 0:
+                        return "jpn";
+                    case 2:
+                        return "ger";
+                    case 3:
+                        return "fra";
+                    case 4:
+                        return "ita";
+                    case 5:
+                        return "spa";
+                    case 1:
+                    default:
+                        return "eng";
+                }
             }
+            else
+            {
+                switch (index)
+                {
+                    case 0:
+                        return "J";
+                    case 2:
+                        return "G";
+                    case 3:
+                        return "F";
+                    case 4:
+                        return "I";
+                    case 5:
+                        return "S";
+                    case 1:
+                    default:
+                        return "E";
+                }
+            }
+
         }
 
         public int SearchCardIndexByID(int CardID)
@@ -196,9 +232,9 @@ namespace YuGiOh_PoC_Patcher.UserControls
             // Text box - style and text
 
             textBox1.Text = ImportDB[CurrentlySelectedCard].Description.Replace("\n", "\r\n");
-            if (ImportDB[CurrentlySelectedCard].Kind == CardKinds.Normal && (CurrentLang != 'J'))
+            if (ImportDB[CurrentlySelectedCard].Kind == CardKinds.Normal && (CurrentLang != "J") || CurrentLang != "jpn")
                 textBox1.Font = new Font(DescWestStyle, FontStyle.Italic);
-            else if (CurrentLang == 'J')
+            else if (CurrentLang == "J" || CurrentLang != "jpn")
                 textBox1.Font = JapaneseStyle;
             else
                 textBox1.Font = new Font(DefaultWestStyle, FontStyle.Regular);
@@ -206,7 +242,7 @@ namespace YuGiOh_PoC_Patcher.UserControls
 
             // description box display stuff...
             // name
-            if (CurrentLang == 'J')
+            if (CurrentLang == "J" || CurrentLang != "jpn")
                 label1.Font = JapaneseStyle;
             else
                 label1.Font = DefaultWestStyle;
@@ -750,32 +786,51 @@ namespace YuGiOh_PoC_Patcher.UserControls
             return tfcecli_process.ExitCode;
         }
 
-        char DetectLangFromFilename(string Filename)
+        string DetectLangFromFilename(string Filename)
         {
-            if (Filename.LastIndexOf('_') != -1)
+            CurrentLangIsPoc = true;
+
+            // Pre-YGO2
+            if (Filename.Contains("eng.bin")) return "eng";
+
+            if (Filename.Contains("fra.bin")) return "fra";
+
+            if (Filename.Contains("ger.bin")) return "ger";
+
+            if (Filename.Contains("ita.bin")) return "ita";
+
+            if (Filename.Contains("jpn.bin")) return "jpn";
+
+            if (Filename.Contains("spa.bin")) return "spa";
+
+            CurrentLangIsPoc = false;
+
+            // YGO2+
+            int index = Filename.LastIndexOf('_');
+            if (index != -1 && index + 1 < Filename.Length)
             {
-                char LangChar = Filename[Filename.LastIndexOf('_') + 1];
-                LangChar = LangChar.ToString().ToUpper()[0];
-                return LangChar;
+                string LangChar = Filename.Substring(index + 1, 1);
+                return LangChar.ToUpper();
             }
-            return 'E';
+
+            return "E";
         }
 
         void CopyFilesForEHP(string Path)
         {
-            if (File.Exists(Path + "\\CARD_SamePict_" + CurrentLang.ToString() + ".bin") && !File.Exists(CurrentCacheDir + "\\CARD_SamePict_" + CurrentLang.ToString() + ".bin"))
-                File.Copy(Path + "\\CARD_SamePict_" + CurrentLang.ToString() + ".bin", CurrentCacheDir + "\\CARD_SamePict_" + CurrentLang.ToString() + ".bin");
-            if (File.Exists(Path + "\\CARD_Sort_" + CurrentLang.ToString() + ".bin") && !File.Exists(CurrentCacheDir + "\\CARD_Sort_" + CurrentLang.ToString() + ".bin"))
-                File.Copy(Path + "\\CARD_Sort_" + CurrentLang.ToString() + ".bin", CurrentCacheDir + "\\CARD_Sort_" + CurrentLang.ToString() + ".bin");
-            if (File.Exists(Path + "\\CARD_Top_" + CurrentLang.ToString() + ".bin") && !File.Exists(CurrentCacheDir + "\\CARD_Top_" + CurrentLang.ToString() + ".bin"))
-                File.Copy(Path + "\\CARD_Top_" + CurrentLang.ToString() + ".bin", CurrentCacheDir + "\\CARD_Top_" + CurrentLang.ToString() + ".bin");
-            if (File.Exists(Path + "\\DLG_Indx_" + CurrentLang.ToString() + ".bin") && !File.Exists(CurrentCacheDir + "\\DLG_Indx_" + CurrentLang.ToString() + ".bin"))
-                File.Copy(Path + "\\DLG_Indx_" + CurrentLang.ToString() + ".bin", CurrentCacheDir + "\\DLG_Indx_" + CurrentLang.ToString() + ".bin");
-            if (File.Exists(Path + "\\DLG_Text_" + CurrentLang.ToString() + ".bin") && !File.Exists(CurrentCacheDir + "\\DLG_Text_" + CurrentLang.ToString() + ".bin"))
-                File.Copy(Path + "\\DLG_Text_" + CurrentLang.ToString() + ".bin", CurrentCacheDir + "\\DLG_Text_" + CurrentLang.ToString() + ".bin");
+            //if (File.Exists(Path + "\\CARD_SamePict_" + CurrentLang.ToString() + ".bin") && !File.Exists(CurrentCacheDir + "\\CARD_SamePict_" + CurrentLang.ToString() + ".bin"))
+            //    File.Copy(Path + "\\CARD_SamePict_" + CurrentLang.ToString() + ".bin", CurrentCacheDir + "\\CARD_SamePict_" + CurrentLang.ToString() + ".bin");
+            //if (File.Exists(Path + "\\CARD_Sort_" + CurrentLang.ToString() + ".bin") && !File.Exists(CurrentCacheDir + "\\CARD_Sort_" + CurrentLang.ToString() + ".bin"))
+            //    File.Copy(Path + "\\CARD_Sort_" + CurrentLang.ToString() + ".bin", CurrentCacheDir + "\\CARD_Sort_" + CurrentLang.ToString() + ".bin");
+            //if (File.Exists(Path + "\\CARD_Top_" + CurrentLang.ToString() + ".bin") && !File.Exists(CurrentCacheDir + "\\CARD_Top_" + CurrentLang.ToString() + ".bin"))
+            //    File.Copy(Path + "\\CARD_Top_" + CurrentLang.ToString() + ".bin", CurrentCacheDir + "\\CARD_Top_" + CurrentLang.ToString() + ".bin");
+            //if (File.Exists(Path + "\\DLG_Indx_" + CurrentLang.ToString() + ".bin") && !File.Exists(CurrentCacheDir + "\\DLG_Indx_" + CurrentLang.ToString() + ".bin"))
+            //    File.Copy(Path + "\\DLG_Indx_" + CurrentLang.ToString() + ".bin", CurrentCacheDir + "\\DLG_Indx_" + CurrentLang.ToString() + ".bin");
+            //if (File.Exists(Path + "\\DLG_Text_" + CurrentLang.ToString() + ".bin") && !File.Exists(CurrentCacheDir + "\\DLG_Text_" + CurrentLang.ToString() + ".bin"))
+            //    File.Copy(Path + "\\DLG_Text_" + CurrentLang.ToString() + ".bin", CurrentCacheDir + "\\DLG_Text_" + CurrentLang.ToString() + ".bin");
 
-            if (File.Exists(Path + "\\CARD_Genre.bin") && !File.Exists(Path + CurrentCacheDir + "\\CARD_Genre.bin"))
-                File.Copy(Path + "\\CARD_Genre.bin", CurrentCacheDir + "\\CARD_Genre.bin");
+            //if (File.Exists(Path + "\\CARD_Genre.bin") && !File.Exists(Path + CurrentCacheDir + "\\CARD_Genre.bin"))
+            //    File.Copy(Path + "\\CARD_Genre.bin", CurrentCacheDir + "\\CARD_Genre.bin");
         }
 
         public void ImportCardDBCustom(List<CardPackEntry> lst)
@@ -822,7 +877,7 @@ namespace YuGiOh_PoC_Patcher.UserControls
             toolStripProgressBar1.Enabled = false;
         }
 
-        void ImportCardDB(string Filename)
+        void ImportCardDB(string folder)
         {
             return;
 
@@ -1114,42 +1169,65 @@ namespace YuGiOh_PoC_Patcher.UserControls
                 string currentDirectory = Path.GetDirectoryName(FileName);
 
                 //checking one by one since there's only so many files that this tool needs work with, so no need to complicate things
-                //TODO: PoC are names a bit diff.
-                if (!File.Exists(currentDirectory + "\\CARD_Desc_" + CurrentLang.ToString() + ".bin"))
+                string descPoC = currentDirectory + "\\card_desc" + CurrentLang.ToString() + ".bin";
+                string descYGO2 = currentDirectory + "\\CARD_Desc_" + CurrentLang.ToString() + ".bin";
+
+                string idxPoC = currentDirectory + "\\card_indx" + CurrentLang.ToString() + ".bin";
+                string idxYGO2 = currentDirectory + "\\CARD_Indx_" + CurrentLang.ToString() + ".bin";
+
+                string propPoC = currentDirectory + "\\card_prop.bin";
+                string propYGO2 = currentDirectory + "\\CARD_Prop" + CurrentLang.ToString() + ".bin";
+
+                string passPoC = currentDirectory + "\\card_pass.bin";
+                string passYGO2 = currentDirectory + "\\CARD_Pass" + CurrentLang.ToString() + ".bin";
+
+                string iidPoC = currentDirectory + "\\card_intid.bin";
+                string iidYGO2 = currentDirectory + "\\CARD_IntID" + CurrentLang.ToString() + ".bin";
+
+                string idPoC = currentDirectory + "\\card_id.bin";
+                string idYGO2 = currentDirectory + "\\CARD_ID" + CurrentLang.ToString() + ".bin";
+
+                if (!(File.Exists(descPoC) || File.Exists(descYGO2)))
                 {
-                    toolStripStatusLabel1.Text = "Missing: " + currentDirectory + "\\CARD_Desc_" + CurrentLang.ToString() + ".bin! Please check if all files are present.";
+                    toolStripStatusLabel1.Text = "Missing: CARD DESC bin file. Please check if all files are present.";
                     return;
                 }
-                if (!File.Exists(currentDirectory + "\\CARD_Indx_" + CurrentLang.ToString() + ".bin"))
+                if (!(File.Exists(idxPoC) || File.Exists(idxYGO2)))
                 {
-                    toolStripStatusLabel1.Text = "Missing: " + currentDirectory + "\\CARD_Indx_" + CurrentLang.ToString() + ".bin! Please check if all files are present.";
+                    toolStripStatusLabel1.Text = "Missing: CARD INDX bin file. Please check if all files are present.";
                     return;
                 }
-                if (!File.Exists(currentDirectory + "\\CARD_Prop.bin"))
+                if (!(File.Exists(propPoC) || File.Exists(propYGO2)))
                 {
-                    toolStripStatusLabel1.Text = "Missing: " + currentDirectory + "\\CARD_Prop.bin! Please check if all files are present.";
+                    toolStripStatusLabel1.Text = "Missing: CARD PROP bin file. Please check if all files are present.";
                     return;
                 }
-                if (!File.Exists(currentDirectory + "\\CARD_Pass.bin"))
+                if (!(File.Exists(passPoC) || File.Exists(passYGO2)))
                 {
-                    toolStripStatusLabel1.Text = "Missing: " + currentDirectory + "\\CARD_Pass.bin! You will not see card passwords.";
+                    toolStripStatusLabel1.Text = "Missing: CARD PASS bin file. Please check if all files are present.";
+                    return;
                 }
-                if (!File.Exists(currentDirectory + "\\CARD_IntID.bin"))
+                if (!(File.Exists(iidPoC) || File.Exists(iidYGO2)))
                 {
-                    toolStripStatusLabel1.Text = "Missing: " + currentDirectory + "\\CARD_IntID.bin! Please check if all files are present.";
+                    toolStripStatusLabel1.Text = "Missing: CARD IntID bin file. Please check if all files are present.";
+                    return;
+                }
+                if (!(File.Exists(idPoC) || File.Exists(idYGO2)))
+                {
+                    toolStripStatusLabel1.Text = "Missing: CARD ID bin file. Please check if all files are present.";
                     return;
                 }
 
+                //if (!Directory.Exists(CurrentCacheDir))
+                //    Directory.CreateDirectory(CurrentCacheDir);
+                //int tfcardresult = ConvertDBToIni(currentDirectory, CurrentCacheIni, CurrentLang.ToString());
+                //if (tfcardresult != 0)
+                //{
+                //    toolStripStatusLabel1.Text = "ERROR: Card DB decoding failed! Status code: " + tfcardresult;
+                //    return;
+                //}
 
-                if (!Directory.Exists(CurrentCacheDir))
-                    Directory.CreateDirectory(CurrentCacheDir);
-                int tfcardresult = ConvertDBToIni(currentDirectory, CurrentCacheIni, CurrentLang.ToString());
-                if (tfcardresult != 0)
-                {
-                    toolStripStatusLabel1.Text = "ERROR: Card DB decoding failed! Status code: " + tfcardresult;
-                    return;
-                }
-                ImportCardDB(CurrentCacheIni);
+                ImportCardDB(currentDirectory);
             }
             else if (string.Compare(Path.GetExtension(FileName), ".ini") == 0)
                 ImportCardDB(FileName); // TODO: add error handling...
@@ -1202,15 +1280,15 @@ namespace YuGiOh_PoC_Patcher.UserControls
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             string URL = "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=" + ImportDB[CurrentlySelectedCard].CardID + "&request_locale=";
-            if (CurrentLang == 'J')
+            if (CurrentLang == "J" || CurrentLang == "jpn")
                 URL += "ja";
-            else if (CurrentLang == 'G')
+            else if (CurrentLang == "G" || CurrentLang == "ger")
                 URL += "de";
-            else if (CurrentLang == 'F')
+            else if (CurrentLang == "F" || CurrentLang == "fra")
                 URL += "fr";
-            else if (CurrentLang == 'I')
+            else if (CurrentLang == "I" || CurrentLang == "ita")
                 URL += "it";
-            else if (CurrentLang == 'S')
+            else if (CurrentLang == "S" || CurrentLang == "spa")
                 URL += "es";
             else
                 URL += "en";
@@ -1224,28 +1302,28 @@ namespace YuGiOh_PoC_Patcher.UserControls
             if (linkLabel1.Enabled)
             {
                 string URL = "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&&cid=" + ImportDB[CurrentlySelectedCard].CardID + "&&request_locale=";
-                if (CurrentLang == 'J')
+                if (CurrentLang == "J" || CurrentLang == "jpn")
                     URL += "ja";
-                else if (CurrentLang == 'G')
+                else if (CurrentLang == "G" || CurrentLang == "ger")
                     URL += "de";
-                else if (CurrentLang == 'F')
+                else if (CurrentLang == "F" || CurrentLang == "fra")
                     URL += "fr";
-                else if (CurrentLang == 'I')
+                else if (CurrentLang == "I" || CurrentLang == "ita")
                     URL += "it";
-                else if (CurrentLang == 'S')
+                else if (CurrentLang == "S" || CurrentLang == "spa")
                     URL += "es";
                 else
                     URL += "en";
                 ClipboardURL = "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=" + ImportDB[CurrentlySelectedCard].CardID + "&request_locale=";
-                if (CurrentLang == 'J')
+                if (CurrentLang == "J" || CurrentLang == "jpn")
                     ClipboardURL += "ja";
-                else if (CurrentLang == 'G')
+                else if (CurrentLang == "G" || CurrentLang == "ger")
                     ClipboardURL += "de";
-                else if (CurrentLang == 'F')
+                else if (CurrentLang == "F" || CurrentLang == "fra")
                     ClipboardURL += "fr";
-                else if (CurrentLang == 'I')
+                else if (CurrentLang == "I" || CurrentLang == "ita")
                     ClipboardURL += "it";
-                else if (CurrentLang == 'S')
+                else if (CurrentLang == "S" || CurrentLang == "spa")
                     ClipboardURL += "es";
                 else
                     ClipboardURL += "en";
@@ -1258,15 +1336,15 @@ namespace YuGiOh_PoC_Patcher.UserControls
         private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             string URL = "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=1&keyword=" + ImportDB[CurrentlySelectedCard].Name.Replace(' ', '+') + "&request_locale=";
-            if (CurrentLang == 'J')
+            if (CurrentLang == "J" || CurrentLang == "jpn")
                 URL += "ja";
-            else if (CurrentLang == 'G')
+            else if (CurrentLang == "G" || CurrentLang == "ger")
                 URL += "de";
-            else if (CurrentLang == 'F')
+            else if (CurrentLang == "F" || CurrentLang == "fra")
                 URL += "fr";
-            else if (CurrentLang == 'I')
+            else if (CurrentLang == "I" || CurrentLang == "ita")
                 URL += "it";
-            else if (CurrentLang == 'S')
+            else if (CurrentLang == "S" || CurrentLang == "spa")
                 URL += "es";
             else
                 URL += "en";
@@ -1280,30 +1358,30 @@ namespace YuGiOh_PoC_Patcher.UserControls
             if (linkLabel2.Enabled)
             {
                 string URL = "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=1&&keyword=" + ImportDB[CurrentlySelectedCard].Name.Replace(' ', '+') + "&&request_locale=";
-                if (CurrentLang == 'J')
+                if (CurrentLang == "J" || CurrentLang == "jpn")
                     URL += "ja";
-                else if (CurrentLang == 'G')
+                else if (CurrentLang == "G" || CurrentLang == "ger")
                     URL += "de";
-                else if (CurrentLang == 'F')
+                else if (CurrentLang == "F" || CurrentLang == "fra")
                     URL += "fr";
-                else if (CurrentLang == 'I')
+                else if (CurrentLang == "I" || CurrentLang == "ita")
                     URL += "it";
-                else if (CurrentLang == 'S')
+                else if (CurrentLang == "S" || CurrentLang == "spa")
                     URL += "es";
                 else
                     URL += "en";
                 linkLabel2.ContextMenuStrip = contextMenuStrip1;
                 toolStripStatusLabel1.Text = URL;
                 ClipboardURL = "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=1&keyword=" + ImportDB[CurrentlySelectedCard].Name.Replace(' ', '+') + "&request_locale=";
-                if (CurrentLang == 'J')
+                if (CurrentLang == "J" || CurrentLang == "jpn")
                     ClipboardURL += "ja";
-                else if (CurrentLang == 'G')
+                else if (CurrentLang == "G" || CurrentLang == "ger")
                     ClipboardURL += "de";
-                else if (CurrentLang == 'F')
+                else if (CurrentLang == "F" || CurrentLang == "fra")
                     ClipboardURL += "fr";
-                else if (CurrentLang == 'I')
+                else if (CurrentLang == "I" || CurrentLang == "ita")
                     ClipboardURL += "it";
-                else if (CurrentLang == 'S')
+                else if (CurrentLang == "S" || CurrentLang == "spa")
                     ClipboardURL += "es";
                 else
                     ClipboardURL += "en";
@@ -1632,6 +1710,11 @@ namespace YuGiOh_PoC_Patcher.UserControls
         private void encodeCardBinsToolStripMenuItem_MouseEnter(object sender, EventArgs e)
         {
             toolStripStatusLabel1.Text = "Pack Card DB .ini to a folder with binaries manually";
+        }
+
+        private void openFileDialog1_FileOk(object sender, CancelEventArgs e)
+        {
+
         }
     }
 }

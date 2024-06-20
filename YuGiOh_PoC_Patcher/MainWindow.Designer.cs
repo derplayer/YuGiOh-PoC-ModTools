@@ -37,7 +37,6 @@
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cardsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.openToolStrip_CCGen = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStrip_CPackEdit = new System.Windows.Forms.ToolStripMenuItem();
             this.convertToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dankYGAToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -54,6 +53,7 @@
             this.generateImagesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem_AudioTest = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem_CardEditTest = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem_xorTest = new System.Windows.Forms.ToolStripMenuItem();
             this.checkBox_Rotate = new System.Windows.Forms.CheckBox();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.tabControl1 = new System.Windows.Forms.TabControl();
@@ -75,6 +75,7 @@
             this.button_datLoad = new System.Windows.Forms.Button();
             this.textBox_datPath = new System.Windows.Forms.TextBox();
             this.treeView_Files = new System.Windows.Forms.TreeView();
+            this.pointUserControl_WindowSize = new YuGiOh_PoC_Patcher.PointUserControl();
             this.groupBox_CardSize = new System.Windows.Forms.GroupBox();
             this.label_CardSize_Width = new System.Windows.Forms.Label();
             this.label_CardSize_Height = new System.Windows.Forms.Label();
@@ -83,11 +84,11 @@
             this.button_Patch = new System.Windows.Forms.Button();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.cardEdit_Preview = new YuGiOh_PoC_Patcher.UserControls.FormCardEdit();
+            this.audioPlayer_Preview = new YuGiOh_PoC_Patcher.UserControls.AudioPlayerUserControl();
             this.richTextBox_Data = new System.Windows.Forms.RichTextBox();
             this.pictureBox_Preview = new System.Windows.Forms.PictureBox();
-            this.pointUserControl_WindowSize = new YuGiOh_PoC_Patcher.PointUserControl();
-            this.audioPlayer_Preview = new YuGiOh_PoC_Patcher.UserControls.AudioPlayerUserControl();
-            this.cardEdit_Preview = new YuGiOh_PoC_Patcher.UserControls.FormCardEdit();
+            this.openToolStrip_CardEdit = new System.Windows.Forms.ToolStripMenuItem();
             tabPage3 = new System.Windows.Forms.TabPage();
             tabPage3.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -179,24 +180,17 @@
             // cardsToolStripMenuItem
             // 
             this.cardsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.openToolStrip_CCGen,
+            this.openToolStrip_CardEdit,
             this.openToolStrip_CPackEdit});
             this.cardsToolStripMenuItem.Name = "cardsToolStripMenuItem";
             this.cardsToolStripMenuItem.Size = new System.Drawing.Size(49, 20);
             this.cardsToolStripMenuItem.Text = "Cards";
             this.cardsToolStripMenuItem.Click += new System.EventHandler(this.cardsToolStripMenuItem_Click);
             // 
-            // openToolStrip_CCGen
-            // 
-            this.openToolStrip_CCGen.Enabled = false;
-            this.openToolStrip_CCGen.Name = "openToolStrip_CCGen";
-            this.openToolStrip_CCGen.Size = new System.Drawing.Size(185, 22);
-            this.openToolStrip_CCGen.Text = "Card Code Generator";
-            // 
             // openToolStrip_CPackEdit
             // 
             this.openToolStrip_CPackEdit.Name = "openToolStrip_CPackEdit";
-            this.openToolStrip_CPackEdit.Size = new System.Drawing.Size(185, 22);
+            this.openToolStrip_CPackEdit.Size = new System.Drawing.Size(181, 22);
             this.openToolStrip_CPackEdit.Text = "card_pack.bin Editor";
             this.openToolStrip_CPackEdit.Click += new System.EventHandler(this.openToolStrip_CPackEdit_Click);
             // 
@@ -277,7 +271,8 @@
             this.testToolStripMenuItem,
             this.generateImagesToolStripMenuItem,
             this.toolStripMenuItem_AudioTest,
-            this.toolStripMenuItem_CardEditTest});
+            this.toolStripMenuItem_CardEditTest,
+            this.toolStripMenuItem_xorTest});
             this.debugToolStripMenuItem.Name = "debugToolStripMenuItem";
             this.debugToolStripMenuItem.Size = new System.Drawing.Size(54, 20);
             this.debugToolStripMenuItem.Text = "Debug";
@@ -316,6 +311,13 @@
             this.toolStripMenuItem_CardEditTest.Size = new System.Drawing.Size(196, 22);
             this.toolStripMenuItem_CardEditTest.Text = "Test CardEditor";
             this.toolStripMenuItem_CardEditTest.Click += new System.EventHandler(this.toolStripMenuItem_CardEditTest_Click);
+            // 
+            // toolStripMenuItem_xorTest
+            // 
+            this.toolStripMenuItem_xorTest.Name = "toolStripMenuItem_xorTest";
+            this.toolStripMenuItem_xorTest.Size = new System.Drawing.Size(196, 22);
+            this.toolStripMenuItem_xorTest.Text = "Test XOR Blob";
+            this.toolStripMenuItem_xorTest.Click += new System.EventHandler(this.toolStripMenuItem_xorTest_Click);
             // 
             // checkBox_Rotate
             // 
@@ -485,9 +487,9 @@
             this.label_infodatafolder.AutoSize = true;
             this.label_infodatafolder.Location = new System.Drawing.Point(7, 328);
             this.label_infodatafolder.Name = "label_infodatafolder";
-            this.label_infodatafolder.Size = new System.Drawing.Size(306, 13);
+            this.label_infodatafolder.Size = new System.Drawing.Size(303, 13);
             this.label_infodatafolder.TabIndex = 27;
-            this.label_infodatafolder.Text = "INFO: Extract files into \"data\" folder in game root. (File injection)";
+            this.label_infodatafolder.Text = "INFO: Extract files into \"data\" folder in game root (for modding).";
             // 
             // button_ExportFilesRaw
             // 
@@ -572,6 +574,14 @@
             this.treeView_Files.Size = new System.Drawing.Size(301, 292);
             this.treeView_Files.TabIndex = 0;
             this.treeView_Files.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView_Files_AfterSelect);
+            // 
+            // pointUserControl_WindowSize
+            // 
+            this.pointUserControl_WindowSize.Location = new System.Drawing.Point(8, 74);
+            this.pointUserControl_WindowSize.Name = "pointUserControl_WindowSize";
+            this.pointUserControl_WindowSize.Point = null;
+            this.pointUserControl_WindowSize.Size = new System.Drawing.Size(146, 75);
+            this.pointUserControl_WindowSize.TabIndex = 24;
             // 
             // groupBox_CardSize
             // 
@@ -684,6 +694,24 @@
             this.panel1.Size = new System.Drawing.Size(802, 548);
             this.panel1.TabIndex = 2;
             // 
+            // cardEdit_Preview
+            // 
+            this.cardEdit_Preview.AllowDrop = true;
+            this.cardEdit_Preview.Location = new System.Drawing.Point(2, 0);
+            this.cardEdit_Preview.MinimumSize = new System.Drawing.Size(693, 448);
+            this.cardEdit_Preview.Name = "cardEdit_Preview";
+            this.cardEdit_Preview.Size = new System.Drawing.Size(797, 545);
+            this.cardEdit_Preview.TabIndex = 6;
+            this.cardEdit_Preview.Visible = false;
+            // 
+            // audioPlayer_Preview
+            // 
+            this.audioPlayer_Preview.Location = new System.Drawing.Point(3, 0);
+            this.audioPlayer_Preview.Name = "audioPlayer_Preview";
+            this.audioPlayer_Preview.Size = new System.Drawing.Size(473, 316);
+            this.audioPlayer_Preview.TabIndex = 3;
+            this.audioPlayer_Preview.Visible = false;
+            // 
             // richTextBox_Data
             // 
             this.richTextBox_Data.Location = new System.Drawing.Point(1, -3);
@@ -704,31 +732,12 @@
             this.pictureBox_Preview.TabStop = false;
             this.pictureBox_Preview.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBox_Preview_MouseClick);
             // 
-            // pointUserControl_WindowSize
+            // openToolStrip_CardEdit
             // 
-            this.pointUserControl_WindowSize.Location = new System.Drawing.Point(8, 74);
-            this.pointUserControl_WindowSize.Name = "pointUserControl_WindowSize";
-            this.pointUserControl_WindowSize.Point = null;
-            this.pointUserControl_WindowSize.Size = new System.Drawing.Size(146, 75);
-            this.pointUserControl_WindowSize.TabIndex = 24;
-            // 
-            // audioPlayer_Preview
-            // 
-            this.audioPlayer_Preview.Location = new System.Drawing.Point(3, 0);
-            this.audioPlayer_Preview.Name = "audioPlayer_Preview";
-            this.audioPlayer_Preview.Size = new System.Drawing.Size(473, 316);
-            this.audioPlayer_Preview.TabIndex = 3;
-            this.audioPlayer_Preview.Visible = false;
-            // 
-            // cardEdit_Preview
-            // 
-            this.cardEdit_Preview.AllowDrop = true;
-            this.cardEdit_Preview.Location = new System.Drawing.Point(2, 0);
-            this.cardEdit_Preview.MinimumSize = new System.Drawing.Size(693, 448);
-            this.cardEdit_Preview.Name = "cardEdit_Preview";
-            this.cardEdit_Preview.Size = new System.Drawing.Size(797, 545);
-            this.cardEdit_Preview.TabIndex = 6;
-            this.cardEdit_Preview.Visible = false;
+            this.openToolStrip_CardEdit.Name = "openToolStrip_CardEdit";
+            this.openToolStrip_CardEdit.Size = new System.Drawing.Size(181, 22);
+            this.openToolStrip_CardEdit.Text = "Card Editor (*.bin)";
+            this.openToolStrip_CardEdit.Click += new System.EventHandler(this.openToolStrip_CardEdit_Click);
             // 
             // MainWindow
             // 
@@ -813,7 +822,6 @@
         private System.Windows.Forms.ToolStripMenuItem lZSSDecompressRecrusiveToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem lZSSDecompressRecrusiveBinToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cardsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem openToolStrip_CCGen;
         private System.Windows.Forms.Label label_datContainer;
         private System.Windows.Forms.Button button_datBtn;
         private System.Windows.Forms.Button button_datLoad;
@@ -830,6 +838,8 @@
         private System.Windows.Forms.ToolStripMenuItem openToolStrip_CPackEdit;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem_CardEditTest;
         private UserControls.FormCardEdit cardEdit_Preview;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem_xorTest;
+        private System.Windows.Forms.ToolStripMenuItem openToolStrip_CardEdit;
     }
 }
 

@@ -5,10 +5,10 @@ Mod tools are (theoreticly) interchangeable with all engine versions.
 
 ## Core functioality that this tool provides:
 * Game Launcher with additional Settings that also applys fixes for modern operating systems.
-* Modding Tools, that allow editing of resolution and position of graphic elements and effects.
-* Proper ".dat" File Extractor (decompression, decryption)
-* *.YGA (Yu-Gi-Oh Graphic Acronym) decompresser/compresser for the proprietary graphics format
-* "LZSS"-Like compressor/decompressor (for txt/bin game files)
+* Modding tools, that allow editing of resolution and position of graphic elements and effects.
+* ".dat" archive extractor (decompression, decryption)
+* ".YGA" decompresser/compresser for the proprietary graphics format (Yu-Gi-Oh Graphic Acronym) 
+* LZSS compressor/decompressor (for txt/bin game files)
 * ...and more!
 
 ![Alt text](https://derplayer.neocities.org/repo/yugioh/01.jpg "Deck Editor Preview")
@@ -22,9 +22,9 @@ Mod tools are (theoreticly) interchangeable with all engine versions.
 * Yu-Gi-Oh! Power of Chaos - Joey the Passion (2004)
 * Yu-Gi-Oh! Online SHONEN JUMP Preview (2004 builds)
 * Yu-Gi-Oh! Online: Phase 1 (2005 builds)
-* Yu-Gi-Oh! Online: Phase 2 (2006 builds)
+* Yu-Gi-Oh! Online: Phase 2 (2006 builds, untested)
 
-> *.bin Editor not implemented yet.
+> *.bin files Editor not implemented yet.
 > Also "Yu-Gi-Oh! Online" is not playable, due to missing server emulator.
 
 ![Alt text](https://derplayer.neocities.org/repo/yugioh/0a.png "YuGiOh Online Asset browser Preview")

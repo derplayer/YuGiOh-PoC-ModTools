@@ -16,6 +16,7 @@ using System.Collections.Generic;
 using YuGiOh_PoC_Patcher.UserControls;
 using System.Linq;
 using System.Text;
+using System.Windows;
 
 namespace YuGiOh_PoC_Patcher
 {
@@ -1329,5 +1330,25 @@ namespace YuGiOh_PoC_Patcher
 
         }
 
+        private void toolStripMenuItem_xorTest_Click(object sender, EventArgs e)
+        {
+            string fldr = @"H:\\Development\\Projects\\Romhacking\\PC\\Yu-Gi-Oh! Power of Chaos\\_Online\\Yu-Gi-Oh! ONLINE 2006-02_\\Yu-Gi-Oh! ONLINE\\";
+            byte[] bytes = Encoding.ASCII.GetBytes(fldr + "yugi_usr.dat");
+            for (int i = 0; i < bytes.Length; i++)
+            {
+                bytes[i] = (byte)(((bytes[i] & 0xF0) >> 4) | ((bytes[i] & 0x0F) << 4));
+            }
+
+            string res = fldr + "TEST.XOR";
+            File.WriteAllBytes(res, bytes);
+
+            return;
+        }
+
+        private void openToolStrip_CardEdit_Click(object sender, EventArgs e)
+        {
+            var dlg = new CardEditForm();
+            dlg.ShowDialog();
+        }
     }
 }
