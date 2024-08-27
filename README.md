@@ -3,8 +3,8 @@ Launcher/modding tools for the PC game "Yu-Gi-Oh! - Power of Chaos" and variants
 The Launcher supports only the "Joey the Passion" version.
 Mod tools are (theoreticly) interchangeable with all engine versions.
 
-## Discord
-Yu-Gi-Oh! Power of Chaos & Online modding discord server: ![Alt text](https://discord.gg/GAKKaJYwF7 "https://discord.gg/GAKKaJYwF7") 
+## Discord/Contact
+[Yu-Gi-Oh! Power of Chaos/Online modding discord](https://discord.com/invite/GAKKaJYwF7)
 
 ## Core functioality that this tool provides:
 * Game Launcher with additional Settings that also applys fixes for modern operating systems.
